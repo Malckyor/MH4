@@ -2,6 +2,8 @@ const monsterName = new Array ("なし","リオレイア","リオレウス","リ
 const areaName = new Array ("BC","迷路","傾斜","崖","水","豚","蔦","天井","柱","ゴール","宝");
 let count = 0;
 
+let weaponKinds = new Array(6);
+
 //クエスト作成者名
 let Author = document.getElementById('$Author');
 let AuthorName = ["0000","0000","0000","0000","0000","0000","0000","0000","0000","0000","0000","0000"];
@@ -99,12 +101,13 @@ function textSetM1(){
     }
     //ドスランポス
     if($monster1.value == "10"){
-        $weapon[1].textContent = "スラッシュアックス (ディーエッジ)";
-        $weapon[2].textContent = "大剣 / 太刀 (41式対飛竜大剣、凍刃)";
-        $weapon[3].textContent = "片手剣 / 双剣 (マスターバング、ランポスクロウズ)";
-        $weapon[4].textContent = "ランス / ガンランス (合戦槍、フルボルテージ)";
-        $weapon[5].textContent = "ハンマー / 狩猟笛 (ウォーバッシュ、ガンズ＝ロック)";
-        $weapon[6].textContent = "弓 / ボウガン (クイーンブラスター、ボルボバレット)";
+        weaponKinds[0] = "ディーエッジ";
+        weaponKinds[1] = "41式対飛竜大剣、凍刃";
+        weaponKinds[2] = "マスターバング、ランポスクロウズ";
+        weaponKinds[3] = "合戦槍、フルボルテージ";
+        weaponKinds[4] = "ウォーバッシュ、ガンズ＝ロック";
+        weaponKinds[5] = "クイーンブラスター、ボルボバレット";
+
 
         $armor[1].textContent = "オリジナルA (インゴッド)";
         $armor[2].textContent = "オリジナルB (インゴッド)";
@@ -127,12 +130,12 @@ function textSetM1(){
     }
     //イャンクック、イャンクック亜種、バサルモス
     else if($monster1.value == '07' || $monster1.value == '08' || $monster1.value == '26'){
-        $weapon[1].textContent = "スラッシュアックス (竜姫の剣斧)";
-        $weapon[2].textContent = "大剣 / 太刀 (ジークムント、飛竜刀)";
-        $weapon[3].textContent = "片手剣 / 双剣 (ヒドゥンエッジ、ギルドナイトセーバー)";
-        $weapon[4].textContent = "ランス / ガンランス (トゥースランス、プリンセスバースト)";
-        $weapon[5].textContent = "ハンマー / 狩猟笛 (ヒドゥンブレイカー、ウネリシェルン)";
-        $weapon[6].textContent = "弓 / ボウガン (クイーンブラスター、デュエルスタッブ)";
+        weaponKinds[0] = "竜姫の剣斧";
+        weaponKinds[1] = "ジークムント";
+        weaponKinds[2] = "ヒドゥンエッジ、ギルドナイトセーバー";
+        weaponKinds[3] = "トゥースランス、プリンセスバースト";
+        weaponKinds[4] = "ヒドゥンブレイカー、ウネリシェルン";
+        weaponKinds[5] = "クイーンブラスター、デュエルスタッブ";
 
         $armor[1].textContent = "オリジナルA (レイア)";
         $armor[2].textContent = "オリジナルB (レイア)";
@@ -155,12 +158,12 @@ function textSetM1(){
     }
     //バサルモス亜種、ジンオウガ
     else if($monster1.value == '27' || $monster1.value == '30'){
-        $weapon[1].textContent = "スラッシュアックス (竜姫の剣斧)";
-        $weapon[2].textContent = "大剣 / 太刀 (ジークムント、飛竜刀)";
-        $weapon[3].textContent = "片手剣 / 双剣 (フロストエッジ、ギルドナイトセーバー)";
-        $weapon[4].textContent = "ランス / ガンランス (トゥースランス、プリンセスバースト)";
-        $weapon[5].textContent = "ハンマー / 狩猟笛 (ヒドゥンブレイカー、ウネリシェルン)";
-        $weapon[6].textContent = "弓 / ボウガン (クイーンブラスター、デュエルスタッブ)";
+        weaponKinds[0] = "竜姫の剣斧";
+        weaponKinds[1] = "ジークムント、飛竜刀";
+        weaponKinds[2] = "フロストエッジ、ギルドナイトセーバー";
+        weaponKinds[3] = "トゥースランス、プリンセスバースト";
+        weaponKinds[4] = "ヒドゥンブレイカー、ウネリシェルン";
+        weaponKinds[5] = "クイーンブラスター、デュエルスタッブ";
 
         $armor[1].textContent = "オリジナルA (レウス)";
         $armor[2].textContent = "オリジナルB (レウス、フルフルU)";
@@ -183,12 +186,12 @@ function textSetM1(){
     }
     //ゴア・マガラ、ティガレックス、キリン
     else if($monster1.value == '1C' || $monster1.value == '0B' || $monster1.value == '22'){
-        $weapon[1].textContent = "スラッシュアックス (豪剣斧)";
-        $weapon[2].textContent = "大剣 / 太刀 (雷剣、成敗刀)";
-        $weapon[3].textContent = "片手剣 / 双剣 (チュクチュク、王双剣)";
-        $weapon[4].textContent = "ランス / ガンランス (バベル、ナナ＝ハウル)";
-        $weapon[5].textContent = "ハンマー / 狩猟笛 (ねこハンマー、獄琴)";
-        $weapon[6].textContent = "弓 / ボウガン (プロミネンスボウ、雷砲)";
+        weaponKinds[0] = "豪剣斧";
+        weaponKinds[1] = "雷剣、成敗刀";
+        weaponKinds[2] = "チュクチュク、王双剣";
+        weaponKinds[3] = "バベル、ナナ＝ハウル";
+        weaponKinds[4] = "ねこハンマー、獄琴";
+        weaponKinds[5] = "プロミネンスボウ、雷砲";
 
         $armor[1].textContent = "オリジナルA (リオハート)";
         $armor[2].textContent = "オリジナルB (リオハート、ギザミ)";
@@ -211,12 +214,12 @@ function textSetM1(){
     }
     //ジンオウガ亜種、ブラキディオス、ティガレックス亜種
     else if($monster1.value == '31' || $monster1.value == '2C' || $monster1.value == '0C'){
-        $weapon[1].textContent = "スラッシュアックス (豪剣斧)";
-        $weapon[2].textContent = "大剣 / 太刀 (封龍剣、軍刀)";
-        $weapon[3].textContent = "片手剣 / 双剣 (峯山小太刀、テッセン)";
-        $weapon[4].textContent = "ランス / ガンランス (竜騎槍、ジェネラルバルド)";
-        $weapon[5].textContent = "ハンマー / 狩猟笛 (鬼鉄丸、ナナ＝トリ、獄琴)";
-        $weapon[6].textContent = "弓 / ボウガン (覇弓レラカムトルム、鋼氷馬弓、雷砲)";
+        weaponKinds[0] = "豪剣斧";
+        weaponKinds[1] = "封龍剣、軍刀";
+        weaponKinds[2] = "峯山小太刀、テッセン";
+        weaponKinds[3] = "竜騎槍、ジェネラルバルド";
+        weaponKinds[4] = "鬼鉄丸、ナナ＝トリ、獄琴";
+        weaponKinds[5] = "覇弓レラカムトルム、鋼氷馬弓、雷砲";
 
         $armor[1].textContent = "オリジナルA (リオソウル)";
         $armor[2].textContent = "オリジナルB (リオソウル、ゴア)";
@@ -239,12 +242,12 @@ function textSetM1(){
     }
     //イャンガルルガ、ラージャン、シャガルマガラ
     else if($monster1.value == '1E' || $monster1.value == '13' || $monster1.value == '1D'){
-        $weapon[1].textContent = "スラッシュアックス (ヒドゥンアックス)";
-        $weapon[2].textContent = "大剣 / 太刀 (輝剣、ラスティクレイモア)";
-        $weapon[3].textContent = "片手剣 / 双剣 (ゴールドマロウ、祭囃子・無形ノ調)";
-        $weapon[4].textContent = "ランス / ガンランス (シルバープロミネンス、シルバールーク)";
-        $weapon[5].textContent = "ハンマー / 狩猟笛 (星砕きプロメテオル、ゴルトリコーダー)";
-        $weapon[6].textContent = "弓 / ボウガン (殲滅と破壊の剛弓、カオスウイング)";
+        weaponKinds[0] = "ヒドゥンアックス";
+        weaponKinds[1] = "輝剣、ラスティクレイモア";
+        weaponKinds[2] = "ゴールドマロウ、祭囃子・無形ノ調";
+        weaponKinds[3] = "シルバープロミネンス、シルバールーク";
+        weaponKinds[4] = "星砕きプロメテオル、ゴルトリコーダー";
+        weaponKinds[5] = "殲滅と破壊の剛弓、カオスウイング";
 
         $armor[1].textContent = "オリジナルA (シルバーソル)";
         $armor[2].textContent = "オリジナルB (シルバーソル、キリンU)";
@@ -267,12 +270,12 @@ function textSetM1(){
     }
     //クシャルダオラ、テオ・テスカトル、キリン亜種
     else if($monster1.value == '1F' || $monster1.value == '20' || $monster1.value == '23'){
-        $weapon[1].textContent = "スラッシュアックス (王剣斧)";
-        $weapon[2].textContent = "大剣 / 太刀 (輝剣、ラスティクレイモア)";
-        $weapon[3].textContent = "片手剣 / 双剣 (ゴールドマロウ、祭囃子・無形ノ調)";
-        $weapon[4].textContent = "ランス / ガンランス (シルバープロミネンス、シルバールーク)";
-        $weapon[5].textContent = "ハンマー / 狩猟笛 (星砕きプロメテオル、ゴルトリコーダー)";
-        $weapon[6].textContent = "弓 / ボウガン (殲滅と破壊の剛弓、カオスウイング)";
+        weaponKinds[0] = "王剣斧";
+        weaponKinds[1] = "輝剣、ラスティクレイモア";
+        weaponKinds[2] = "ゴールドマロウ、祭囃子・無形ノ調";
+        weaponKinds[3] = "シルバープロミネンス、シルバールーク";
+        weaponKinds[4] = "星砕きプロメテオル、ゴルトリコーダー";
+        weaponKinds[5] = "殲滅と破壊の剛弓、カオスウイング";
 
         $armor[1].textContent = "オリジナルA (エスカドラ)";
         $armor[2].textContent = "オリジナルB (エスカドラ)";
@@ -294,12 +297,12 @@ function textSetM1(){
         $armor[18].textContent = "ドスF (ドラゴンX)";
     }
     else{
-        $weapon[1].textContent = "スラッシュアックス";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / ボウガン";
+        weaponKinds[0] = "";
+        weaponKinds[1] = "";
+        weaponKinds[2] = "";
+        weaponKinds[3] = "";
+        weaponKinds[4] = "";
+        weaponKinds[5] = "";
 
         $armor[1].textContent = "オリジナルA";
         $armor[2].textContent = "オリジナルB";
@@ -320,6 +323,7 @@ function textSetM1(){
         $armor[17].textContent = "ドスE";
         $armor[18].textContent = "ドスF";
     }
+    $weaponKinds.textContent = weaponKinds[parseInt($weapon.value,16)];
 }
 function textSetM2(){
     if($monster2.value == ""){
@@ -1002,6 +1006,17 @@ $frenzyM2.onchange = function(){
 $frenzyM3.onchange = function(){
     removeOutput();
 }
+$weapon.onchange = function(){
+    removeOutput();
+    $weaponKinds.textContent = weaponKinds[parseInt($weapon.value,16)];
+}
+$armor.onchange = function(){
+    removeOutput();
+}
+$armorType.onchange = function(){
+    removeOutput();
+}
+
 
 //ロード時
 window.addEventListener("load",function(){
