@@ -1396,131 +1396,131 @@ btnGeneration.addEventListener("click", function(){
         //クエスト作成者名
         for(i=0,j=0; i<12; i+=2,j+=1){
             
-            output[j] = ( "00" + startAddress.toString(16).toUpperCase() + " " + AuthorName[i+1] + AuthorName[i]);
+            output[j] = ( "0" + startAddress.toString(16).toUpperCase() + " " + AuthorName[i+1] + AuthorName[i]);
 
             startAddress += 4;
         }
 
         //クエスト識別 ID
-        output[6] = ( "00" + startAddress.toString(16).toUpperCase() + " " + questID1);
+        output[6] = ( "0" + startAddress.toString(16).toUpperCase() + " " + questID1);
         startAddress += 4;
-        output[7] = ( "00" + startAddress.toString(16).toUpperCase() + " " + questID2);
+        output[7] = ( "0" + startAddress.toString(16).toUpperCase() + " " + questID2);
         startAddress += 4;
 
         //空白
-        output[8] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00000000");
+        output[8] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
         startAddress += 4;
 
         //出土武器、防具、部位
-        output[9] = ( "00" + startAddress.toString(16).toUpperCase() + " " + $armorType.value + $armor.value + $weapon.value + "00");
+        output[9] = ( "0" + startAddress.toString(16).toUpperCase() + " " + $armorType.value + $armor.value + $weapon.value + "00");
         startAddress += 4;
 
         //モンスター1体目
-        output[10] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "000000" + monster1);
+        output[10] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "000000" + monster1);
         startAddress += 4;
 
         //01
-        output[11] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00000001");
+        output[11] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000001");
         startAddress += 4;
         
         //モンスター1 初期エリア
-        output[12] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "0007" + ini1 + "FF");
+        output[12] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "0007" + ini1 + "FF");
         startAddress += 4;
 
         //空白 * 7
         for(i=0; i<7; i++){
-            output[13+i] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00000000");
+            output[13+i] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
             startAddress += 4;
         }
         
         //モンスター2体目
-        output[20] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "000000" + monster2);
+        output[20] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "000000" + monster2);
         startAddress += 4;
 
         //01
-        output[21] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00000001");
+        output[21] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000001");
         startAddress += 4;
 
         //モンスター2 初期エリア
-        output[22] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "0007" + ini2 + "FF");
+        output[22] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "0007" + ini2 + "FF");
         startAddress += 4;
 
         //以下3セット
         for(cnt=0,j=0;j<3;j++){
             //空白 * 8
             for(i=0;i<8;i++){
-                output[23+cnt] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00000000");
+                output[23+cnt] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
                 startAddress += 4;
                 cnt ++;
             }
 
             //01
-            output[23+cnt] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00000001");
+            output[23+cnt] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000001");
             startAddress += 4;
             cnt++;
 
             //FF000700
-            output[23+cnt] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "0007" + "00" + "FF");
+            output[23+cnt] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "0007" + "00" + "FF");
             startAddress += 4;
             cnt++;
         }
 
         //空白 * 7
         for(i=0;i<7;i++){
-            output[53+i] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00000000");
+            output[53+i] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
             startAddress += 4;
         }
 
         //モンスター1　休眠、食事、位置、位置
-        output[60] = ( "00" + startAddress.toString(16).toUpperCase() + " " + area2Posi1 + area1Posi1 + meal1 + sleep1);
+        output[60] = ( "0" + startAddress.toString(16).toUpperCase() + " " + area2Posi1 + area1Posi1 + meal1 + sleep1);
         startAddress += 4;
 
         //モンスター1　位置、位置、位置、モンスター2休眠
-        output[61] = ( "00" + startAddress.toString(16).toUpperCase() + " " + sleep2 + area5Posi1 + area4Posi1 + area3Posi1);
+        output[61] = ( "0" + startAddress.toString(16).toUpperCase() + " " + sleep2 + area5Posi1 + area4Posi1 + area3Posi1);
         startAddress += 4;
 
         //モンスター2　食事、位置、位置、位置
-        output[62] = ( "00" + startAddress.toString(16).toUpperCase() + " " + area3Posi2 + area2Posi2 + area1Posi2 + meal2);
+        output[62] = ( "0" + startAddress.toString(16).toUpperCase() + " " + area3Posi2 + area2Posi2 + area1Posi2 + meal2);
         startAddress += 4;
 
         //モンスター2　位置、位置、00、00
-        output[63] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00" + "00" + area5Posi2 + area4Posi2);
+        output[63] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00" + "00" + area5Posi2 + area4Posi2);
         startAddress += 4;
 
         //空白 * 5
         for(i=0;i<5;i++){
-            output[64+i] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00000000");
+            output[64+i] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
             startAddress += 4;
         }
 
 
 
         //エリア1マップID、入口、出口、最終エリアフラグ
-        output[69] = ( "00" + startAddress.toString(16).toUpperCase() + " " + endFlag[0] + area1Out + area1In + area1);
+        output[69] = ( "0" + startAddress.toString(16).toUpperCase() + " " + endFlag[0] + area1Out + area1In + area1);
         startAddress += 4;
 
         //エリア2マップID、入口、出口、最終エリアフラグ
-        output[70] = ( "00" + startAddress.toString(16).toUpperCase() + " " + endFlag[1] + area2Out + area2In + area2);
+        output[70] = ( "0" + startAddress.toString(16).toUpperCase() + " " + endFlag[1] + area2Out + area2In + area2);
         startAddress += 4;
 
         //エリア3マップID、入口、出口、最終エリアフラグ
-        output[71] = ( "00" + startAddress.toString(16).toUpperCase() + " " + endFlag[2] + area3Out + area3In + area3);
+        output[71] = ( "0" + startAddress.toString(16).toUpperCase() + " " + endFlag[2] + area3Out + area3In + area3);
         startAddress += 4;
 
         //エリア4マップID、入口、出口、最終エリアフラグ
-        output[72] = ( "00" + startAddress.toString(16).toUpperCase() + " " + endFlag[3] + area4Out + area4In + area4);
+        output[72] = ( "0" + startAddress.toString(16).toUpperCase() + " " + endFlag[3] + area4Out + area4In + area4);
         startAddress += 4;
 
         //エリア5マップID、入口、出口、最終エリアフラグ
-        output[73] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00" + area5Out + area5In + area5);
+        output[73] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00" + area5Out + area5In + area5);
         startAddress += 4;
 
         //初期レベル、現在レベル、お宝(RARE)フラグ、モンス1狂竜化
-        output[74] = ( "00" + startAddress.toString(16).toUpperCase() + " " + $frenzyM1.value + RARE + curLev + iniLev);
+        output[74] = ( "0" + startAddress.toString(16).toUpperCase() + " " + $frenzyM1.value + RARE + curLev + iniLev);
         startAddress += 4;
 
         //モンス2狂竜化、乱入モンス狂竜化、00、00
-        output[75] = ( "00" + startAddress.toString(16).toUpperCase() + " " + "00" + "00" + $frenzyM3.value + $frenzyM2.value);
+        output[75] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00" + "00" + $frenzyM3.value + $frenzyM2.value);
         startAddress += 4;
 
 
