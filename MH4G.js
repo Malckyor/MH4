@@ -1574,16 +1574,16 @@ btnGeneration.addEventListener("click", function(){
             startAddress += 4;
         }
 
-        //モンスター1　休眠、食事、位置、位置
-        output[60] = ( "0" + startAddress.toString(16).toUpperCase() + " " + area2Posi1 + area1Posi1 + meal1 + sleep1);
+        //モンスター1　食事、休眠、位置、位置
+        output[60] = ( "0" + startAddress.toString(16).toUpperCase() + " " + area2Posi1 + area1Posi1 + sleep1 + meal1);
         startAddress += 4;
 
-        //モンスター1　位置、位置、位置、モンスター2休眠
-        output[61] = ( "0" + startAddress.toString(16).toUpperCase() + " " + sleep2 + area5Posi1 + area4Posi1 + area3Posi1);
+        //モンスター1　位置、位置、位置、モンスター2食事
+        output[61] = ( "0" + startAddress.toString(16).toUpperCase() + " " + meal2 + area5Posi1 + area4Posi1 + area3Posi1);
         startAddress += 4;
 
-        //モンスター2　食事、位置、位置、位置
-        output[62] = ( "0" + startAddress.toString(16).toUpperCase() + " " + area3Posi2 + area2Posi2 + area1Posi2 + meal2);
+        //モンスター2　休眠、位置、位置、位置
+        output[62] = ( "0" + startAddress.toString(16).toUpperCase() + " " + area3Posi2 + area2Posi2 + area1Posi2 + sleep2);
         startAddress += 4;
 
         //モンスター2　位置、位置、00、00
@@ -1653,7 +1653,7 @@ btnGeneration.addEventListener("click", function(){
         
         
         //情報info
-        let info = new Array("【MH4Gクエスト情報】","\n",$Author.value,"\n",$questID.value,"\n",$weapon[parseInt($weapon.value,16)+1].textContent,"\n",$armor[parseInt($armor.value,16)+1].textContent," ",$armorType[parseInt($armorType.value,16)+1].textContent,"\n",monsterName[parseInt(monster1,16)]," ",ini1,",",sleep1,",",meal1,"\n",monsterName[parseInt(monster2,16)]," ",ini2,",",sleep2,",",meal2,"\n",areaName[parseInt(area1,16)]," ",area1In,",",area1Out,",",area1Posi1,",",area1Posi2,"\n",areaName[parseInt(area2,16)]," ",area2In,",",area2Out,",",area2Posi1,",",area2Posi2,"\n",areaName[parseInt(area3,16)]," ",area3In,",",area3Out,",",area3Posi1,",",area3Posi2,"\n",areaName[parseInt(area4,16)]," ",area4In,",",area4Out,",",area4Posi1,",",area4Posi2,"\n",areaName[parseInt(area5,16)]," ",area5In,",",area5Out,",",area5Posi1,",",area5Posi2,"\n","最終エリア: ",$mapNum.value,"\n","初期レベル: ",$iniLev.value);
+        let info = new Array("【MH4Gクエスト情報】","\n",$Author.value,"\n",$questID.value,"\n",$weapon[parseInt($weapon.value,16)+1].textContent,"\n",$armor[parseInt($armor.value,16)+1].textContent," ",$armorType[parseInt($armorType.value,16)+1].textContent,"\n",monsterName[parseInt(monster1,16)]," ",ini1,",",meal1,",",sleep1,"\n",monsterName[parseInt(monster2,16)]," ",ini2,",",meal2,",",sleep2,"\n",areaName[parseInt(area1,16)]," ",area1In,",",area1Out,",",area1Posi1,",",area1Posi2,"\n",areaName[parseInt(area2,16)]," ",area2In,",",area2Out,",",area2Posi1,",",area2Posi2,"\n",areaName[parseInt(area3,16)]," ",area3In,",",area3Out,",",area3Posi1,",",area3Posi2,"\n",areaName[parseInt(area4,16)]," ",area4In,",",area4Out,",",area4Posi1,",",area4Posi2,"\n",areaName[parseInt(area5,16)]," ",area5In,",",area5Out,",",area5Posi1,",",area5Posi2,"\n","最終エリア: ",$mapNum.value,"\n","初期レベル: ",$iniLev.value);
         for(i=0; i<info.length; i++){
 
             $coppy2.value = $coppy2.value + info[i];
