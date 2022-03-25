@@ -594,30 +594,30 @@ function setIniM2(num){
 }
 function setSleepM1(num){
     if(num == ""){
-        document.getElementsByClassName("add")[2].textContent = "";
-    }else{
-        document.getElementsByClassName("add")[2].textContent = areaName[parseInt(num,16)];
-    }
-}
-function setSleepM2(num){
-    if(num == ""){
-        document.getElementsByClassName("add")[3].textContent = "";
-    }else{
-        document.getElementsByClassName("add")[3].textContent = areaName[parseInt(num,16)];
-    }
-}
-function setMealM1(num){
-    if(num == ""){
         document.getElementsByClassName("add")[4].textContent = "";
     }else{
         document.getElementsByClassName("add")[4].textContent = areaName[parseInt(num,16)];
     }
 }
-function setMealM2(num){
+function setSleepM2(num){
     if(num == ""){
         document.getElementsByClassName("add")[5].textContent = "";
     }else{
         document.getElementsByClassName("add")[5].textContent = areaName[parseInt(num,16)];
+    }
+}
+function setMealM1(num){
+    if(num == ""){
+        document.getElementsByClassName("add")[2].textContent = "";
+    }else{
+        document.getElementsByClassName("add")[2].textContent = areaName[parseInt(num,16)];
+    }
+}
+function setMealM2(num){
+    if(num == ""){
+        document.getElementsByClassName("add")[3].textContent = "";
+    }else{
+        document.getElementsByClassName("add")[3].textContent = areaName[parseInt(num,16)];
     }
 }
 //2つから受付パス
