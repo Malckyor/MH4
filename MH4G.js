@@ -239,7 +239,7 @@ function textSetM1(){
         $armor[18].textContent = "ドスF (ザザミ)";
     }
     //セルレギオス、キリン
-    else if($monster1.value == '63' || $monster1.value == '22'){
+    else if($monster1.value == '58' || $monster1.value == '22'){
         $weapon[1].textContent = "スラッシュアックス / 操虫棍";
         $weapon[2].textContent = "大剣 / 太刀";
         $weapon[3].textContent = "片手剣 / 双剣";
@@ -379,7 +379,7 @@ function textSetM1(){
         $armor[18].textContent = "ドスF (ドラゴンX)";
     }
     //ドスランポス
-    else if($monster1.value == '20'){
+    else if($monster1.value == '10'){
         $weapon[1].textContent = "スラッシュアックス / 操虫棍";
         $weapon[2].textContent = "大剣 / 太刀";
         $weapon[3].textContent = "片手剣 / 双剣";

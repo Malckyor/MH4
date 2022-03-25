@@ -131,7 +131,7 @@ function textSetM1(){
     //イャンクック、イャンクック亜種、バサルモス
     else if($monster1.value == '07' || $monster1.value == '08' || $monster1.value == '26'){
         weaponKinds[0] = "竜姫の剣斧";
-        weaponKinds[1] = "ジークムント";
+        weaponKinds[1] = "ジークムント、飛竜刀";
         weaponKinds[2] = "ヒドゥンエッジ、ギルドナイトセーバー";
         weaponKinds[3] = "トゥースランス、プリンセスバースト";
         weaponKinds[4] = "ヒドゥンブレイカー、ウネリシェルン";
