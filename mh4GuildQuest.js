@@ -92,11 +92,11 @@ $questID.onchange = function(){
 //モンスターテキストの変更
 function textSetM1(){
     if($monster1.value == ""){
-        for( i=0; i<8; i++){
+        for( i=0; i<9; i++){
             document.getElementsByClassName("$m1Name")[i].textContent = "モンスター";
             }
     }else{
-        for( i=0; i<8; i++){
+        for( i=0; i<9; i++){
             document.getElementsByClassName("$m1Name")[i].textContent = monsterName[parseInt($monster1.value,16)];
             }
     }
@@ -328,11 +328,11 @@ function textSetM1(){
 }
 function textSetM2(){
     if($monster2.value == ""){
-        for( i=0; i<8; i++){
+        for( i=0; i<9; i++){
             document.getElementsByClassName("$m2Name")[i].textContent = "モンスター";
             }
     }else{
-        for( i=0; i<8; i++){
+        for( i=0; i<9; i++){
             document.getElementsByClassName("$m2Name")[i].textContent = monsterName[parseInt($monster2.value,16)];
             }
     }
@@ -708,44 +708,44 @@ function LevSet(){
     let Lev2 = 0;
     let cnt = 0;
     switch($monster1.value){
-        case "07": Lev1 = 51; cnt+=1; break;
-        case "08": Lev1 = 51; cnt+=1; break;
-        case "0B": Lev1 = 43; cnt+=1; break;
-        case "0C": Lev1 = 53; cnt+=1; break;
-        case "10": Lev1 = 48; cnt+=1; break;
-        case "13": Lev1 = 53; cnt+=1; break;
+        case "07": Lev1 = 41; cnt+=1; break;
+        case "08": Lev1 = 46; cnt+=1; break;
+        case "0B": Lev1 = 31; cnt+=1; break;
+        case "0C": Lev1 = 51; cnt+=1; break;
+        case "10": Lev1 = 41; cnt+=1; break;
+        case "13": Lev1 = 51; cnt+=1; break;
         case "1C": Lev1 = 58; cnt+=1; break;
         case "1D": Lev1 = 58; cnt+=1; break;
-        case "1E": Lev1 = 53; cnt+=1; break;
+        case "1E": Lev1 = 51; cnt+=1; break;
         case "1F": Lev1 = 54; cnt+=1; break;
         case "20": Lev1 = 58; cnt+=1; break;
-        case "22": Lev1 = 51; cnt+=1; break;
+        case "22": Lev1 = 46; cnt+=1; break;
         case "23": Lev1 = 56; cnt+=1; break;
-        case "26": Lev1 = 53; cnt+=1; break;
-        case "27": Lev1 = 53; cnt+=1; break;
-        case "2C": Lev1 = 51; cnt+=1; break;
-        case "30": Lev1 = 46; cnt+=1; break;
-        case "31": Lev1 = 53; cnt+=1; break;
+        case "26": Lev1 = 51; cnt+=1; break;
+        case "27": Lev1 = 51; cnt+=1; break;
+        case "2C": Lev1 = 46; cnt+=1; break;
+        case "30": Lev1 = 36; cnt+=1; break;
+        case "31": Lev1 = 51; cnt+=1; break;
     }
     switch($monster2.value){
-        case "07": Lev2 = 51; cnt+=1; break;
-        case "08": Lev2 = 51; cnt+=1; break;
-        case "0B": Lev2 = 43; cnt+=1; break;
-        case "0C": Lev2 = 53; cnt+=1; break;
-        case "10": Lev2 = 48; cnt+=1; break;
-        case "13": Lev2 = 53; cnt+=1; break;
+        case "07": Lev2 = 41; cnt+=1; break;
+        case "08": Lev2 = 46; cnt+=1; break;
+        case "0B": Lev2 = 31; cnt+=1; break;
+        case "0C": Lev2 = 51; cnt+=1; break;
+        case "10": Lev2 = 41; cnt+=1; break;
+        case "13": Lev2 = 51; cnt+=1; break;
         case "1C": Lev2 = 58; cnt+=1; break;
         case "1D": Lev2 = 58; cnt+=1; break;
-        case "1E": Lev2 = 53; cnt+=1; break;
+        case "1E": Lev2 = 51; cnt+=1; break;
         case "1F": Lev2 = 54; cnt+=1; break;
         case "20": Lev2 = 58; cnt+=1; break;
-        case "22": Lev2 = 51; cnt+=1; break;
+        case "22": Lev2 = 46; cnt+=1; break;
         case "23": Lev2 = 56; cnt+=1; break;
-        case "26": Lev2 = 53; cnt+=1; break;
-        case "27": Lev2 = 53; cnt+=1; break;
-        case "2C": Lev2 = 51; cnt+=1; break;
-        case "30": Lev2 = 46; cnt+=1; break;
-        case "31": Lev2 = 53; cnt+=1; break;
+        case "26": Lev2 = 51; cnt+=1; break;
+        case "27": Lev2 = 51; cnt+=1; break;
+        case "2C": Lev2 = 46; cnt+=1; break;
+        case "30": Lev2 = 36; cnt+=1; break;
+        case "31": Lev2 = 51; cnt+=1; break;
     }
     if(cnt==0){
         return "";
@@ -788,14 +788,12 @@ $RARE.onchange = function(){
 const btnAuto = document.getElementById("$btnAuto");
 btnAuto.addEventListener("click", function(){
     $iniLev.value = LevSet();
-    $curLev.value = LevSet();
-    $iniLev.value = LevCheck($iniLev.value);
-    $curLev.value = LevCheck($curLev.value);
-    $frenzyM1.value = "00";
-    $frenzyM2.value = "00";
-    $frenzyM3.value = "00";
-    $RARE.checked = false;
-    RARE = "00";
+    $curLev.value = "100";
+    $frenzyM1.value = "03";
+    $frenzyM2.value = "03";
+    $frenzyM3.value = "03";
+    $RARE.checked = true;
+    RARE = "01";
     removeOutput();
 });
 
@@ -872,7 +870,7 @@ btnSample.addEventListener("click", function(){
     $area4Out.value = "02";
     mapNumChange();
     
-    $iniLev.value = "49";
+    $iniLev.value = "43";
     $curLev.value = "100";
     $RARE.checked = true;
     RARE = "01";

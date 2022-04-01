@@ -91,11 +91,11 @@ $questID.onchange = function(){
 //モンスターテキストの変更
 function textSetM1(){
     if($monster1.value == ""){
-        for( i=0; i<8; i++){
+        for( i=0; i<9; i++){
             document.getElementsByClassName("$m1Name")[i].textContent = "モンスター";
             }
     }else{
-        for( i=0; i<8; i++){
+        for( i=0; i<9; i++){
             document.getElementsByClassName("$m1Name")[i].textContent = monsterName[parseInt($monster1.value,16)];
             }
     }
@@ -558,11 +558,11 @@ function textSetM1(){
 }
 function textSetM2(){
     if($monster2.value == ""){
-        for( i=0; i<8; i++){
+        for( i=0; i<9; i++){
             document.getElementsByClassName("$m2Name")[i].textContent = "モンスター";
             }
     }else{
-        for( i=0; i<8; i++){
+        for( i=0; i<9; i++){
             document.getElementsByClassName("$m2Name")[i].textContent = monsterName[parseInt($monster2.value,16)];
             }
     }
@@ -1050,14 +1050,12 @@ $RARE.onchange = function(){
 const btnAuto = document.getElementById("$btnAuto");
 btnAuto.addEventListener("click", function(){
     $iniLev.value = LevSet();
-    $curLev.value = LevSet();
-    $iniLev.value = LevCheck($iniLev.value);
-    $curLev.value = LevCheck($curLev.value);
-    $frenzyM1.value = "00";
-    $frenzyM2.value = "00";
-    $frenzyM3.value = "00";
-    $RARE.checked = false;
-    RARE = "00";
+    $curLev.value = "140";
+    $frenzyM1.value = "";
+    $frenzyM2.value = "";
+    $frenzyM3.value = "03";
+    $RARE.checked = true;
+    RARE = "01";
     removeOutput();
 });
 
