@@ -1691,9 +1691,10 @@ btnLoad.addEventListener("click", function(){
 
                 case "スラッシュアックス": val1 = "00"; break;
                 case "大剣/太刀": val1 = "01"; break;
-                case "ランス/ガンランス": val1 = "02"; break;
-                case "ハンマー/狩猟笛": val1 = "03"; break;
-                case "弓/ボウガン": val1 = "04"; break;
+                case "片手剣/双剣": val1 = "02"; break;
+                case "ランス/ガンランス": val1 = "03"; break;
+                case "ハンマー/狩猟笛": val1 = "04"; break;
+                case "弓/ボウガン": val1 = "05"; break;
             
             }
             switch (string5) {  //防具シリーズ変換
