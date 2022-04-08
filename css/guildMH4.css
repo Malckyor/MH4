@@ -1,0 +1,63 @@
+h1{
+    background-color: #bfffba;
+}
+
+h2{
+    background-color: #da7706bb;
+}
+
+p, dl{
+    margin-left: 10px;
+}
+
+.yellow{
+    background-color:rgb(255, 255, 190);
+}
+
+.blue{
+    background-color: rgb(210, 255, 255);
+}
+
+.pink{
+    background-color: rgb(255, 220, 226);
+}
+
+.purple{
+    background-color: rgba(128, 0, 128, 0.5);
+}
+
+.black{
+    background-color: rgba(0, 0, 0, 0.226);
+}
+
+.aqua{
+    background-color: rgba(255, 127, 42, 0.438);
+}
+
+.red{
+    background-color: rgba(255, 0, 0, 0.301);
+}
+
+.green{
+    background-color:rgba(0, 139, 139, 0.5);
+}
+
+p.space{
+    margin-top: 30px;
+}
+
+select{
+    font-size: 16px;
+}
+
+textarea{
+    font-size: 16px;
+}
+
+input{
+    font-size: 16px;
+}
+
+.margin{
+    margin-left: 10px;
+}
