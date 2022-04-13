@@ -32,7 +32,7 @@ h2{
     background-color: #bfffba;
 }
 
-h2,h3,p,header,footer{
+h2,h3,p,header,footer,dl{
     text-align: center;
 }
 
@@ -87,6 +87,9 @@ a{
 .img4{
     width: min(50px,5vw);
     height: auto;
+}
+.MH4G{
+    background-color:rgba(0, 255, 255, 0.2)
 }
   
 
