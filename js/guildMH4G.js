@@ -214,7 +214,7 @@ function textSetM1(){
         $weapon[6].textContent = "弓 / へビィボウガン";
 
         weaponKinds[0] = "(ディア＝ルテミス、ボーンロッド)";
-        weaponKinds[1] = "(41式対飛竜大剣、飛竜刀)";
+        weaponKinds[1] = "(ジークムント、飛竜刀)";
         weaponKinds[2] = "(ポイズンタバルジン、ギルドナイトセーバー)";
         weaponKinds[3] = "(トゥースランス、プリンセスバースト)";
         weaponKinds[4] = "(ヒドゥンブレイカー、ガンズロック)";
