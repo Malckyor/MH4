@@ -178,7 +178,7 @@ function textSetM1(){
         $weapon[5].textContent = "ハンマー / 狩猟笛";
         $weapon[6].textContent = "弓 / ライトボウガン";
 
-        weaponKinds[0] = "(ディア＝ルテミス、ボーンロッド)";
+        weaponKinds[0] = "(ディア＝ルテミス、エイムofトリック)";
         weaponKinds[1] = "(雷剣、成敗刀)";
         weaponKinds[2] = "(ヒドゥンエッジ、王双刃)";
         weaponKinds[3] = "(バベル、ナナ＝ハウル)";
@@ -388,7 +388,7 @@ function textSetM1(){
         $weapon[5].textContent = "ハンマー / 狩猟笛";
         $weapon[6].textContent = "弓 / ライトボウガン";
 
-        weaponKinds[0] = "(ディーエッジ、ボーンロッド)";
+        weaponKinds[0] = "(ディーエッジ、エイムofトリック)";
         weaponKinds[1] = "(41式対飛竜大剣、凍刀)";
         weaponKinds[2] = "(マスターバング、ランポスクロウズ)";
         weaponKinds[3] = "(合戦槍、フルボルテージ)";
