@@ -90,13 +90,15 @@ $questID.onchange = function(){
 }
 
 //モンスターテキストの変更
+let ele1 = document.getElementsByClassName("$m1Name");
+let ele2 = document.getElementsByClassName("$m2Name");
 function textSetM1(){
     if($monster1.value == ""){
-        for( i=0; i<9; i++){
+        for( i=0; i<ele1.length; i++){
             document.getElementsByClassName("$m1Name")[i].textContent = "モンスター";
             }
     }else{
-        for( i=0; i<9; i++){
+        for( i=0; i<ele1.length; i++){
             document.getElementsByClassName("$m1Name")[i].textContent = monsterName[parseInt($monster1.value,16)];
             }
     }
@@ -328,11 +330,11 @@ function textSetM1(){
 }
 function textSetM2(){
     if($monster2.value == ""){
-        for( i=0; i<9; i++){
+        for( i=0; i<ele2.length; i++){
             document.getElementsByClassName("$m2Name")[i].textContent = "モンスター";
             }
     }else{
-        for( i=0; i<9; i++){
+        for( i=0; i<ele2.length; i++){
             document.getElementsByClassName("$m2Name")[i].textContent = monsterName[parseInt($monster2.value,16)];
             }
     }
@@ -358,16 +360,16 @@ function setIniM1(num){
 }
 function setIniM2(num){
     if(num == ""){
-        document.getElementsByClassName("add")[1].textContent = "";
+        document.getElementsByClassName("add")[3].textContent = "";
     }else{
-        document.getElementsByClassName("add")[1].textContent = areaName[parseInt(num,16)];
+        document.getElementsByClassName("add")[3].textContent = areaName[parseInt(num,16)];
     }
 }
 function setSleepM1(num){
     if(num == ""){
-        document.getElementsByClassName("add")[4].textContent = "";
+        document.getElementsByClassName("add")[2].textContent = "";
     }else{
-        document.getElementsByClassName("add")[4].textContent = areaName[parseInt(num,16)];
+        document.getElementsByClassName("add")[2].textContent = areaName[parseInt(num,16)];
     }
 }
 function setSleepM2(num){
@@ -379,16 +381,16 @@ function setSleepM2(num){
 }
 function setMealM1(num){
     if(num == ""){
-        document.getElementsByClassName("add")[2].textContent = "";
+        document.getElementsByClassName("add")[1].textContent = "";
     }else{
-        document.getElementsByClassName("add")[2].textContent = areaName[parseInt(num,16)];
+        document.getElementsByClassName("add")[1].textContent = areaName[parseInt(num,16)];
     }
 }
 function setMealM2(num){
     if(num == ""){
-        document.getElementsByClassName("add")[3].textContent = "";
+        document.getElementsByClassName("add")[4].textContent = "";
     }else{
-        document.getElementsByClassName("add")[3].textContent = areaName[parseInt(num,16)];
+        document.getElementsByClassName("add")[4].textContent = areaName[parseInt(num,16)];
     }
 }
 //2つから受付パス
@@ -550,6 +552,9 @@ function monster1None(){
     $area3Posi1.value = "";
     $area4Posi1.value = "";
     $area5Posi1.value = "";
+    document.getElementsByClassName("add")[0].textContent = "";
+    document.getElementsByClassName("add")[1].textContent = "";
+    document.getElementsByClassName("add")[2].textContent = "";
     textSetM1();
 }
 function monster2None(){
@@ -562,6 +567,9 @@ function monster2None(){
     $area3Posi2.value = "";
     $area4Posi2.value = "";
     $area5Posi2.value = "";
+    document.getElementsByClassName("add")[3].textContent = "";
+    document.getElementsByClassName("add")[4].textContent = "";
+    document.getElementsByClassName("add")[5].textContent = "";
     textSetM2();
 }
 
@@ -658,23 +666,25 @@ $mapNum.onchange = function(){
 }
 
 //モンスター hidden
+let ele3 = document.getElementsByClassName("hiddenM1");
+let ele4 = document.getElementsByClassName("hiddenM2");
 function hiddenSetTrueM1(){
-    for( i=0; i<9; i++){
+    for( i=0; i<ele3.length; i++){
         document.getElementsByClassName("hiddenM1")[i].hidden = true;
     }
 }
 function hiddenSetTrueM2(){
-    for( i=0; i<9; i++){
+    for( i=0; i<ele4.length; i++){
         document.getElementsByClassName("hiddenM2")[i].hidden = true;
     }
 }
 function hiddenSetFalseM1(){
-    for( i=0; i<9; i++){
+    for( i=0; i<ele3.length; i++){
         document.getElementsByClassName("hiddenM1")[i].hidden = false;
     }
 }
 function hiddenSetFalseM2(){
-    for( i=0; i<9; i++){
+    for( i=0; i<ele4.length; i++){
         document.getElementsByClassName("hiddenM2")[i].hidden = false;
     }
 }
@@ -1032,6 +1042,7 @@ window.addEventListener("load",function(){
     document.getElementById("$btnHidden").hidden = true;
     document.getElementById("$textareaHidden").hidden = true;
     document.getElementById("$load").hidden = true;
+
 });
 
 //コード生成ボタン
@@ -1955,3 +1966,4 @@ btnLoad.addEventListener("click", function(){
     }
 
 });
+

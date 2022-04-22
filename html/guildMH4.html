@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="../image/favicon3.png" sizes="192x192">
 
     <title>MH4ギルクエ作成ツール</title>
-    <link rel="stylesheet" href="../css/guildMH4.css">
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
     <header>
@@ -21,23 +21,21 @@
 
 
 <main>
-    <h2>MH4ギルクエ作成ツール</h2>
+    <br>
+    <h2 class="MH4">MH4ギルクエ作成ツール</h2>
 
     <p>
         <button id="$btnSample">サンプル</button>
         <button id="$btnReset">リセット</button>
+        <button id="$btnLoad">読み込み</button>
     </p>
 
-    <div class="aqua">
-        <p>
-            クエスト基本要素
-        </p>
-    </div>
+    <br>
 
-    <p>
-        <label for="$frames">ギルクエの枠数を選択:</label>
+    <p class="skin">
+        <label for="$frames">ギルクエの枠数を選択</label>
         <select id="$frames">
-            <option value="">--未選択--</option>
+            <option value=""></option>
             <option value="1">1枠目</option>
             <option value="2">2枠目</option>
             <option value="3">3枠目</option>
@@ -52,13 +50,13 @@
     </p>
 
     <p>
-        <label for="$Author">クエスト作成者名:</label>
+        <label for="$Author">クエスト作成者名</label>
         <br>
         <textarea id="$Author" rows="1" cols="33"></textarea>
     </p>
 
     <p>
-        <label for="$questID">クエスト識別ID:</label>
+        <label for="$questID">クエスト識別ID</label>
         <br>
         <textarea id="$questID" rows="1" cols="33"></textarea>
         <br>
@@ -66,9 +64,9 @@
     </p>
     <br>
     <p>
-        <label for="$weapon">出土武器:</label>
+        <label for="$weapon">出土武器</label>
         <select id="$weapon">
-            <option value="">--未選択--</option>
+            <option value=""></option>
             <option value="00">スラッシュアックス</option>
             <option value="01">大剣 / 太刀</option>
             <option value="02">片手剣 / 双剣</option>
@@ -78,14 +76,16 @@
         </select>
     </p>
 
-    <div id="$weaponKinds" class="margin">
-
-    </div>
+    <p id="$weaponKinds"></p>
+    
+        
+    
+    
 
     <p>
-        <label for="$armor">出土防具:</label>
+        <label for="$armor">出土防具</label>
         <select id="$armor">
-            <option value="">--未選択--</option>
+            <option value=""></option>
             <option value="00">オリジナルA</option>
             <option value="01">オリジナルB</option>
             <option value="02">オリジナルC</option>
@@ -108,9 +108,9 @@
     </p>
 
     <p>
-        <label for="$armorType">出土部位:</label>
+        <label for="$armorType">出土部位</label>
         <select id="$armorType">
-            <option value="">--未選択--</option>
+            <option value=""></option>
             <option value="00">胴</option>
             <option value="01">腕</option>
             <option value="02">腰</option>
@@ -122,20 +122,20 @@
 
     <div class="purple">
         <p>
-            <label for="$monsterNum">モンスター数を選択:</label>
+            <label for="$monsterNum">モンスター数を選択</label>
             <select id="$monsterNum">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="1">1体</option>
                 <option value="2">2体</option>
             </select>
         </p>
     </div>
     
-    <div class="hiddenM1">
+    <div class="hiddenM1 pink">
         <p>
-            <label for="$monster1">モンスター1体目:</label>
+            <label for="$monster1">モンスター1体目</label>
             <select id="$monster1">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="07">イャンクック</option>
                 <option value="08">イャンクック亜種</option>
                 <option value="0B">ティガレックス</option>
@@ -157,12 +157,53 @@
             </select>
         </p>
     </div>
+
+    <p class="hiddenM1">
+        <label for="$ini1">初期</label>
+        <select id="$ini1">
+            <option value=""></option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+        </select>
+        <label for="$meal1">食事</label>
+        <select id="$meal1">
+            <option value=""></option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+        </select>
+        <label for="$sleep1">休眠</label>
+        <select id="$sleep1">
+            <option value=""></option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+        </select>
+    </p>
+
+    <p class="hiddenM1">
+        (<span class="add yellow"></span>)
+        /
+        (<span class="add yellow"></span>)
+        /
+        (<span class="add yellow"></span>)
+    </p>
     
-    <div class="hiddenM2">
+
+    <br>
+    
+    <div class="hiddenM2 blue">
         <p>
-            <label for="$monster2">モンスター2体目:</label>
+            <label for="$monster2">モンスター2体目</label>
             <select id="$monster2">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="07">イャンクック</option>
                 <option value="08">イャンクック亜種</option>
                 <option value="0B">ティガレックス</option>
@@ -184,154 +225,57 @@
             </select>
         </p>
     </div>
+
+    <p class="hiddenM2">
+        <label for="$ini2">初期</label>
+        <select id="$ini2">
+            <option value=""></option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+        </select>
+        <label for="$meal2">食事</label>
+        <select id="$meal2">
+            <option value=""></option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+        </select>
+        <label for="$sleep2">休眠</label>
+        <select id="$sleep2">
+            <option value=""></option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+        </select>
+    </p>
+
+    <p class="hiddenM2">
+        (<span class="add yellow"></span>)
+        /
+        (<span class="add yellow"></span>)
+        /
+        (<span class="add yellow"></span>)
+    </p>
     
-    <div class="hiddenM1">
-        <p class="space">
-            1.
-            <span class="$m1Name pink">
-                モンスター
-            </span>
+    <br>
     
-            <label for="$ini1">:初期エリア:</label>
-            <select id="$ini1">
-                <option value="">--未選択--</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-            </select>
     
-            <span class="add yellow">
-    
-            </span>
-        </p>
+    <div class="pic_set">
+        <img class="img5" src="../image/map1.png" alt="マップ画像1" width="360">
     </div>
-
-    <div class="hiddenM2">
-        <p>
-            2.
-            <span class="$m2Name blue">
-                モンスター
-            </span>
-    
-            <label for="$ini2">:初期エリア:</label>
-            <select id="$ini2">
-                <option value="">--未選択--</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-            </select>
-    
-            <span class="add yellow">
-    
-            </span>
-        </p>
-    </div> 
-
-    <div class="hiddenM1">
-        <p class="space">
-            1.
-            <span class="$m1Name pink">
-                モンスター
-            </span>
-    
-            <label for="$meal1">:食事エリア:</label>
-            <select id="$meal1">
-                <option value="">--未選択--</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-            </select>
-    
-            <span class="add yellow">
-    
-            </span>
-        </p>
-    </div> 
-
-    <div class="hiddenM2">
-        <p>
-            2.
-            <span class ="$m2Name blue">
-                モンスター
-            </span>
-    
-            <label for="$meal2">:食事エリア:</label>
-            <select id="$meal2">
-                <option value="">--未選択--</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-            </select>
-    
-            <span class="add yellow">
-    
-            </span>
-        </p>
-    </div>
-
-    <div class="hiddenM1">
-        <p class="space">
-            1.
-            <span class="$m1Name pink">
-                モンスター
-            </span>
-    
-            <label for="$sleep1">:休眠エリア:</label>
-            <select id="$sleep1">
-                <option value="">--未選択--</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-            </select>
-    
-            <span class="add yellow">
-    
-            </span>
-        </p>
-    </div>
-
-    <div class="hiddenM2">
-        <p>
-            2.
-            <span class="$m2Name blue">
-                モンスター
-            </span>
-    
-            <label for="$sleep2">:休眠エリア:</label>
-            <select id="$sleep2">
-                <option value="">--未選択--</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-            </select>
-    
-            <span class="add yellow">
-    
-            </span>
-        </p>
-    </div>
-    
-    
-
-    <img src="../image/map1.png" alt="マップ画像1" width="360">
 
     <div class="yellow">
         <p>
-            <label for="$mapNum">総マップ数を選択:</label>
+            <label for="$mapNum">総マップ数を選択</label>
             <select id="$mapNum">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="2">2マップ</option>
                 <option value="3">3マップ</option>
                 <option value="4">4マップ</option>
@@ -343,9 +287,9 @@
     <div class="hiddenArea">
         <div class="yellow">
             <p>
-                <label for="$area1" class="yellow">エリア1マップ:</label>
+                <label for="$area1" class="yellow">エリア1</label>
                 <select id="$area1">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">BC(キャンプ)</option>
                     <option value="01">迷路</option>
                     <option value="02">傾斜(丘)</option>
@@ -362,9 +306,9 @@
         </div>
     
         <p>
-            <label for="$area1In">エリア1入口:</label>
+            <label for="$area1In">入口</label>
             <select id="$area1In">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -374,12 +318,12 @@
                 <option value="07">07</option>
                 <option value="08">08</option>
             </select>
-        </p>
+        
     
-        <p>
-            <label for="$area1Out">エリア1出口:</label>
+        
+            <label for="$area1Out">出口</label>
             <select id="$area1Out">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -393,13 +337,13 @@
     
         <div class="hiddenM1">
             <p>
-                1.
+                
                 <span class="$m1Name pink">
                 モンスター
                 </span>
-                <label for="$area1Posi1">:位置:</label>
+                <label for="$area1Posi1">位置</label>
                 <select id="$area1Posi1">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">⓪</option>
                     <option value="01">①</option>
                     <option value="02">②</option>
@@ -410,13 +354,13 @@
     
         <div class="hiddenM2">
             <p>
-                2.
+                
                 <span class="$m2Name blue">
                 モンスター
                 </span>
-                <label for="$area1Posi2">:位置:</label>
+                <label for="$area1Posi2">位置</label>
                 <select id="$area1Posi2">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">⓪</option>
                     <option value="01">①</option>
                     <option value="02">②</option>
@@ -429,9 +373,9 @@
     <div class="hiddenArea">
         <div class="yellow">
             <p class="space">
-                <label for="$area2">エリア2マップ:</label>
+                <label for="$area2">エリア2</label>
                 <select id="$area2">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">BC(キャンプ)</option>
                     <option value="01">迷路</option>
                     <option value="02">傾斜(丘)</option>
@@ -448,9 +392,9 @@
         </div>
     
         <p>
-            <label for="$area2In">エリア2入口:</label>
+            <label for="$area2In">入口</label>
             <select id="$area2In">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -460,12 +404,12 @@
                 <option value="07">07</option>
                 <option value="08">08</option>
             </select>
-        </p>
+        
     
-        <p>
-            <label for="$area2Out">エリア2出口:</label>
+        
+            <label for="$area2Out">出口</label>
             <select id="$area2Out">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -479,13 +423,13 @@
     
         <div class="hiddenM1">
             <p>
-                1.
+                
                 <span class="$m1Name pink">
                 モンスター
                 </span>
-                <label for="$area2Posi1">:位置:</label>
+                <label for="$area2Posi1">位置</label>
                 <select id="$area2Posi1">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">⓪</option>
                     <option value="01">①</option>
                     <option value="02">②</option>
@@ -496,13 +440,13 @@
     
         <div class="hiddenM2">
             <p>
-                2.
+                
                 <span class="$m2Name blue">
                 モンスター
                 </span>
-                <label for="$area2Posi2">:位置:</label>
+                <label for="$area2Posi2">位置</label>
                 <select id="$area2Posi2">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">⓪</option>
                     <option value="01">①</option>
                     <option value="02">②</option>
@@ -515,9 +459,9 @@
     <div class="hiddenArea">
         <div class="yellow">
             <p class="space">
-                <label for="$area3">エリア3マップ:</label>
+                <label for="$area3">エリア3</label>
                 <select id="$area3">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">BC(キャンプ)</option>
                     <option value="01">迷路</option>
                     <option value="02">傾斜(丘)</option>
@@ -534,9 +478,9 @@
         </div>
         
         <p>
-            <label for="$area3In">エリア3入口:</label>
+            <label for="$area3In">入口</label>
             <select id="$area3In">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -546,12 +490,12 @@
                 <option value="07">07</option>
                 <option value="08">08</option>
             </select>
-        </p>
+        
     
-        <p>
-            <label for="$area3Out">エリア3出口:</label>
+        
+            <label for="$area3Out">出口</label>
             <select id="$area3Out">
-                <option value="">--未選択--</option>
+                <option value=""></option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -565,13 +509,13 @@
     
         <div class="hiddenM1">
             <p>
-                1.
+                
                 <span class="$m1Name pink">
                 モンスター
                 </span>
-                <label for="$area3Posi1">:位置:</label>
+                <label for="$area3Posi1">位置</label>
                 <select id="$area3Posi1">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">⓪</option>
                     <option value="01">①</option>
                     <option value="02">②</option>
@@ -582,13 +526,13 @@
     
         <div class="hiddenM2">
             <p>
-                2.
+                
                 <span class="$m2Name blue">
                 モンスター
                 </span>
-                <label for="$area3Posi2">:位置:</label>
+                <label for="$area3Posi2">位置</label>
                 <select id="$area3Posi2">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">⓪</option>
                     <option value="01">①</option>
                     <option value="02">②</option>
@@ -601,9 +545,9 @@
     <div class="hiddenArea">
         <div class="yellow">
             <p class="space">
-                <label for="$area4">エリア4マップ:</label>
+                <label for="$area4">エリア4</label>
                 <select id="$area4">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="00">BC(キャンプ)</option>
                     <option value="01">迷路</option>
                     <option value="02">傾斜(丘)</option>
@@ -620,9 +564,9 @@
         </div>
             
             <p>
-                <label for="$area4In">エリア4入口:</label>
+                <label for="$area4In">入口</label>
                 <select id="$area4In">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -632,12 +576,12 @@
                     <option value="07">07</option>
                     <option value="08">08</option>
                 </select>
-            </p>
+            
         
-            <p>
-                <label for="$area4Out">エリア4出口:</label>
+            
+                <label for="$area4Out">出口</label>
                 <select id="$area4Out">
-                    <option value="">--未選択--</option>
+                    <option value=""></option>
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -651,13 +595,13 @@
         
             <div class="hiddenM1">
                 <p>
-                    1.
+                    
                     <span class="$m1Name pink">
                     モンスター
                     </span>
-                    <label for="$area4Posi1">:位置:</label>
+                    <label for="$area4Posi1">位置</label>
                     <select id="$area4Posi1">
-                        <option value="">--未選択--</option>
+                        <option value=""></option>
                         <option value="00">⓪</option>
                         <option value="01">①</option>
                         <option value="02">②</option>
@@ -668,13 +612,13 @@
             
             <div class="hiddenM2">
                 <p>
-                    2.
+                    
                     <span class="$m2Name blue">
                     モンスター
                     </span>
-                    <label for="$area4Posi2">:位置:</label>
+                    <label for="$area4Posi2">位置</label>
                     <select id="$area4Posi2">
-                        <option value="">--未選択--</option>
+                        <option value=""></option>
                         <option value="00">⓪</option>
                         <option value="01">①</option>
                         <option value="02">②</option>
@@ -687,9 +631,9 @@
     <div class="hiddenArea">
             <div class="yellow">
                 <p class="space">
-                    <label for="$area5">エリア5マップ:</label>
+                    <label for="$area5">エリア5</label>
                     <select id="$area5">
-                        <option value="">--未選択--</option>
+                        <option value=""></option>
                         <option value="00">BC(キャンプ)</option>
                         <option value="01">迷路</option>
                         <option value="02">傾斜(丘)</option>
@@ -706,9 +650,9 @@
             </div>
                 
                 <p>
-                    <label for="$area5In">エリア5入口:</label>
+                    <label for="$area5In">入口</label>
                     <select id="$area5In">
-                        <option value="">--未選択--</option>
+                        <option value=""></option>
                         <option value="01">01</option>
                         <option value="02">02</option>
                         <option value="03">03</option>
@@ -718,12 +662,12 @@
                         <option value="07">07</option>
                         <option value="08">08</option>
                     </select>
-                </p>
+                
             
-                <p>
-                    <label for="$area5Out">エリア5出口:</label>
+                
+                    <label for="$area5Out">出口</label>
                     <select id="$area5Out">
-                        <option value="">--未選択--</option>
+                        <option value=""></option>
                         <option value="01">01</option>
                         <option value="02">02</option>
                         <option value="03">03</option>
@@ -737,13 +681,13 @@
             
                 <div class="hiddenM1">
                     <p>
-                        1.
+                        
                         <span class="$m1Name pink">
                         モンスター
                         </span>
-                        <label for="$area5Posi1">:位置:</label>
+                        <label for="$area5Posi1">位置</label>
                         <select id="$area5Posi1">
-                            <option value="">--未選択--</option>
+                            <option value=""></option>
                             <option value="00">⓪</option>
                             <option value="01">①</option>
                             <option value="02">②</option>
@@ -754,13 +698,13 @@
                 
                 <div class="hiddenM2">
                     <p>
-                        2.
+                        
                         <span class="$m2Name blue">
                         モンスター
                         </span>
-                        <label for="$area5Posi2">:位置:</label>
+                        <label for="$area5Posi2">位置</label>
                         <select id="$area5Posi2">
-                            <option value="">--未選択--</option>
+                            <option value=""></option>
                             <option value="00">⓪</option>
                             <option value="01">①</option>
                             <option value="02">②</option>
@@ -770,8 +714,8 @@
                 </div>
             </div>
 
-            <div id="hiddenMap">
-                <img src="../image/map1.png" alt="マップ画像1" width="360">
+            <div id="hiddenMap" class="pic_set">
+                <img class="img5" src="../image/map1.png" alt="マップ画像1" width="360">
             </div>
 
     <br>
@@ -781,12 +725,12 @@
         </p>
     </div>
     <p>
-        クエスト初期レベル:
+        初期レベル:
         <input id="$iniLev" type="number" min="1" max="100">
     </p>
 
     <p>
-        クエスト現在レベル:
+        現在レベル:
         <input id="$curLev" type="number" min="1" max="100">
     </p>
 
@@ -796,13 +740,13 @@
     </p>
 
     <p>
-        1.
+        
             <span class="$m1Name pink">
             モンスター
             </span>
-        <label for="$frenzyM1">:狂竜化:</label>
+        <label for="$frenzyM1">狂竜化</label>
         <select id="$frenzyM1">
-            <option value="">--未選択--</option>
+            <option value=""></option>
             <option value="00">00(しない)</option>
             <option value="01">01(最初から)</option>
             <option value="02">02(途中から)</option>
@@ -813,13 +757,13 @@
     </p>
 
     <p>
-        2.
+        
             <span class="$m2Name blue">
             モンスター
             </span>
-        <label for="$frenzyM2">:狂竜化:</label>
+        <label for="$frenzyM2">狂竜化</label>
         <select id="$frenzyM2">
-            <option value="">--未選択--</option>
+            <option value=""></option>
             <option value="00">00(しない)</option>
             <option value="01">01(最初から)</option>
             <option value="02">02(途中から)</option>
@@ -830,9 +774,9 @@
     </p>
 
     <p>
-        <label for="$frenzyM3">乱入モンスター狂竜化:</label>
+        <label for="$frenzyM3">乱入モンスター狂竜化</label>
         <select id="$frenzyM3">
-            <option value="">--未選択--</option>
+            <option value=""></option>
             <option value="00">00(しない)</option>
             <option value="01">01(最初から)</option>
             <option value="02">02(途中から)</option>
@@ -845,7 +789,7 @@
     <p>
         <button id="$btnAuto">自動設定</button>
     </p>
-
+    <br>
     <div class="red">
         <p>
             コード生成ボタン
@@ -865,30 +809,27 @@
             <button id="$btnCoppyCode">コードのコピー</button>
         </p>
     </div>
-
-<div id="$output"></div>
+    <br>
+<p id="$output"></p>
     
         <div id="$textareaHidden">
             <textarea id="$coppy1" rows="1" cols="33"></textarea>
             <textarea id="$coppy2" rows="20" cols="60"></textarea>
         </div>
 
+        <textarea id="$load"></textarea>
+
+
 
         <br>
-        <div class="red">
-            <p>
-                読み込みボタン
-            </p>
+        <br>
+        <br>
+        <br>
+        <div class="border">
+            <p>使い方や注意点などは<a href="">こちら!</a><br>質問や代行依頼は<a href="">Twitter</a>のDMまでお願いします<br>作成代行1クエスト<br>任意のクエスト作成者名→1500円<br>作成者名固定(@senaga19)→無料<br>でやってます!</p>
         </div>
-
-        <p>
-            <button id="$btnLoad">読み込み</button>
-        </p>
-        <p>
-            『クエスト情報』がクリップボードにコピーされている状態でこのボタンを押すと、自動で復元できます。
-        </p>
-
-        <textarea id="$load"></textarea>
+        <br>
+        <br>
         
 
 
@@ -896,134 +837,7 @@
 </main>
 
 <footer>
-    <br>
-    <br>
-    <h2>使い方や注意点など</h2>
-    
-    <div class="green">
-        <p>
-            正規内(外)ギルクエについて
-        </p>
-    </div>
-    
-        
-    <p>
-        情報元 → <a href="https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10147613220" target="_blank">①</a>
-
-    </p>
-        
-    <p>
-        お宝を挟まない連続同マップ、2体の初期エリアが違うのにマップの種類が同じ、ラーラー傾斜→水→蔦の様なマップ構成は存在しない。
-    </p>
-
-    <p>
-        作成者『N』や作成者『brillant』のラーラーなど、マップが真ん中だけの狭いエリアは存在しない。
-    </p>
-    
-    <p>崖の7番、8番は没データ。</p>
-
-    <div class="green">
-        <p>
-            受け取り可能なギルクエについて
-        </p>
-    </div>
-
-    <p>
-        (たぶん)
-    </p>
-
-    <p>
-        クエスト初期レベル、設定モンスター、マップ構成、モンスター配置マップ、で弾かれる。
-    </p>
-
-    <p>
-        レベル → 公式発表範囲内ならok
-    </p>
-
-    <p>モンスター → 基本正規で派生する組み合わせのみ</p>
-
-    <p>マップ構成 → お宝2つ以上は不可</p>
-
-    <p>配置 → (例)お宝にモンスター置くのは不可</p>
-
-    <div class="green">
-        <p>
-            休眠、食事エリアの正規値
-        </p>
-    </div>
-
-    <p>
-        情報元 → <a href="https://www.youtube.com/watch?v=zBfWUmav6oU" target="_blank">②</a>
-    </p>
-
-    <p>
-        移動可能エリアが2つ → 初期休眠、食事はもう1つのエリア
-    </p>
-
-    <p>
-        移動可能エリアが3つ以上 → 休眠、食事共に別エリア
-    </p>
-        
-    <div class="green">
-        <p>
-            戸惑いそうな事
-        </p>
-    </div>
-
-    <p>
-        このツールは選択で隠れた場所を正規値で設定してるので、隠れたモンスターやエリアの事は気にしなくて大丈夫です。
-    </p>
-
-    <p>
-        また、最終エリアフラグも自動で設定されます。最終エリアも入口と出口までしっかり設定してください！(マップの大きさに影響します)
-    </p>
-
-    <div class="green">
-        <p>
-            クエスト初期レベルについて
-        </p>
-    </div>
-
-    <p>
-        情報元 → <a href="https://www.dopr.net/formonsterhunter/%E3%80%90MH4%E3%80%91%E3%82%AE%E3%83%AB%E3%83%89%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AB%E5%87%BA%E7%8F%BE%E3%81%99%E3%82%8B%E3%83%A2%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%BC%E3%81%A8%E5%88%9D%E6%9C%9F%E3%83%AC%E3%83%99%E3%83%AB%E3%81%AE%E6%97%A9%E8%A6%8B%E8%A1%A8" target="_blank">③</a>
-    </p>
-
-    <p>
-        モンスターが2体の場合の自動設定はここに載ってる最大レベルを足して2で割って少数点は切り捨ててます。
-    </p>
-
-    <p>
-        もしかしたらMH4Gみたいに探索に出現するモンスターの都合上、存在しないレベルがあるかもです。
-    </p>
-
-    
-        
-    <div class="green">
-        <p>
-            狂竜化フラグについて
-        </p>
-    </div>
-
-    <p>
-        クリアする度に正規値が設定されるのでテキトーでokです。
-    </p>
-
-    <p>
-        狂竜化フラグの02~05と、天エリア移動可能時の正規値00~03はどれも同じだと思われる。
-    </p>
-
-    <div class="green">
-        <p>
-            連絡先
-        </p>
-    </div>
-    <p>
-        自分でコード適応できない方、有償で良ければ<a href="https://twitter.com/senaga19" target="_blank">Twitter</a>にDM下さい。
-    </p>
-    <p>
-        代わりに適応してお渡しします。
-    </p>
-    
+    <small><a href="https://twitter.com/senaga19" target="_blank">@senaga19</a></small>
 </footer>
 
 <script src="../js/guildMH4.js"></script>
