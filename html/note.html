@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="MH4、MH4G(モンスターハンター4、モンスターハンター4G)ギルクエ作成ツールの使い方や注意点">
+
+    <title>ギルクエ作成ツールの使い方や注意点</title>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">MH4 MH4G改造チート</a></h1>
+    </header>
+    
+    <main>
+        <br>
+        <h2>ギルクエ作成ツールの使い方や注意点</h2>
+        <br>
+        <h3 class="red">クエスト情報と読み込みボタンについて</h3>
+        <p>コードを生成した時に表示される『情報のコピー』ボタンを押すと、『クエスト情報』をコピーできます。</p>
+        <p>これはクエストデータを共有したり保存したりする為の物です。</p>
+        <p>この『クエスト情報』がクリップボードにコピーされている状態で『読み込み』ボタンを押すと、クエストデータを自動で復元できます。</p>
+        <br>
+        <h3 class="red">完全正規のギルクエを作成する為に</h3>
+        <p>このツールは不要な箇所まで正規値で設定しているので、登録済みのギルクエに上書きでも、未登録の何もない枠に書き込んでも、チーターが中身見ても分からない、完全正規のギルクエを作成できます。</p>
+        <p>もちろん改造クエストも作成できますが、間違えてそうならない為に以下注意点です。</p>
+        <br>
+        <h3 class="red">食事と休眠エリアの正規値</h3>
+        <p>移動可能エリアが2つの場合→休眠エリアが初期エリア、食事エリアがもう1つのエリア</p>
+        <p>移動可能エリアが3つ以上の場合→食事、休眠の両方が初期エリアとは別のエリア</p>
+        <div class="pic_set">
+            <iframe class="img6" width="560" height="315" src="https://www.youtube.com/embed/zBfWUmav6oU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p>MH4だとここまで気にしてる人がいないのであえて改造にするのはアリだと思ってます。</p>
+        <p>MH4Gはこれ含め全て完全正規をお勧めします。</p>
+        <br>
+        <h3 class="red">初期エリアについて</h3>
+        <p><a href="https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10147613220" target="_blank">マップ作成ルーチン(知恵袋)</a></p>
+        <p>同じ種類のマップの別エリアにそれぞれモンスターがいる事は有り得ません。</p>
+        <p>(例)エリア1水、エリア4水で、モンスター1の初期エリアが1、モンスター2の初期エリアが4</p>
+        <br>
+        <h3 class="red">マップ関連</h3>
+        <p>エリアの入口と出口は必ず点線で区切られている箇所を通る必要があります。</p>
+        <p>エリアの入口と出口でエリアの大きさが決まります。</p>
+        <p>最終エリアもしっかり入口と出口を設定してください。</p>
+        <p>内部的には設定したエリアの出口を封鎖する事で最終エリアになります。</p>
+        <p>4エリア構成の場合エリア5は、BC(00)、入口01出口01が正規値です。</p>
+        <br>
+        <h3 class="red">モンスター位置について</h3>
+        <p>初期位置が1つしかないマップは⓪~③どれも同じでどれも正規値です。</p>
+        <p>移動不可のマップは⓪が正規値、他は改造。</p>
+        <p>マップの点線位置をしっかり見て、エリア外にモンスターが配置されない様に注意です。</p>
+        <p>(例)崖の入口4、出口1の構成で②を選択してしまったとか崖の入口3、出口6の構成で⓪を選択してしまった</p>
+        <br>
+        <h3 class="red">クエスト初期レベルについて</h3>
+        <p><a href="http://wiki.mh4g.org/data/1781.html" target="_blank">MH4G派生レベル</a>、<a href="http://ryogakucx.blog.fc2.com/blog-entry-113.html" target="_blank">存在しないレベル</a></p>
+        <p>上の2つを参考に、自動設定ボタンで正規内最高レベルになります。</p>
+        <p>下手に触らない方がいいかもです!</p>
+        <br>
+        <h3 class="red">出土武具について</h3>
+        <p><a href="https://www.dopr.net/formonsterhunter/%E3%80%90MH4%E3%80%91%E6%A0%84%E5%85%89%E3%81%AE%E6%AD%A6%E5%99%A8%E3%81%AE%E8%A6%8B%E3%81%9F%E7%9B%AE%E3%81%A8%E3%82%AE%E3%83%AB%E3%83%89%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%83%BB%E3%83%A2%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%BC%E3%81%AE%E5%AF%BE%E5%BF%9C%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">MH4発掘</a>、<a href="https://www.dopr.net/formonsterhunter/%E3%80%90MH4G%E3%80%91%E7%99%BA%E6%8E%98%E6%AD%A6%E5%99%A8%E3%81%AE%E8%A6%8B%E3%81%9F%E7%9B%AE%E3%81%A8%E3%82%AE%E3%83%AB%E3%82%AF%E3%82%A8%E3%83%A2%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%BC%E3%81%AE%E5%AF%BE%E5%BF%9C%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">MH4G発掘</a></p>
+        <p>上の2つを参考に、MH4は栄光、MH4Gは封じの出土を表示してます。</p>
+        <p>他の出土品は変わります。</p>
+        <p>これは改造でも変更できません。</p>
+        <br>
+        <br>
+        <br>
+    </main>
+
+    <footer>
+        <small><a href="https://twitter.com/senaga19" target="_blank">@senaga19</a></small>
+    </footer>
+    
+</body>
+</html>

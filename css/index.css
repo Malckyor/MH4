@@ -92,6 +92,10 @@ a{
     width:min(600px,100vw);
     height:auto;
 }
+.img6{
+    width:min(500px,80vw);
+    height:min(281.25px,45vw);
+}
 .MH4G{
     background-color:rgba(0, 255, 255, 0.2)
 }
@@ -123,7 +127,10 @@ select,textarea,input{
 .red{
     background-color: rgba(255, 0, 0, 0.301);
 }
-.border{
+.borderMH4{
+    border: 4mm ridge rgba(211, 220, 50, .6);
+}
+.borderMH4G{
     border: 4mm ridge rgba(50, 129, 220, 0.6);
 }
 
