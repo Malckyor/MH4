@@ -276,32 +276,19 @@
                 <td>40</td>
                 <td>00</td>
                 <td></td>
-                <td>60</td>
-                <td>09</td>
-                <td>00</td>
-                <td>00</td>
+                <td colspan="4">契約金</td>
             </tr>
             <tr>
                 <th>+A8</th>
-                <td>3C</td>
-                <td>5A</td>
-                <td>00</td>
-                <td>00</td>
+                <td colspan="4">報酬金</td>
                 <td></td>
-                <td>14</td>
-                <td>1E</td>
-                <td>00</td>
-                <td>00</td>
+                <td colspan="4">減少金</td>
             </tr>
             <tr>
                 <th>+B0</th>
-                <td>60</td>
-                <td>09</td>
-                <td>00</td>
-                <td>00</td>
+                <td colspan="4">サブタゲ報酬金</td>
                 <td></td>
-                <td>32</td>
-                <td>00</td>
+                <td colspan="2">制限時間</td>
                 <td>00</td>
                 <td>00</td>
             </tr>
@@ -321,12 +308,12 @@
                 <th>+C0</th>
                 <td>E2</td>
                 <td>EA</td>
-                <td>FF</td>
+                <td>クエストレベル★</td>
                 <td>00</td>
                 <td></td>
-                <td>10</td>
-                <td>00</td>
-                <td>00</td>
+                <td>マップID</td>
+                <td>受注参加条件1</td>
+                <td>受注参加条件2</td>
                 <td>00</td>
             </tr>
             <tr>
@@ -336,15 +323,16 @@
                 <td>00</td>
                 <td>01</td>
                 <td></td>
-                <td>01</td>
+                <td>メインタゲtype</td>
                 <td>00</td>
                 <td>00</td>
                 <td>00</td>
             </tr>
             <tr>
                 <th>+D0</th>
-                <td colspan="2">メインタゲモンスID</td>
-                <td colspan="2">メインタゲ条件</td>
+                <td colspan="2">メインタゲID</td>
+                <td>メインタゲ必要数</td>
+                <td>00</td>
                 <td></td>
                 <td>00</td>
                 <td>00</td>
@@ -365,8 +353,9 @@
             </tr>
             <tr>
                 <th>+E0</th>
-                <td colspan="2">サブタゲモンスID</td>
-                <td colspan="2">サブタゲ条件</td>
+                <td colspan="2">サブタゲID</td>
+                <td>サブタゲ07尻尾?</td>
+                <td>00</td>
                 <td></td>
                 <td>00</td>
                 <td>00</td>
@@ -414,7 +403,105 @@
                 <td>00</td>
                 <td>00</td>
                 <td></td>
-                <td colspan="4">next</td>
+                <td colspan="4">失敗条件<br>2文字</td>
+            </tr>
+            <tr>
+                <th>+128</th>
+                <td colspan="9" rowspan="2">失敗条件<br>8文字</td>
+            </tr>
+            <tr>
+                <th>+130</th>
+            </tr>
+            <tr>
+                <th>+138</th>
+                <td colspan="7">失敗条件<br>3文字</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+140</th>
+                <td colspan="9" rowspan="23">依頼内容<br>92文字</td>
+            </tr>
+            <tr>
+                <th>+148</th>
+            </tr>
+            <tr>
+                <th>+150</th>
+            </tr>
+            <tr>
+                <th>+158</th>
+            </tr>
+            <tr>
+                <th>+160</th>
+            </tr>
+            <tr>
+                <th>+168</th>
+            </tr>
+            <tr>
+                <th>+170</th>
+            </tr>
+            <tr>
+                <th>+178</th>
+            </tr>
+            <tr>
+                <th>+180</th>
+            </tr>
+            <tr>
+                <th>+188</th>
+            </tr>
+            <tr>
+                <th>+190</th>
+            </tr>
+            <tr>
+                <th>+198</th>
+            </tr>
+            <tr>
+                <th>+1A0</th>
+            </tr>
+            <tr>
+                <th>+1A8</th>
+            </tr>
+            <tr>
+                <th>+1B0</th>
+            </tr>
+            <tr>
+                <th>+1B8</th>
+            </tr>
+            <tr>
+                <th>+1C0</th>
+            </tr>
+            <tr>
+                <th>+1C8</th>
+            </tr>
+            <tr>
+                <th>+1D0</th>
+            </tr>
+            <tr>
+                <th>+1D8</th>
+            </tr>
+            <tr>
+                <th>+1E0</th>
+            </tr>
+            <tr>
+                <th>+1E8</th>
+            </tr>
+            <tr>
+                <th>+1F0</th>
+            </tr>
+            <tr>
+                <th>+1F8</th>
+            </tr>
+            <tr>
+                <th>+</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
         <br>
