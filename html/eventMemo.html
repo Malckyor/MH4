@@ -30,7 +30,7 @@
                 <th>01</th>
                 <th>02</th>
                 <th>03</th>
-                <th>//</th>
+                <th>-</th>
                 <th>04</th>
                 <th>05</th>
                 <th>06</th>
@@ -238,7 +238,7 @@
                 <td>00</td>
                 <td>採取</td>
                 <td>剥ぎ取り</td>
-                <td></td>
+                <td>?</td>
                 <td></td>
                 <td>00</td>
                 <td>00</td>
@@ -288,9 +288,7 @@
                 <th>+B0</th>
                 <td colspan="4">サブタゲ報酬金</td>
                 <td></td>
-                <td colspan="2">制限時間</td>
-                <td>00</td>
-                <td>00</td>
+                <td colspan="4">制限時間</td>
             </tr>
             <tr>
                 <th>+B8</th>
@@ -330,9 +328,8 @@
             </tr>
             <tr>
                 <th>+D0</th>
-                <td colspan="2">メインタゲID</td>
-                <td>メインタゲ必要数</td>
-                <td>00</td>
+                <td colspan="2"><a href="monsterID.html">メインタゲID</a></td>
+                <td colspan="2">メインタゲ必要数</td>
                 <td></td>
                 <td>00</td>
                 <td>00</td>
@@ -490,18 +487,1208 @@
             </tr>
             <tr>
                 <th>+1F8</th>
+                <td colspan="7">依頼内容<br>3文字</td>
+                <td>00</td>
+                <td>00</td>
             </tr>
             <tr>
-                <th>+</th>
+                <th>+200</th>
+                <td colspan="7">主なモンスター<br>3文字</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+208</th>
+                <td colspan="9" rowspan="2">依頼主<br>8文字</td>
+            </tr>
+            <tr>
+                <th>+210</th>
+            </tr>
+            <tr>
+                <th>+218</th>
+                <td colspan="7">依頼主<br>3文字</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+220</th>
+                <td colspan="9" rowspan="3">サブターゲット名<br>12文字</td>
+            </tr>
+            <tr>
+                <th>+228</th>
+            </tr>
+            <tr>
+                <th>+230</th>
+            </tr>
+            <tr>
+                <th>+238</th>
+                <td colspan="7">サブターゲット名<br>3文字</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+240</th>
+                <td>F4</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
                 <td></td>
+                <td>00</td>
+                <td>01</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+248</th>
+                <td>24</td>
+                <td>01</td>
+                <td>00</td>
+                <td>00</td>
                 <td></td>
+                <td>40</td>
+                <td>01</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+250</th>
+                <td>00</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
                 <td></td>
+                <td>08</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+258</th>
+                <td>20</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
                 <td></td>
+                <td>40</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+260</th>
+                <td>40</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
                 <td></td>
+                <td>40</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+268</th>
+                <td>40</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
                 <td></td>
+                <td>40</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+270</th>
+                <td>40</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
                 <td></td>
+                <td>40</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+278</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
                 <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+280</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ①</a></td>
+                <td colspan="2">個数 ①</td>
                 <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ②</a></td>
+                <td colspan="2">個数 ②</td>
+            </tr>
+            <tr>
+                <th>+288</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ③</a></td>
+                <td colspan="2">個数 ③</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ④</a></td>
+                <td colspan="2">個数 ④</td>
+            </tr>
+            <tr>
+                <th>+290</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑤</a></td>
+                <td colspan="2">個数 ⑤</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑥</a></td>
+                <td colspan="2">個数 ⑥</td>
+            </tr>
+            <tr>
+                <th>+298</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑦</a></td>
+                <td colspan="2">個数 ⑦</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑧</a></td>
+                <td colspan="2">個数 ⑧</td>
+            </tr>
+            <tr>
+                <th>+2A0</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑨</a></td>
+                <td colspan="2">個数 ⑨</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑩</a></td>
+                <td colspan="2">個数 ⑩</td>
+            </tr>
+            <tr>
+                <th>+2A8</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑪</a></td>
+                <td colspan="2">個数 ⑪</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑫</a></td>
+                <td colspan="2">個数 ⑫</td>
+            </tr>
+            <tr>
+                <th>+2B0</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑬</a></td>
+                <td colspan="2">個数 ⑬</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑭</a></td>
+                <td colspan="2">個数 ⑭</td>
+            </tr>
+            <tr>
+                <th>+2B8</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑮</a></td>
+                <td colspan="2">個数 ⑮</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑯</a></td>
+                <td colspan="2">個数 ⑯</td>
+            </tr>
+            <tr>
+                <th>+2C0</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑰</a></td>
+                <td colspan="2">個数 ⑰</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑱</a></td>
+                <td colspan="2">個数 ⑱</td>
+            </tr>
+            <tr>
+                <th>+2C8</th>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑲</a></td>
+                <td colspan="2">個数 ⑲</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">支給品ID ⑳</a></td>
+                <td colspan="2">個数 ⑳</td>
+            </tr>
+            <tr>
+                <th>+2D0</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+2D8</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+2E0</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+2E8</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+2F0</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+2F8</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+300</th>
+                <td colspan="2"><a href="itemID.html">追加の支給品ID ①</a></td>
+                <td colspan="2">個数 ①</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">追加の支給品ID ②</a></td>
+                <td colspan="2">個数 ②</td>
+            </tr>
+            <tr>
+                <th>+308</th>
+                <td colspan="2"><a href="itemID.html">追加の支給品ID ③</a></td>
+                <td colspan="2">個数 ③</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">追加の支給品ID ④</a></td>
+                <td colspan="2">個数 ④</td>
+            </tr>
+            <tr>
+                <th>+310</th>
+                <td colspan="2"><a href="itemID.html">追加の支給品ID ⑤</a></td>
+                <td colspan="2">個数 ⑤</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">追加の支給品ID ⑥</a></td>
+                <td colspan="2">個数 ⑥</td>
+            </tr>
+            <tr>
+                <th>+318</th>
+                <td colspan="2"><a href="itemID.html">追加の支給品ID ⑦</a></td>
+                <td colspan="2">個数 ⑦</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+320</th>
+                <td>00</td>
+                <td>20</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>80</td>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+328</th>
+                <td>01</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>03</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+330</th>
+                <td>02</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>03</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+338</th>
+                <td>03</td>
+                <td>08</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>03</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+340</th>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+348</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+350</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+358</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+360</th>
+                <td colspan="2">①<br>Ａ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">①<br>アイテムID</a></td>
+                <td></td>
+                <td colspan="2">①<br>個数</td>
+                <td colspan="2">②<br>Ａ報酬確率</td>
+            </tr>
+            <tr>
+                <th>+368</th>
+                <td colspan="2"><a href="itemID.html">②<br>アイテムID</a></td>
+                <td colspan="2">②<br>個数</td>
+                <td></td>
+                <td colspan="2">③<br>Ａ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">③<br>アイテムID</a></td>
+            </tr>
+            <tr>
+                <th>+370</th>
+                <td colspan="2">③<br>個数</td>
+                <td colspan="2">④<br>Ａ報酬確率</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">④<br>アイテムID</a></td>
+                <td colspan="2">④<br>個数</td>
+            </tr>
+            <tr>
+                <th>+378</th>
+                <td colspan="2">⑤<br>Ａ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">⑤<br>アイテムID</a></td>
+                <td></td>
+                <td colspan="2">⑤<br>個数</td>
+                <td colspan="2">⑥<br>Ａ報酬確率</td>
+            </tr>
+            <tr>
+                <th>+380</th>
+                <td colspan="2"><a href="itemID.html">⑥<br>アイテムID</a></td>
+                <td colspan="2">⑥<br>個数</td>
+                <td></td>
+                <td colspan="2">⑦<br>Ａ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">⑦<br>アイテムID</a></td>
+            </tr>
+            <tr>
+                <th>+388</th>
+                <td colspan="2">⑦<br>個数</td>
+                <td>FF</td>
+                <td>FF</td>
+                <td></td>
+                <td>00</td>
+                <td>80</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+390</th>
+                <td>60</td>
+                <td>03</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>FF</td>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+398</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+3A0</th>
+                <td colspan="2">①<br>Ｂ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">①<br>アイテムID</a></td>
+                <td></td>
+                <td colspan="2">①<br>個数</td>
+                <td colspan="2">②<br>Ｂ報酬確率</td>
+            </tr>
+            <tr>
+                <th>+3A8</th>
+                <td colspan="2"><a href="itemID.html">②<br>アイテムID</a></td>
+                <td colspan="2">②<br>個数</td>
+                <td></td>
+                <td colspan="2">③<br>Ｂ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">③<br>アイテムID</a></td>
+            </tr>
+            <tr>
+                <th>+3B0</th>
+                <td colspan="2">③<br>個数</td>
+                <td colspan="2">④<br>Ｂ報酬確率</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">④<br>アイテムID</a></td>
+                <td colspan="2">④<br>個数</td>
+            </tr>
+            <tr>
+                <th>+3B8</th>
+                <td colspan="2">⑤<br>Ｂ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">⑤<br>アイテムID</a></td>
+                <td></td>
+                <td colspan="2">⑤<br>個数</td>
+                <td colspan="2">⑥<br>Ｂ報酬確率</td>
+            </tr>
+            <tr>
+                <th>+3C0</th>
+                <td colspan="2"><a href="itemID.html">⑥<br>アイテムID</a></td>
+                <td colspan="2">⑥<br>個数</td>
+                <td></td>
+                <td colspan="2">⑦<br>Ｂ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">⑦<br>アイテムID</a></td>
+            </tr>
+            <tr>
+                <th>+3C8</th>
+                <td colspan="2">⑦<br>個数</td>
+                <td colspan="2">⑧<br>Ｂ報酬確率</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">⑧<br>アイテムID</a></td>
+                <td colspan="2">⑧<br>個数</td>
+            </tr>
+            <tr>
+                <th>+3D0</th>
+                <td>FF</td>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>03</td>
+                <td>80</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+3D8</th>
+                <td>A0</td>
+                <td>03</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>FF</td>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+3E0</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+3E8</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+3F0</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+3F8</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+400</th>
+                <td colspan="2">①<br>サブタゲ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">①<br>アイテムID</a></td>
+                <td></td>
+                <td colspan="2">①<br>個数</td>
+                <td colspan="2">②<br>サブタゲ報酬確率</td>
+            </tr>
+            <tr>
+                <th>+408</th>
+                <td colspan="2"><a href="itemID.html">②<br>アイテムID</a></td>
+                <td colspan="2">②<br>個数</td>
+                <td></td>
+                <td colspan="2">③<br>サブタゲ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">③<br>アイテムID</a></td>
+            </tr>
+            <tr>
+                <th>+410</th>
+                <td colspan="2">③<br>個数</td>
+                <td colspan="2">④<br>サブタゲ報酬確率</td>
+                <td></td>
+                <td colspan="2"><a href="itemID.html">④<br>アイテムID</a></td>
+                <td colspan="2">④<br>個数</td>
+            </tr>
+            <tr>
+                <th>+418</th>
+                <td colspan="2">⑤<br>サブタゲ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">⑤<br>アイテムID</a></td>
+                <td></td>
+                <td colspan="2">⑤<br>個数</td>
+                <td colspan="2">⑥<br>サブタゲ報酬確率</td>
+            </tr>
+            <tr>
+                <th>+420</th>
+                <td colspan="2"><a href="itemID.html">⑥<br>アイテムID</a></td>
+                <td colspan="2">⑥<br>個数</td>
+                <td></td>
+                <td colspan="2">⑦<br>サブタゲ報酬確率</td>
+                <td colspan="2"><a href="itemID.html">⑦<br>アイテムID</a></td>
+            </tr>
+            <tr>
+                <th>+428</th>
+                <td colspan="2">⑦<br>個数</td>
+                <td>FF</td>
+                <td>FF</td>
+                <td></td>
+                <td>00</td>
+                <td>80</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+430</th>
+                <td>00</td>
+                <td>04</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>FF</td>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+438</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+440</th>
+                <td>FF</td>
+                <td>FF</td>
+                <td>FF</td>
+                <td>FF</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+448</th>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+450</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+458</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+460</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+468</th>
+                <td>40</td>
+                <td>04</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>40</td>
+                <td>04</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+470</th>
+                <td>40</td>
+                <td>04</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+478</th>
+                <td>68</td>
+                <td>04</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>68</td>
+                <td>04</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+480</th>
+                <td>68</td>
+                <td>04</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+488</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+490</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+498</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4A0</th>
+                <td>FF</td>
+                <td>FF</td>
+                <td>FF</td>
+                <td>FF</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4A8</th>
+                <td>FF</td>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4B0</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4B8</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4C0</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4C8</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4D0</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4D8</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4E0</th>
+                <td colspan="2"><a href="monsterID.html">モンスターID</a></td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>01</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4E8</th>
+                <td>FF</td>
+                <td>初期エリア</td>
+                <td>00</td>
+                <td>状態</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+4F0</th>
+                <td colspan="4">x座標</td>
+                <td></td>
+                <td colspan="4">y座標</td>
+            </tr>
+            <tr>
+                <th>+4F8</th>
+                <td colspan="4">z座標</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+500</th>
+                <td>43</td>
+                <td>5B</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+508</th>
+                <td>FF</td>
+                <td>FF</td>
+                <td>FF</td>
+                <td>FF</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+510</th>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+518</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+520</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+528</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+530</th>
+                <td>E0</td>
+                <td>04</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+538</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+540</th>
+                <td>FF</td>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>FF</td>
+                <td>FF</td>
+                <td>FF</td>
+                <td>FF</td>
+            </tr>
+            <tr>
+                <th>+548</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>FF</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+550</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+558</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+560</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+568</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+570</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+578</th>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+            </tr>
+            <tr>
+                <th>+580</th>
+                <td>00</td>
+                <td>00</td>
+                <td>DC</td>
+                <td>83</td>
+                <td></td>
+                <td>BE</td>
+                <td>2B</td>
+                <td>10</td>
+                <td>48</td>
+            </tr>
+            <tr>
+                <th>+588</th>
+                <td>9A</td>
+                <td>81</td>
+                <td>8E</td>
+                <td>7D</td>
+                <td></td>
+                <td>94</td>
+                <td>CA</td>
+                <td>88</td>
+                <td>E6</td>
+            </tr>
+            <tr>
+                <th>+590</th>
+                <td>52</td>
+                <td>67</td>
+                <td>0F</td>
+                <td>FB</td>
+                <td></td>
+                <td>44</td>
+                <td>16</td>
+                <td>BA</td>
+                <td>8D</td>
+            </tr>
+            <tr>
+                <th>+598</th>
+                <td>00</td>
+                <td>00</td>
+                <td>05</td>
+                <td>94</td>
+                <td></td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
+                <td>00</td>
             </tr>
         </table>
         <br>
