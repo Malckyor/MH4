@@ -21,6 +21,45 @@ area2.oninput = function(){
     }
 }
 
+
+//追加
+area3.oninput = function(){
+    area4.value = "";
+    let cnt = 0;
+    let str1 = "";
+    let str2 = "";
+    for( i=0; i<area3.value.length; i++){
+        if(area3.value[i] != " "){
+            switch (cnt) {
+                case 0:
+                    str1 += area3.value[i];
+                    cnt += 1;
+                    break;
+            
+                case 1:
+                    str1 += area3.value[i];
+                    cnt += 1;
+                    break;
+
+                case 2:
+                    str2 += area3.value[i];
+                    cnt += 1;
+                    break;
+                
+                case 3:
+                    str2 += area3.value[i];
+                    cnt = 0;
+                    area4.value = area4.value + str2 + " " + str1 + " ";
+                    str1 = "";
+                    str2 = "";
+                    break;
+            }
+        }
+    }
+}
+
+
+
 //文字を16進数へ
 function convertASCIItoHex(asciiVal) {
     let asciiCode = asciiVal.charCodeAt(0);
