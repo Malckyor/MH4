@@ -132,6 +132,41 @@ const func = {
     }
 }
 
+//追加
+area5.oninput = function(){
+    area6.value = "";
+    let cnt = 0;
+    let str1 = "";
+    let str2 = "";
+    for( i=0; i<area5.value.length; i++){
+        if(area5.value[i] != " "){
+            switch (cnt) {
+                case 0:
+                    str1 += area5.value[i];
+                    cnt += 1;
+                    break;
+            
+                case 1:
+                    str1 += area5.value[i];
+                    cnt += 1;
+                    break;
+
+                case 2:
+                    str2 += area5.value[i];
+                    cnt += 1;
+                    break;
+                
+                case 3:
+                    str2 += area5.value[i];
+                    cnt = 0;
+                    area6.value = area6.value + str2 + " " + str1 + " ";
+                    str1 = "";
+                    str2 = "";
+                    break;
+            }
+        }
+    }
+}
 
 
 
