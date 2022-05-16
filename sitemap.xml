@@ -1,134 +1,221 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
 <!--  created with free sitemap generation system www.sitemapxml.jp  --> 
 <url>
   <loc>https://r77tchan.github.io/MH4/</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>1.0</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/guildMH4.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/guildMH4G.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/convert.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/HexEditor.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
+</url>
+<url>
+  <loc>https://r77tchan.github.io/MH4/html/HexEditor_armor.html</loc>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/addressMemo.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/itemID.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/monsterID.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/skillID.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/eventMemo.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/hennkanTest.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.8</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/index.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/note.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/category.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/huntingInsects.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/weaponID.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/elementValue.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/elementID.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/ornamentsMH4.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/sharpness.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/weaponMultiplier.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/weaponLevel.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/bonus.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/polishing.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/rarity.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/excavated.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/ornamentsMH4G.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/extreme.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
+</url>
+<url>
+  <loc>https://r77tchan.github.io/MH4/html/armorLevel.html</loc>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
+</url>
+<url>
+  <loc>https://r77tchan.github.io/MH4/html/armorID.html</loc>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/eventMemo_Reia.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/mapID.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/conditions.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 <url>
   <loc>https://r77tchan.github.io/MH4/html/iconID.html</loc>
-  <lastmod>2022-05-10T11:50:13+09:00</lastmod>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
+</url>
+<url>
+  <loc>https://r77tchan.github.io/MH4/html/My_Toul.html</loc>
+  <priority>0.7</priority>
+  <lastmod>2022-05-16T22:04:40+09:00</lastmod>
+  <mobile:mobile />
 </url>
 
 </urlset>
