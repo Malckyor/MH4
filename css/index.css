@@ -136,3 +136,56 @@ select,textarea,input{
 
 
 
+
+.print{
+    width: min(100vw,500px);
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    background-color: rgb(0, 0, 0);
+    padding-top: min(5vw,25px);
+
+}
+.val{
+    color: rgb(255, 255, 255);
+    width: min(50vw,250px);
+    height: auto;
+    text-align: center;
+    font-size: 20px;
+}
+
+.route{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    width: min(100vw,500px);
+    height: 24px;
+    font-size: 16px;
+    margin: 0 auto;
+    text-align: center;
+
+}
+
+
+.container{
+    width: min(80vw,400px);
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: min(5vw,25px) min(10vw,50px);
+    padding-top: 0;
+    margin: auto;
+    background-color: rgb(0, 0, 0);
+}
+.item{
+    width: min(20vw,100px);
+    height: min(20vw,100px);
+    background: rgb(0, 162, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 50%;
+    text-align:center;
+    line-height: min(20vw,100px);
+    font-size: 20px;
+}
+
