@@ -368,6 +368,10 @@ equal.onclick = function(){
 
         Calc();
 
+        //履歴
+        history();
+        //
+
         conChange_Del();
         conChange_mark();
         conChange_zero();
@@ -512,4 +516,78 @@ function convertToDEC(){
     }
 }
 
+// 6/5追加
+let history_cnt = 0;
+let history_HEX_route = new Array(0);
+let history_DEC_route = new Array(0);
+let history_HEX_result = new Array(0);
+let history_DEC_result = new Array(0);
+//履歴、＝が押されると呼び出し
+function history(){
+    // id属性で要素を取得
+    let b_element = document.getElementById('history');
+
+    // 新しいHTML要素を作成
+    let new_element0 = document.createElement('p');
+    let new_element1 = document.createElement('p');
+    let new_element2 = document.createElement('p');
+    let new_element3 = document.createElement('br');
+
+    //テキストの追加
+    new_element0.textContent = `${history_cnt+1}`;
+    new_element1.textContent = `${document.getElementsByClassName("route")[0].innerText} = ${document.getElementById("HEX").innerText}`;
+    new_element2.textContent = `${document.getElementsByClassName("route")[1].innerText} = ${document.getElementById("DEC").innerText}`;
+
+    //クラス名追加
+    new_element1.className = history_cnt;
+    new_element2.className = history_cnt;
+
+
+    //pushで配列の追加
+    history_HEX_route.push(document.getElementsByClassName("route")[0].innerText);
+    history_DEC_route.push(document.getElementsByClassName("route")[1].innerText);
+    history_HEX_result.push(document.getElementById("HEX").innerText);
+    history_DEC_result.push(document.getElementById("DEC").innerText);
+
+    //クリックイベントの追加
+    new_element1.onclick = function(){
+        document.getElementsByClassName("route")[0].innerText = history_HEX_route[this.className];
+        document.getElementsByClassName("route")[1].innerText = history_DEC_route[this.className];
+        document.getElementById("HEX").innerText = history_HEX_result[this.className];
+        document.getElementById("DEC").innerText = history_DEC_result[this.className];
+
+        markCheck();
+        zeroCheck();
+        equalCheck();
+        DelCheck();
+
+        alert(`HEX → ${document.getElementsByClassName("route")[0].innerText} = ${document.getElementById("HEX").innerText}\nDEC → ${document.getElementsByClassName("route")[1].innerText} = ${document.getElementById("DEC").innerText}\nの途中式&結果を復元しました`);
+    };
+    new_element2.onclick = function(){
+        document.getElementsByClassName("route")[0].innerText = history_HEX_route[this.className];
+        document.getElementsByClassName("route")[1].innerText = history_DEC_route[this.className];
+        document.getElementById("HEX").innerText = history_HEX_result[this.className];
+        document.getElementById("DEC").innerText = history_DEC_result[this.className];
+
+        markCheck();
+        zeroCheck();
+        equalCheck();
+        DelCheck();
+
+        alert(`HEX → ${document.getElementsByClassName("route")[0].innerText} = ${document.getElementById("HEX").innerText}\nDEC → ${document.getElementsByClassName("route")[1].innerText} = ${document.getElementById("DEC").innerText}\nの途中式&結果を復元しました`);
+    };
+
+    
+
+    // 指定した要素の中の末尾に挿入
+    b_element.appendChild(new_element0);
+    b_element.appendChild(new_element1);
+    b_element.appendChild(new_element2);
+    b_element.appendChild(new_element3);
+
+    
+    
+
+    history_cnt += 1;
+}
 
