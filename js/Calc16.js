@@ -528,13 +528,13 @@ function history(){
     let b_element = document.getElementById('history');
 
     // 新しいHTML要素を作成
-    let new_element0 = document.createElement('p');
+    let new_element0 = document.createElement('hr');
     let new_element1 = document.createElement('p');
     let new_element2 = document.createElement('p');
     let new_element3 = document.createElement('br');
 
     //テキストの追加
-    new_element0.textContent = `${history_cnt+1}`;
+    // new_element0.textContent = `${history_cnt+1}`;没
     new_element1.textContent = `${document.getElementsByClassName("route")[0].innerText} = ${document.getElementById("HEX").innerText}`;
     new_element2.textContent = `${document.getElementsByClassName("route")[1].innerText} = ${document.getElementById("DEC").innerText}`;
 
