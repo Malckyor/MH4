@@ -22,8 +22,8 @@ function conChange_HEX(){
         //falseで呼び出した時の処理、on色にする
         for(i=0; i<6; i++){
             let target = document.getElementsByClassName("HEX")[i];
-            target.style.backgroundColor="#404040";
-            target.style.color="#808080";
+            target.style.backgroundColor="#FFFF9B";
+            target.style.color="#000000";
         }
         //routeの背景色
         let target = document.getElementsByClassName("route")[0];
@@ -86,8 +86,8 @@ function conChange_mark(){
 function conChange_zero(){
     if(condition_zero = !condition_zero){
         let target = document.getElementById("num0");
-        target.style.backgroundColor="#404040";
-        target.style.color="#808080";
+        target.style.backgroundColor="rgb(0, 162, 255)";
+        target.style.color="#000000";
     }else{
         let target = document.getElementById("num0");
         target.style.backgroundColor="#202020";
@@ -98,8 +98,8 @@ function conChange_zero(){
 function conChange_equal(){
     if(condition_equal = !condition_equal){
         let target = document.getElementById("equal");
-        target.style.backgroundColor="#404040";
-        target.style.color="#808080";
+        target.style.backgroundColor="#4040FF";
+        target.style.color="#FFFFFF";
     }else{
         let target = document.getElementById("equal");
         target.style.backgroundColor="#202020";

@@ -181,7 +181,7 @@ select,textarea,input{
 .item{
     width: min(20vw,100px);
     height: min(20vw,100px);
-    background: rgb(0, 162, 255);
+    background: #00a2ff;
     color: rgb(0, 0, 0);
     border-radius: 50%;
     text-align:center;
@@ -189,3 +189,10 @@ select,textarea,input{
     font-size: 20px;
 }
 
+.none{
+    background: #000000;
+}
+#change{
+    background: #4040FF;
+    color: #FFFFFF;
+}
