@@ -257,24 +257,24 @@ function textSetM1(){
         weaponKinds[4] = "(ねこハンマー、ソニックビードロー)";
         weaponKinds[5] = "(鋼氷馬弓、ベルクーツ)";
 
-        $armor[1].textContent = "オリジナルA (リオソウル)";
-        $armor[2].textContent = "オリジナルB (リオソウル、ゴア)";
-        $armor[3].textContent = "オリジナルC (リオソウル、クシャナ)";
-        $armor[4].textContent = "オリジナルD (ゴア、クシャナ)";
-        $armor[5].textContent = "オリジナルE (ゴア)";
-        $armor[6].textContent = "オリジナルF (クシャナ)";
-        $armor[7].textContent = "トライA (レックスU)";
-        $armor[8].textContent = "トライB (レックスU、ゴア)";
-        $armor[9].textContent = "トライC (レックスU、クシャナ)";
-        $armor[10].textContent = "トライD (ゴア、クシャナ)";
-        $armor[11].textContent = "トライE (ゴア)";
-        $armor[12].textContent = "トライF (クシャナ)";
-        $armor[13].textContent = "ドスA (凛)";
-        $armor[14].textContent = "ドスB (凛、ゴア)";
-        $armor[15].textContent = "ドスC (凛、クシャナ)";
-        $armor[16].textContent = "ドスD (ゴア、クシャナ)";
-        $armor[17].textContent = "ドスE (ゴア)";
-        $armor[18].textContent = "ドスF (クシャナ)";
+        $armor[1].textContent = "オリジナルA (モノデビル)";
+        $armor[2].textContent = "オリジナルB (モノデビル)";
+        $armor[3].textContent = "オリジナルC (モノデビル)";
+        $armor[4].textContent = "オリジナルD (モノデビル)";
+        $armor[5].textContent = "オリジナルE (モノデビル)";
+        $armor[6].textContent = "オリジナルF (モノデビル)";
+        $armor[7].textContent = "トライA (ネブラ)";
+        $armor[8].textContent = "トライB (ネブラ)";
+        $armor[9].textContent = "トライC (ネブラ)";
+        $armor[10].textContent = "トライD (ネブラ)";
+        $armor[11].textContent = "トライE (ネブラ)";
+        $armor[12].textContent = "トライF (ネブラ)";
+        $armor[13].textContent = "ドスA (ディアブロ)";
+        $armor[14].textContent = "ドスB (ディアブロ)";
+        $armor[15].textContent = "ドスC (ディアブロ)";
+        $armor[16].textContent = "ドスD (ディアブロ)";
+        $armor[17].textContent = "ドスE (ディアブロ)";
+        $armor[18].textContent = "ドスF (ディアブロ)";
     }
     //ティガレックス、ジンオウガ
     else if($monster1.value == '0B' || $monster1.value == '30'){
