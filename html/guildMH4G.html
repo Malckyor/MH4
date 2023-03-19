@@ -1,862 +1,385 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head prefix=”og: http://ogp.me/ns#”>
-    <meta property="og:url" content="https://r77tchan.github.io/MH4/html/guildMH4G.html" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="MH4Gギルクエ作成ツール" />
-    <meta property="og:description" content="description" />
-    <meta property="og:site_name" content="site_name" />
-    <meta property="og:image" content="https://r77tchan.github.io/MH4/image/favicon4.png" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@senaga19" />
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:url" content="https://r77tchan.github.io/MH4/html/guildMH4G.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="MH4Gギルクエ作成ツール" />
+  <meta property="og:description" content="description" />
+  <meta property="og:site_name" content="site_name" />
+  <meta property="og:image" content="https://r77tchan.github.io/MH4/image/favicon4.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@senaga19" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="モンスターハンター4Gのギルクエ作成ツール">
-    <meta name="thumbnail" content="https://r77tchan.github.io/MH4/image/favicon4.png">
+  <meta name="description" content="モンスターハンター4Gのギルクエ作成ツール">
+  <meta name="thumbnail" content="https://r77tchan.github.io/MH4/image/favicon4.png">
 
-    <link rel="shortcut icon" href="../image/favicon4.png" type="image/x-icon">
-    <link rel="apple-touch-icon" href="../image/favicon4.png" sizes="180x180">
-    <link rel="icon" type="image/png" href="../image/favicon4.png" sizes="192x192">
+  <link rel="shortcut icon" href="../image/favicon4.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../image/favicon4.png" sizes="180x180">
+  <link rel="icon" type="image/png" href="../image/favicon4.png" sizes="192x192">
 
-    <title>MH4Gギルクエ作成ツール</title>
-    <link rel="stylesheet" href="../css/index.css">
+  <title>MH4Gギルクエ作成ツール</title>
+  <link rel="stylesheet" href="../css/guildMH4G.css">
 </head>
+
 <body>
-    <header>
-        <h1><a href="../index.html">MH4 MH4G改造チート</a></h1>
-    </header>
+  <header>
+    <h1><a href="../index.html">MH4 MH4G改造チート</a></h1>
+  </header>
+
+  <main>
+    <h2>MH4Gギルクエ作成ツール</h2>
+    <div id="guideMessage">
+      <p><a target="_blank" href="https://twitter.com/senaga19">Twitter</a>または<a target="_blank" href="https://liff.line.me/1645278921-kWRPP32q/?accountId=227qeqca">公式LINE</a>にて作成代行を承ります</p>
+      <p>任意のクエスト作成者名→1500円</p>
+      <p>クエスト作成者名＠senaga19→無料</p>
+      <p>にてゲーム内で受け渡します</p>
+      <p>代行や使い方について詳しくは<a target="_blank" href="https://blog.mh4.jp/archives/172">blog.mh4.jp</a>に書いてますのでご確認下さい</p>
+      <p>このメッセージは右下のストレージタブから非表示にできます</p>
+    </div>
+
+    <div class="switchTabFlex">
+      <span class="switchTab onTab" onclick="createTabChange()">作成タブ</span>
+      <span class="switchTab offTab" onclick="storageTabChange()">ストレージ</span>
+    </div>
+    
+    <div class="createContainer">
+      <div class="buttonWarapper">        
+        <button onclick="loadInfo()">クエスト情報読み込み</button>
+        <button onclick="saveStorage()">ストレージ保存</button>
+      </div>
 
 
-<main>
-    <br>
-    <h2 class="MH4G">MH4Gギルクエ作成ツール</h2>
+      <p style="background-color: aquamarine;">monster</p>
 
-    <p>
-        <button id="$btnSample">サンプル</button>
-        <button id="$btnReset">リセット</button>
-        <button id="$btnLoad">読み込み</button>
-    </p>
 
-    <br>
-
-    <p class="skin">
-        <label for="$frames">ギルクエの枠数を選択</label>
-        <select id="$frames">
-            <option value=""></option>
-            <option value="1">1枠目</option>
-            <option value="2">2枠目</option>
-            <option value="3">3枠目</option>
-            <option value="4">4枠目</option>
-            <option value="5">5枠目</option>
-            <option value="6">6枠目</option>
-            <option value="7">7枠目</option>
-            <option value="8">8枠目</option>
-            <option value="9">9枠目</option>
-            <option value="10">10枠目</option>
+      <div class="monster1">
+        <label for="monster1">モンスター1体目</label>
+        <select id="monster1">
+          <option value=""></option>
         </select>
-    </p>
+      </div>
 
-    <p>
-        <label for="$Author">クエスト作成者名</label>
+      <div class="monster2">
+        <label for="monster2">モンスター2体目</label>
+        <select id="monster2">
+          <option value=""></option>
+        </select>
+      </div>
+
+      <div class="weapon">
+        <label for="weapon">出土武器</label>
         <br>
-        <textarea id="$Author" rows="1" cols="33"></textarea>
-    </p>
+        <select id="weapon">
+          <option value=""></option>
+          <option value="00">スクリプトを読み込んで下さい</option>
+          <option value="01">スクリプトを読み込んで下さい</option>
+          <option value="02">スクリプトを読み込んで下さい</option>
+          <option value="03">スクリプトを読み込んで下さい</option>
+          <option value="04">スクリプトを読み込んで下さい</option>
+          <option value="05">スクリプトを読み込んで下さい</option>
+        </select>
+      </div>
 
-    <p>
-        <label for="$questID">クエスト識別ID</label>
+      <div class="armor">
+        <label for="armor">出土防具</label>
         <br>
-        <textarea id="$questID" rows="1" cols="33"></textarea>
+        <select id="armor">
+          <option value=""></option>
+          <option value="00">スクリプトを読み込んで下さい</option>
+          <option value="01">スクリプトを読み込んで下さい</option>
+          <option value="02">スクリプトを読み込んで下さい</option>
+          <option value="03">スクリプトを読み込んで下さい</option>
+          <option value="04">スクリプトを読み込んで下さい</option>
+          <option value="05">スクリプトを読み込んで下さい</option>
+          <option value="06">スクリプトを読み込んで下さい</option>
+          <option value="07">スクリプトを読み込んで下さい</option>
+          <option value="08">スクリプトを読み込んで下さい</option>
+          <option value="09">スクリプトを読み込んで下さい</option>
+          <option value="0A">スクリプトを読み込んで下さい</option>
+          <option value="0B">スクリプトを読み込んで下さい</option>
+          <option value="0C">スクリプトを読み込んで下さい</option>
+          <option value="0D">スクリプトを読み込んで下さい</option>
+          <option value="0E">スクリプトを読み込んで下さい</option>
+          <option value="0F">スクリプトを読み込んで下さい</option>
+          <option value="10">スクリプトを読み込んで下さい</option>
+          <option value="11">スクリプトを読み込んで下さい</option>
+        </select>
+      </div>
+
+      <div class="armorType">
+        <label for="armorType">防具部位</label>
+        <select id="armorType">
+          <option value=""></option>
+          <option value="00">胴</option>
+          <option value="01">腕</option>
+          <option value="02">腰</option>
+          <option value="03">脚</option>
+          <option value="04">頭</option>          
+        </select>
+      </div>
+
+      <div class="level">
+        <label for="level">初期レベル</label>
+        <input type="number" id="level" min="1" max="140" step="1">
+      </div>
+
+      
+      <p style="background-color: aquamarine;">maps</p>
+
+
+      
+      <img src="../image/map2.png">
+
+      <div class="area">
+        エリア1
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <hr>
+      
+      <div class="area">
+        エリア2
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="area">
+        エリア3
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="area">
+        エリア4
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="area">
+        エリア5
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <img src="../image/map2.png">
+
+
+      <p style="background-color: aquamarine;">author</p>
+
+
+      <div class="author">
+        <label for="author">クエスト作成者名</label>
         <br>
-        <button id="$btnID">乱数生成</button>
-    </p>
-    <br>
-    <p>
-        <label for="$weapon">出土武器</label>
-        <select id="$weapon">
-            <option value=""></option>
-            <option value="00">アックス / 操虫棍</option>
-            <option value="01">大剣 / 太刀</option>
-            <option value="02">片手剣 / 双剣</option>
-            <option value="03">ランス / ガンランス</option>
-            <option value="04">ハンマー / 狩猟笛</option>
-            <option value="05">弓 / ボウガン</option>
-        </select>
-    </p>
+        <textarea id="author" rows="1" maxlength="12"></textarea>
+      </div>
 
-    <p id="$weaponKinds"></p>
-
-    <p>
-        <label for="$armor">出土防具</label>
-        <select id="$armor">
-            <option value=""></option>
-            <option value="00">オリジナルA</option>
-            <option value="01">オリジナルB</option>
-            <option value="02">オリジナルC</option>
-            <option value="03">オリジナルD</option>
-            <option value="04">オリジナルE</option>
-            <option value="05">オリジナルF</option>
-            <option value="06">トライA</option>
-            <option value="07">トライB</option>
-            <option value="08">トライC</option>
-            <option value="09">トライD</option>
-            <option value="0A">トライE</option>
-            <option value="0B">トライF</option>
-            <option value="0C">ドスA</option>
-            <option value="0D">ドスB</option>
-            <option value="0E">ドスC</option>
-            <option value="0F">ドスD</option>
-            <option value="10">ドスE</option>
-            <option value="11">ドスF</option>
-        </select>
-    </p>
-
-    <p>
-        <label for="$armorType">出土部位</label>
-        <select id="$armorType">
-            <option value=""></option>
-            <option value="00">胴</option>
-            <option value="01">腕</option>
-            <option value="02">腰</option>
-            <option value="03">脚</option>
-            <option value="04">頭</option>
-        </select>
-    </p>
-    <br>
-
-    <div class="purple">
-        <p>
-            <label for="$monsterNum">モンスター数を選択</label>
-            <select id="$monsterNum">
-                <option value=""></option>
-                <option value="1">1体</option>
-                <option value="2">2体</option>
-            </select>
-        </p>
-    </div>
-    
-    <div class="hiddenM1">
-        <p>
-            <label for="$monster1">モンスター1体目</label>
-            <select id="$monster1">
-                <option value=""></option>
-                <option value="07">イャンクック</option>
-                <option value="08">イャンクック亜種</option>
-                <option value="0B">ティガレックス</option>
-                <option value="0C">ティガレックス亜種</option>
-                <option value="10">ドスランポス</option>
-                <option value="13">ラージャン</option>
-                <option value="1C">ゴア・マガラ</option>
-                <option value="1D">シャガル・マガラ</option>
-                <option value="1E">イャンガルルガ</option>
-                <option value="1F">クシャルダオラ</option>
-                <option value="20">テオ・テスカトル</option>
-                <option value="22">キリン</option>
-                <option value="23">キリン亜種</option>
-                <option value="26">バサルモス</option>
-                <option value="27">バサルモス亜種</option>     
-                <option value="2C">ブラキディオス</option>
-                <option value="30">ジンオウガ</option>
-                <option value="31">ジンオウガ亜種</option>
-                <option value="2A">イビルジョー</option>
-                <option value="58">セルレギオス</option>
-                <option value="63">ディアブロス</option>
-                <option value="64">ディアブロス亜種</option>
-                <option value="67">オオナズチ</option>
-                <option value="6C">ダイミョウザザミ亜種</option>
-            </select>
-        </p>
-    </div>
-
-    <p class="hiddenM1">
-        <label for="$ini1">初期</label>
-        <select id="$ini1">
-            <option value=""></option>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-        </select>
-        <label for="$meal1">食事</label>
-        <select id="$meal1">
-            <option value=""></option>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-        </select>
-        <label for="$sleep1">休眠</label>
-        <select id="$sleep1">
-            <option value=""></option>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-        </select>
-    </p>
-
-    <p class="hiddenM1">
-        (<span class="add yellow"></span>)
-        /
-        (<span class="add yellow"></span>)
-        /
-        (<span class="add yellow"></span>)
-    </p>
-
-    <br>
-    
-    <div class="hiddenM2">
-        <p>
-            <label for="$monster2">モンスター2体目</label>
-            <select id="$monster2">
-                <option value=""></option>
-                <option value="07">イャンクック</option>
-                <option value="08">イャンクック亜種</option>
-                <option value="0B">ティガレックス</option>
-                <option value="0C">ティガレックス亜種</option>
-                <option value="10">ドスランポス</option>
-                <option value="13">ラージャン</option>
-                <option value="1E">イャンガルルガ</option>
-                <option value="22">キリン</option>
-                <option value="23">キリン亜種</option>
-                <option value="26">バサルモス</option>
-                <option value="27">バサルモス亜種</option>     
-                <option value="2C">ブラキディオス</option>
-                <option value="30">ジンオウガ</option>
-                <option value="31">ジンオウガ亜種</option>
-                <option value="2A">イビルジョー</option>
-                <option value="58">セルレギオス</option>
-                <option value="63">ディアブロス</option>
-                <option value="64">ディアブロス亜種</option>
-                <option value="6C">ダイミョウザザミ亜種</option>
-            </select>
-        </p>
-    </div>
-
-    <p class="hiddenM2">
-        <label for="$ini2">初期</label>
-        <select id="$ini2">
-            <option value=""></option>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-        </select>
-        <label for="$meal2">食事</label>
-        <select id="$meal2">
-            <option value=""></option>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-        </select>
-        <label for="$sleep2">休眠</label>
-        <select id="$sleep2">
-            <option value=""></option>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-        </select>
-    </p>
-
-    <p class="hiddenM2">
-        (<span class="add yellow"></span>)
-        /
-        (<span class="add yellow"></span>)
-        /
-        (<span class="add yellow"></span>)
-    </p>
-    
-    <br>
-    
-    <div class="pic_set">
-        <img class="img5" src="../image/map2.png" alt="マップ画像1" width="360">
-    </div>
-    
-
-    <div class="yellow">
-        <p>
-            <label for="$mapNum">総マップ数を選択</label>
-            <select id="$mapNum">
-                <option value=""></option>
-                <option value="4">4マップ</option>
-                <option value="5">5マップ</option>
-            </select>
-        </p>   
-    </div>
-       
-    <div class="hiddenArea">
-        <div class="yellow">
-            <p>
-                <label for="$area1" class="yellow">エリア1</label>
-                <select id="$area1">
-                    <option value=""></option>
-                    <option value="01">迷路</option>
-                    <option value="02">傾斜(丘)</option>
-                    <option value="03">崖</option>
-                    <option value="04">水(川)</option>
-                    <option value="05">豚(猫)</option>
-                    <option value="06">蔦(ツタ)</option>
-                    <option value="07">天井(洞窟)</option>
-                    <option value="08">柱(遺跡)</option>
-                    <option value="0A">宝</option>
-                    <option value="0B">水晶(紫)</option>
-                    <option value="0C">砂漠</option>
-                </select>
-            </p>
-        </div>
-    
-        <p>
-            <label for="$area1In">入口</label>
-            <select id="$area1In">
-                <option value=""></option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-            </select>
-        
-    
-        
-            <label for="$area1Out">出口</label>
-            <select id="$area1Out">
-                <option value=""></option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-            </select>
-        </p>
-    
-        <div class="hiddenM1">
-            <p>
-                
-                <span class="$m1Name pink">
-                モンスター
-                </span>
-                <label for="$area1Posi1">位置</label>
-                <select id="$area1Posi1">
-                    <option value=""></option>
-                    <option value="00">⓪</option>
-                    <option value="01">①</option>
-                    <option value="02">②</option>
-                    <option value="03">③</option>
-                </select>
-            </p>
-        </div>
-    
-        <div class="hiddenM2">
-            <p>
-                
-                <span class="$m2Name blue">
-                モンスター
-                </span>
-                <label for="$area1Posi2">位置</label>
-                <select id="$area1Posi2">
-                    <option value=""></option>
-                    <option value="00">⓪</option>
-                    <option value="01">①</option>
-                    <option value="02">②</option>
-                    <option value="03">③</option>
-                </select>
-            </p>
-        </div> 
-    </div>
-    
-    <div class="hiddenArea">
-        <div class="yellow">
-            <p class="space">
-                <label for="$area2">エリア2</label>
-                <select id="$area2">
-                    <option value=""></option>
-                    <option value="01">迷路</option>
-                    <option value="02">傾斜(丘)</option>
-                    <option value="03">崖</option>
-                    <option value="04">水(川)</option>
-                    <option value="05">豚(猫)</option>
-                    <option value="06">蔦(ツタ)</option>
-                    <option value="07">天井(洞窟)</option>
-                    <option value="08">柱(遺跡)</option>
-                    <option value="0A">宝</option>
-                    <option value="0B">水晶(紫)</option>
-                    <option value="0C">砂漠</option>
-                </select>
-            </p>
-        </div>
-    
-        <p>
-            <label for="$area2In">入口</label>
-            <select id="$area2In">
-                <option value=""></option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-            </select>
-        
-    
-        
-            <label for="$area2Out">出口</label>
-            <select id="$area2Out">
-                <option value=""></option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-            </select>
-        </p>
-    
-        <div class="hiddenM1">
-            <p>
-                
-                <span class="$m1Name pink">
-                モンスター
-                </span>
-                <label for="$area2Posi1">位置</label>
-                <select id="$area2Posi1">
-                    <option value=""></option>
-                    <option value="00">⓪</option>
-                    <option value="01">①</option>
-                    <option value="02">②</option>
-                    <option value="03">③</option>
-                </select>
-            </p>
-        </div>
-    
-        <div class="hiddenM2">
-            <p>
-                
-                <span class="$m2Name blue">
-                モンスター
-                </span>
-                <label for="$area2Posi2">位置</label>
-                <select id="$area2Posi2">
-                    <option value=""></option>
-                    <option value="00">⓪</option>
-                    <option value="01">①</option>
-                    <option value="02">②</option>
-                    <option value="03">③</option>
-                </select>
-            </p>
-        </div>
-    </div>
-    
-    <div class="hiddenArea">
-        <div class="yellow">
-            <p class="space">
-                <label for="$area3">エリア3</label>
-                <select id="$area3">
-                    <option value=""></option>
-                    <option value="01">迷路</option>
-                    <option value="02">傾斜(丘)</option>
-                    <option value="03">崖</option>
-                    <option value="04">水(川)</option>
-                    <option value="05">豚(猫)</option>
-                    <option value="06">蔦(ツタ)</option>
-                    <option value="07">天井(洞窟)</option>
-                    <option value="08">柱(遺跡)</option>
-                    <option value="0A">宝</option>
-                    <option value="0B">水晶(紫)</option>
-                    <option value="0C">砂漠</option>
-                </select>
-            </p>
-        </div>
-        
-        <p>
-            <label for="$area3In">入口</label>
-            <select id="$area3In">
-                <option value=""></option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-            </select>
-        
-    
-        
-            <label for="$area3Out">出口</label>
-            <select id="$area3Out">
-                <option value=""></option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-            </select>
-        </p>
-    
-        <div class="hiddenM1">
-            <p>
-                
-                <span class="$m1Name pink">
-                モンスター
-                </span>
-                <label for="$area3Posi1">位置</label>
-                <select id="$area3Posi1">
-                    <option value=""></option>
-                    <option value="00">⓪</option>
-                    <option value="01">①</option>
-                    <option value="02">②</option>
-                    <option value="03">③</option>
-                </select>
-            </p>
-        </div>
-    
-        <div class="hiddenM2">
-            <p>
-                
-                <span class="$m2Name blue">
-                モンスター
-                </span>
-                <label for="$area3Posi2">位置</label>
-                <select id="$area3Posi2">
-                    <option value=""></option>
-                    <option value="00">⓪</option>
-                    <option value="01">①</option>
-                    <option value="02">②</option>
-                    <option value="03">③</option>
-                </select>
-            </p>
-        </div>
-    </div>
-    
-    <div class="hiddenArea">
-        <div class="yellow">
-            <p class="space">
-                <label for="$area4">エリア4</label>
-                <select id="$area4">
-                    <option value=""></option>
-                    <option value="01">迷路</option>
-                    <option value="02">傾斜(丘)</option>
-                    <option value="03">崖</option>
-                    <option value="04">水(川)</option>
-                    <option value="05">豚(猫)</option>
-                    <option value="06">蔦(ツタ)</option>
-                    <option value="07">天井(洞窟)</option>
-                    <option value="08">柱(遺跡)</option>
-                    <option value="0A">宝</option>
-                    <option value="0B">水晶(紫)</option>
-                    <option value="0C">砂漠</option>
-                </select>
-            </p>
-        </div>
-            
-            <p>
-                <label for="$area4In">入口</label>
-                <select id="$area4In">
-                    <option value=""></option>
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                </select>
-            
-        
-            
-                <label for="$area4Out">出口</label>
-                <select id="$area4Out">
-                    <option value=""></option>
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                </select>
-            </p>
-        
-            <div class="hiddenM1">
-                <p>
-                    
-                    <span class="$m1Name pink">
-                    モンスター
-                    </span>
-                    <label for="$area4Posi1">位置</label>
-                    <select id="$area4Posi1">
-                        <option value=""></option>
-                        <option value="00">⓪</option>
-                        <option value="01">①</option>
-                        <option value="02">②</option>
-                        <option value="03">③</option>
-                    </select>
-                </p>
-            </div>
-            
-            <div class="hiddenM2">
-                <p>
-                    
-                    <span class="$m2Name blue">
-                    モンスター
-                    </span>
-                    <label for="$area4Posi2">位置</label>
-                    <select id="$area4Posi2">
-                        <option value=""></option>
-                        <option value="00">⓪</option>
-                        <option value="01">①</option>
-                        <option value="02">②</option>
-                        <option value="03">③</option>
-                    </select>
-                </p>
-            </div> 
-    </div>
-    
-    <div class="hiddenArea">
-            <div class="yellow">
-                <p class="space">
-                    <label for="$area5">エリア5</label>
-                    <select id="$area5">
-                        <option value=""></option>
-
-                        <option value="01">迷路</option>
-                        <option value="02">傾斜(丘)</option>
-                        <option value="03">崖</option>
-                        <option value="04">水(川)</option>
-                        <option value="05">豚(猫)</option>
-                        <option value="06">蔦(ツタ)</option>
-                        <option value="07">天井(洞窟)</option>
-                        <option value="08">柱(遺跡)</option>
-                        <option value="0A">宝</option>
-                        <option value="0B">水晶(紫)</option>
-                        <option value="0C">砂漠</option>
-                    </select>
-                </p>
-            </div>
-                
-                <p>
-                    <label for="$area5In">入口</label>
-                    <select id="$area5In">
-                        <option value=""></option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                    </select>
-                
-            
-                
-                    <label for="$area5Out">出口</label>
-                    <select id="$area5Out">
-                        <option value=""></option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                    </select>
-                </p>
-            
-                <div class="hiddenM1">
-                    <p>
-                        
-                        <span class="$m1Name pink">
-                        モンスター
-                        </span>
-                        <label for="$area5Posi1">位置</label>
-                        <select id="$area5Posi1">
-                            <option value=""></option>
-                            <option value="00">⓪</option>
-                            <option value="01">①</option>
-                            <option value="02">②</option>
-                            <option value="03">③</option>
-                        </select>
-                    </p>
-                </div>
-                
-                <div class="hiddenM2">
-                    <p>
-                        
-                        <span class="$m2Name blue">
-                        モンスター
-                        </span>
-                        <label for="$area5Posi2">位置</label>
-                        <select id="$area5Posi2">
-                            <option value=""></option>
-                            <option value="00">⓪</option>
-                            <option value="01">①</option>
-                            <option value="02">②</option>
-                            <option value="03">③</option>
-                        </select>
-                    </p>
-                </div>
-            </div>
-
-            <div id="hiddenMap" class="pic_set">
-                <img class="img5" src="../image/map2.png" alt="マップ画像1" width="360">
-            </div>
-
-    <br>
-    <div class="black">
-        <p>
-            レベル&フラグ
-        </p>
-    </div>
-    <p>
-        初期レベル
-        <input id="$iniLev" type="number" min="1" max="140">
-    </p>
-
-    <p>
-        現在レベル
-        <input id="$curLev" type="number" min="1" max="140">
-    </p>
-
-    <p>
-        <label for="$RARE">お宝フラグ</label>
-        <input type="checkbox" id="$RARE">
-    </p>
-
-    <p>
-            
-            <span class="$m1Name pink">
-            モンスター
-            </span>
-        <label for="$frenzyM1">狂竜化</label>
-        <select id="$frenzyM1">
-            <option value=""></option>
-            <option value="00">00(しない)</option>
-            <option value="01">01(最初から)</option>
-            <option value="02">02(途中から)</option>
-            <option value="03">03(途中から)</option>
-            <option value="04">04(途中から)</option>
-            <option value="05">05(途中から)</option>
-            <option value="09">09(極限状態)</option>
-        </select>
-    </p>
-
-    <p>
-            
-            <span class="$m2Name blue">
-            モンスター
-            </span>
-        <label for="$frenzyM2">狂竜化</label>
-        <select id="$frenzyM2">
-            <option value=""></option>
-            <option value="00">00(しない)</option>
-            <option value="01">01(最初から)</option>
-            <option value="02">02(途中から)</option>
-            <option value="03">03(途中から)</option>
-            <option value="04">04(途中から)</option>
-            <option value="05">05(途中から)</option>
-            <option value="09">09(極限状態)</option>
-        </select>
-    </p>
-
-    <p>
-        <label for="$frenzyM3">乱入モンスター狂竜化</label>
-        <select id="$frenzyM3">
-            <option value=""></option>
-            <option value="00">00(しない)</option>
-            <option value="01">01(最初から)</option>
-            <option value="02">02(途中から)</option>
-            <option value="03">03(途中から)</option>
-            <option value="04">04(途中から)</option>
-            <option value="05">05(途中から)</option>
-        </select>
-    </p>
-
-    <p>
-        <button id="$btnAuto">自動設定</button>
-    </p>
-    <br>
-    <div class="red">
-        <p>
-            コード生成ボタン
-        </p>
-    </div>
-
-    <p>
-        <button id="$btnGeneration">++生成++</button>
-    </p>
-
-    
-
-    <div id="$btnHidden">
-        <p>
-            <button id="$btnDelete">コード削除</button>
-            <button id="$btnCoppyInformation">情報のコピー</button>
-            <button id="$btnCoppyCode">コードのコピー</button>
-        </p>
-    </div>
-    <br>
-    <p id="$output"></p>
-    
-        <div id="$textareaHidden">
-            <textarea id="$coppy1" rows="1" cols="33"></textarea>
-            <textarea id="$coppy2" rows="20" cols="60"></textarea>
-        </div>
-
-        <textarea id="$load"></textarea>
-
-
+      <div class="questID">
+        <label for="questID">クエスト識別ID</label>
         <br>
-        <br>
-        <br>
-        <br>
-        <div class="borderMH4G">
-            <p>使い方や注意点などは<a href="note.html">こちら!</a><br>質問や代行依頼は<a href="https://twitter.com/senaga19" target="_blank">Twitter</a>のDMまでお願いします<br>作成代行1クエスト<br>任意のクエスト作成者名→1500円<br>作成者名固定(@senaga19)→無料<br>でやってます!</p>
-        </div>
-        <br>
-        <br>
-        
+        <textarea id="questID" rows="1" maxlength="16"></textarea>
+      </div>
+
+      <div class="buttonWarapper">
+        <button onclick="senaga19()">＠senaga19</button>
+        <button onclick="randomNumber()">乱数生成</button>
+      </div>
 
 
+      <p style="background-color: aquamarine;">build</p>
 
-</main>
 
-<footer>
-    <small><a href="https://twitter.com/senaga19" target="_blank">@senaga19</a></small>
-</footer>
+      <div class="buttonWarapper">
+        <button onclick="generate()">++生成++</button>
+      </div>
 
-<script src="../js/guildMH4G.js"></script>
+
+      <div class="resultButton none">
+        <button class="questInfo" onclick="copyInfo()">クエスト情報コピー</button>
+        <button class="questCode" onclick="copyCode()">チートコードコピー</button>
+      </div>
+      <div class="resultText none">
+        <span class="questInfo result"></span>
+        <span class="questCode result"></span>
+      </div>
+      <br>
+      <br>
+
+
+      
+
+    </div>
+    <div class="storageContainer" style="display: none;">
+      <p>
+        guideメッセージ
+        <span class="guideChange" onclick="guideOn()">表示</span>
+        <span class="guideChange" onclick="guideOff()">非表示</span>
+      </p>
+      <p>ここはストレージコンテナ</p>
+      <p>クエスト情報を端末上（ブラウザ上）に一時保存可能にする予定（未定）</p>
+    </div>
+  </main>
+
+  <footer>
+    <small><a href="https://twitter.com/senaga19" target="_blank">＠senaga19</a></small>
+  </footer>
+
+  <script src="../js/guildMH4G.js"></script>
 </body>
+
 </html>
-
-
-
-
-
-
