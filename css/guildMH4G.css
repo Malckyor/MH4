@@ -1,0 +1,224 @@
+@media (min-width: 576px) {}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 992px) {}
+
+@media (min-width: 1200px) {}
+
+@media (max-width: 575px) {}
+
+body {
+  margin: 0;
+}
+
+header {
+  margin: 0;
+  background-color: #bfffba;
+  padding: 30px 0px 30px 0px;
+  text-align: center;
+}
+
+footer {
+  margin: 0;
+  background-color: #bfffba;
+  padding: 50px 0px 50px 0px;
+  text-align: center;
+}
+
+select,
+textarea,
+input {
+  font-size: 16px;
+}
+
+a {
+  color: black;
+}
+
+h2 {
+  text-align: center;
+  background-color: #00FFFF66;
+}
+#guideMessage {
+  /* border: 1px solid black; */
+  background-color: #00FFFF15;
+  max-width: 1000px;
+  margin: 0px auto;
+  margin-bottom: 19.920px;
+  border: 0.5px solid black;
+}
+#guideMessage p {
+  margin: 0px;
+  padding: 5px;
+}
+#guideMessage a {
+  color: blue;
+}
+.guideChange {
+  display: inline-block;
+  border: solid 1px;
+  padding: 3px;
+  margin: 3px;
+}
+.currentGuide {
+  background-color: #00FFFF33;
+}
+ 
+.switchTabFlex {
+  display: flex;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.switchTab {
+  width: 50%;
+  text-align: center;
+  border: solid 1px;
+}
+.onTab {
+  background-color: #bfffba;
+}
+.offTab {
+  background-color: #eee;
+}
+.switchTab:hover {
+  background-color: #bfffba;
+}
+.switchTab:active {
+  background-color: aqua;
+}
+.createContainer,
+.storageContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.buttonWarapper {
+  margin: 10px;
+  text-align: center;
+}
+
+
+.monster1 {
+  text-align: center;
+}
+.monster2 {
+  text-align: center;
+}
+#monster1 {
+  width: 50%;
+}
+#monster2 {
+  width: 50%;
+}
+.weapon {
+  text-align: center;
+}
+#weapon {
+  width: 90%;
+}
+.armor {
+  text-align: center;
+}
+#armor {
+  width: 90%;
+}
+.armorType {
+  text-align: center;
+}
+#armorType {
+  width: 70px;
+}
+
+.level {
+  text-align: center;
+}
+#level {
+  width: 50px;
+}
+
+img {
+  width: 100%;
+}
+
+
+
+.area {
+  text-align: center;
+}
+.areaIn {
+  width: 50px;
+}
+.areaOut {
+  width: 50px;
+}
+.areaMonster1,
+.areaMonster2 {
+  width: 50px;
+}
+.areaError {
+  background-color: red;
+}
+
+
+.set3 {
+  display: inline-block;
+  border: solid 1px;
+  padding: 3px;
+  margin: 3px;
+}
+
+
+.visibility {
+  visibility: hidden;
+}
+
+
+
+
+.author {
+  text-align: center;
+}
+#author {
+  width: 80%;
+}
+.questID {
+  text-align: center;
+}
+#questID {
+  width: 80%;
+}
+
+.pink{
+  background-color: rgb(255, 220, 226);
+}
+.blue{
+  background-color: rgb(210, 255, 255);
+}
+
+.resultButton {
+  display: flex;
+  justify-content: space-around;
+  margin: 5px;
+}
+
+.resultText {
+  display: flex;
+}
+.result {
+  width: 50%;
+  padding: 5px 0px 1px 1px;
+  border: 1px solid;
+  line-height: 1;
+}
+.resultText .questCode {
+  text-align: justify;
+}
+
+
+.none {
+  display: none;
+}
+
+
