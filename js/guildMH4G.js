@@ -1,2256 +1,1972 @@
-const monsterName = new Array ("なし","リオレイア","リオレウス","リオレイア亜種","リオレウス亜種","リオレイア希少種","リオレウス希少種","イャンクック","イャンクック亜種","ゲリョス","ゲリョス亜種","ティガレックス","ティガレックス亜種","ドスゲネポス","ドスイーオス","ドスジャギィ","ドスランポス","ババコンガ","ババコンガ亜種","ラージャン","ケチャワチャ","テツカブラ","ザボアザキル","ガララアジャラ","ダラ・アマデュ","アルセルタス","ゲネルセルタス","ネルスキュラ","ゴア・マガラ","シャガル・マガラ","イャンガルルガ","クシャルダオラ","テオ・テスカトル","アカムトルム","キリン","キリン亜種","フルフル","フルフル亜種","バサルモス","バサルモス亜種","グラビモス","グラビモス亜種","イビルジョー","怒り喰らうイビ","ブラキディオス","激昂したラージ","ダレン・モーラ","ウルクスス","ジンオウガ","ジンオウガ亜種","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","セルレギオス","","","","","","","","","","","ディアブロス","ディアブロス亜種","","","オオナズチ","","","","","ダイミョウザザミ亜種");
-const areaName = new Array ("BC","迷路","傾斜","崖","水","豚","蔦","天井","柱","ゴール","宝","水晶","砂漠");
-let count = 0;
-let weaponKinds = new Array(6);
+//セレクトの変数データ
+let selectValue = {
+  monster1:'',
+  monster2:'',
+  weapon:'',
+  armor:'',
+  armorType:'',
+  level:'',
+  areaType:['','','','',''],
+  areaIn:['','','','',''],
+  areaOut:['','','','',''],
+  areaMonster1:['','','','',''],
+  areaMonster2:['','','','',''],
+  areaIniM1:'', //数字で0,1,2,3,4が入る
+  areaIniM2:'',
+  areaSleepM1:'',
+  areaSleepM2:'',
+  areaMealM1:'',
+  areaMealM2:'',
+  author:['0000','0000','0000','0000','0000','0000','0000','0000','0000','0000','0000','0000'],
+  questID:'',
+  areaFlag:[false,false,false,false,false] //エリアの形が決まっているかを識別する
+}
+//モンスターデータ
+const monsterData = new Map(
+  [
+    ['07', {unit:'2', level:'90' , artifact:'T2' , choseableArea:['02','03','04','06']          , frenzy:'03', value:'07', text:'イャンクック'}],
+    ['08', {unit:'2', level:'90' , artifact:'T10', choseableArea:['02','03','04','06']          , frenzy:'03', value:'08', text:'イャンクック亜種'}],
+    ['0B', {unit:'2', level:'98' , artifact:'T6' , choseableArea:['02','03','04','07','0B','0C'], frenzy:'09', value:'0B', text:'ティガレックス'}],
+    ['0C', {unit:'2', level:'94' , artifact:'T11', choseableArea:['02','03','04','07','0B','0C'], frenzy:'03', value:'0C', text:'ティガレックス亜種'}],
+    ['10', {unit:'2', level:'90' , artifact:'T9' , choseableArea:['02','04','06','0B','0C']     , frenzy:'03', value:'10', text:'ドスランポス'}],
+    ['13', {unit:'2', level:'120', artifact:'T12', choseableArea:['02','03','04','07','0B','0C'], frenzy:'09', value:'13', text:'ラージャン'}],
+    ['1C', {unit:'1', level:'98' , artifact:'T3' , choseableArea:['02','03','04','06']          , frenzy:'00', value:'1C', text:'ゴア・マガラ'}],
+    ['1D', {unit:'1', level:'120', artifact:'T8' , choseableArea:['02','04','06']               , frenzy:'00', value:'1D', text:'シャガル・マガラ'}],
+    ['1E', {unit:'2', level:'101', artifact:'T12', choseableArea:['02','03','04','06','0B','0C'], frenzy:'03', value:'1E', text:'イャンガルルガ'}],
+    ['1F', {unit:'1', level:'120', artifact:'T1' , choseableArea:['02','03','04']               , frenzy:'00', value:'1F', text:'クシャルダオラ'}],
+    ['20', {unit:'1', level:'120', artifact:'T8' , choseableArea:['02','03','04']               , frenzy:'00', value:'20', text:'テオ・テスカトル'}],
+    ['22', {unit:'2', level:'120', artifact:'T5' , choseableArea:['02','03','04','07','0B']     , frenzy:'00', value:'22', text:'キリン'}],
+    ['23', {unit:'2', level:'120', artifact:'T1' , choseableArea:['02','03','04','07','0B']     , frenzy:'00', value:'23', text:'キリン亜種'}],
+    ['26', {unit:'2', level:'98' , artifact:'T10', choseableArea:['02','03','04','06']          , frenzy:'03', value:'26', text:'バサルモス'}],
+    ['27', {unit:'2', level:'98' , artifact:'T4' , choseableArea:['02','03','04','06']          , frenzy:'03', value:'27', text:'バサルモス亜種'}],
+    ['2C', {unit:'2', level:'101', artifact:'T11', choseableArea:['02','03','04']               , frenzy:'03', value:'2C', text:'ブラキディオス'}],
+    ['30', {unit:'2', level:'98' , artifact:'T6' , choseableArea:['02','04','07']               , frenzy:'09', value:'30', text:'ジンオウガ'}],
+    ['31', {unit:'2', level:'94' , artifact:'T7' , choseableArea:['02','04','07']               , frenzy:'03', value:'31', text:'ジンオウガ亜種'}],
+    ['2A', {unit:'2', level:'120', artifact:'T1' , choseableArea:['02','03','04','07','0B','0C'], frenzy:'09', value:'2A', text:'イビルジョー'}],
+    ['58', {unit:'2', level:'94' , artifact:'T5' , choseableArea:['02','03','04','0B','0C']     , frenzy:'09', value:'58', text:'セルレギオス'}],
+    ['63', {unit:'2', level:'101', artifact:'T3' , choseableArea:['0B','0C']                    , frenzy:'09', value:'63', text:'ディアブロス'}],
+    ['64', {unit:'2', level:'101', artifact:'T7' , choseableArea:['0B','0C']                    , frenzy:'03', value:'64', text:'ディアブロス亜種'}],
+    ['67', {unit:'1', level:'120', artifact:'T8' , choseableArea:['02','04','06','0B']          , frenzy:'00', value:'67', text:'オオナズチ'}],
+    ['6C', {unit:'2', level:'94' , artifact:'T4' , choseableArea:['04','0B','0C']               , frenzy:'03', value:'6C', text:'ダイミョウザザミ亜種'}]
+  ]
+);
+//出土データ
+const artifactData = new Map(
+  [
+    //モンスター非選択
+    ['T0', {
+      weapon:[
+        'アックス/操虫棍',
+        '大剣/太刀',
+        '片手剣/双剣',
+        'ランス/ガンランス',
+        'ハンマー/狩猟笛',
+        '弓/ボウガン'
+      ],
+      armor:[
+        'オリジナルA',
+        'オリジナルB',
+        'オリジナルC',
+        'オリジナルD',
+        'オリジナルE',
+        'オリジナルF',
+        'トライA',
+        'トライB',
+        'トライC',
+        'トライD',
+        'トライE',
+        'トライF',
+        'ドスA',
+        'ドスB',
+        'ドスC',
+        'ドスD',
+        'ドスE',
+        'ドスF'
+      ]
+    }],
+    //クシャルダオラ(1F)、キリン亜種(23)、イビルジョー(2A)
+    ['T1', {
+      weapon:[
+        'スラアク/操虫棍 (激流斧、エイムofトリック)',
+        '大剣/太刀 (輝剣、ラスティクレイモア)',
+        '片手剣/双剣 (峰山小太刀、祭囃子・無形ノ調)',
+        'ランス/ガンランス (シルバープロミネンス、砕牙砲)',
+        'ハンマー/狩猟笛 (星砕きプロメテオル、獄琴)',
+        '弓/ライト (エクリプスボウ、フリルパラソル)'
+      ],
+      armor:[
+        'オリジナルA (ダマスク)',
+        'オリジナルB (ダマスク、デスギア)',
+        'オリジナルC (ダマスク、デスギア)',
+        'オリジナルD (ダマスク、デスギア)',
+        'オリジナルE (ダマスク)',
+        'オリジナルF (ダマスク)',
+        'トライA (荒天/蒼天)',
+        'トライB (荒天/蒼天、デスギア)',
+        'トライC (荒天/蒼天、デスギア)',
+        'トライD (荒天/蒼天、デスギア)',
+        'トライE (荒天/蒼天)',
+        'トライF (荒天/蒼天)',
+        'ドスA (ミラバルZ)',
+        'ドスB (ミラバルZ、デスギア)',
+        'ドスC (ミラバルZ、デスギア)',
+        'ドスD (ミラバルZ、デスギア)',
+        'ドスE (ミラバルZ)',
+        'ドスF (ミラバルZ)'
+      ]
+    }],
+    //イャンクック(07)
+    ['T2', {
+      weapon:[
+        'スラアク/操虫棍 (ディーエッジ、エイムofトリック)',
+        '大剣/太刀 (41式対飛竜大剣、凍刀)',
+        '片手剣/双剣 (マスターバング、ランポスクロウズ)',
+        'ランス/ガンランス (合戦槍、フルボルテージ)',
+        'ハンマー/狩猟笛 (ウォーバッシュ、ガンズ＝ロック)',
+        '弓/ライト (クイーンブラスター、ボルボバレット)'
+      ],
+      armor:[
+        'オリジナルA (アロイ)',
+        'オリジナルB (アロイ)',
+        'オリジナルC (アロイ)',
+        'オリジナルD (アロイ)',
+        'オリジナルE (アロイ)',
+        'オリジナルF (アロイ)',
+        'トライA (ルドロス)',
+        'トライB (ルドロス)',
+        'トライC (ルドロス)',
+        'トライD (ルドロス)',
+        'トライE (ルドロス)',
+        'トライF (ルドロス)',
+        'ドスA (ハンター)',
+        'ドスB (ハンター)',
+        'ドスC (ハンター)',
+        'ドスD (ハンター)',
+        'ドスE (ハンター)',
+        'ドスF (ハンター)'
+      ]
+    }],
+    //ゴアマガラ(1C)、ディアブロス(63)
+    ['T3', {
+      weapon:[
+        'チャアク/操虫棍 (ディア＝ルテミス、エイムofトリック)',
+        '大剣/太刀 (雷剣、成敗刀)',
+        '片手剣/双剣 (ヒドゥンエッジ、王双刃)',
+        'ランス/ガンランス (バベル、ナナ＝ハウル)',
+        'ハンマー/狩猟笛 (ねこハンマー、ウネリシェルン)',
+        '弓/ライト (鋼氷馬弓、ベルクーツ)'
+      ],
+      armor:[
+        'オリジナルA (レウス)',
+        'オリジナルB (レウス、フルフルU)',
+        'オリジナルC (レウス、キリン)',
+        'オリジナルD (フルフルU、キリン)',
+        'オリジナルE (フルフルU)',
+        'オリジナルF (キリン)',
+        'トライA (レックス)',
+        'トライB (レックス、フルフルU)',
+        'トライC (レックス、キリン)',
+        'トライD (フルフルU、キリン)',
+        'トライE (フルフルU)',
+        'トライF (キリン)',
+        'ドスA (ゲリョスU)',
+        'ドスB (ゲリョスU、フルフルU)',
+        'ドスC (ゲリョスU、キリン)',
+        'ドスD (フルフルU、キリン)',
+        'ドスE (フルフルU)',
+        'ドスF (キリン)'
+      ]
+    }],
+    //バサルモス亜種(27)、ダイミョウザザミ亜種(6C)
+    ['T4', {
+      weapon:[
+        'スラアク/操虫棍 (ディア＝ルテミス、ボーンロッド)',
+        '大剣/太刀 (ジークムント、飛竜刀)',
+        '片手剣/双剣 (ポイズンタバルジン、ギルドナイトセーバー)',
+        'ランス/ガンランス (トゥースランス、プリンセスバースト)',
+        'ハンマー/狩猟笛 (ヒドゥンブレイカー、ガンズロック)',
+        '弓/ヘビィ (プロミネンスボウ、デュエルスタップ)'
+      ],
+      armor:[
+        'オリジナルA (レイア)',
+        'オリジナルB (レイア)',
+        'オリジナルC (レイア)',
+        'オリジナルD (レイア)',
+        'オリジナルE (レイア)',
+        'オリジナルF (レイア)',
+        'トライA (ラギア)',
+        'トライB (ラギア)',
+        'トライC (ラギア)',
+        'トライD (ラギア)',
+        'トライE (ラギア)',
+        'トライF (ラギア)',
+        'ドスA (ザザミ)',
+        'ドスB (ザザミ)',
+        'ドスC (ザザミ)',
+        'ドスD (ザザミ)',
+        'ドスE (ザザミ)',
+        'ドスF (ザザミ)'
+      ]
+    }],
+    //キリン(22)、セルレギオス(58)
+    ['T5', {
+      weapon:[
+        'スラアク/操虫棍 (王剣斧、セクトハルバー)',
+        '大剣/太刀 (雷剣、成敗刀)',
+        '片手剣/双剣 (ヒドゥンエッジ、王双刃)',
+        'ランス/ガンランス (バベル、ナナ＝ハウル)',
+        'ハンマー/狩猟笛 (ねこハンマー、ソニックビードロー)',
+        '弓/ライト (鋼氷馬弓、ベルクーツ)'
+      ],
+      armor:[
+        'オリジナルA (モノデビル)',
+        'オリジナルB (モノデビル)',
+        'オリジナルC (モノデビル)',
+        'オリジナルD (モノデビル)',
+        'オリジナルE (モノデビル)',
+        'オリジナルF (モノデビル)',
+        'トライA (ネブラ)',
+        'トライB (ネブラ)',
+        'トライC (ネブラ)',
+        'トライD (ネブラ)',
+        'トライE (ネブラ)',
+        'トライF (ネブラ)',
+        'ドスA (ディアブロ)',
+        'ドスB (ディアブロ)',
+        'ドスC (ディアブロ)',
+        'ドスD (ディアブロ)',
+        'ドスE (ディアブロ)',
+        'ドスF (ディアブロ)'
+      ]
+    }],
+    //ティガレックス(0B)、ジンオウガ(30)
+    ['T6', {
+      weapon:[
+        'スラアク/操虫棍 (ヒドゥンアックス、ボーンロッド)',
+        '大剣/太刀 (ジークムント、飛竜刀)',
+        '片手剣/双剣 (ポイズンタバルジン、ギルドナイトセーバー)',
+        'ランス/ガンランス (トゥースランス、プリンセスバースト)',
+        'ハンマー/狩猟笛 (ヒドゥンブレイカー、ウネリシェルン)',
+        '弓/ヘビィ (プロミネンスボウ、デュエルスタップ)'
+      ],
+      armor:[
+        'オリジナルA (モノブロ)',
+        'オリジナルB (モノブロ)',
+        'オリジナルC (モノブロ)',
+        'オリジナルD (モノブロ)',
+        'オリジナルE (モノブロ)',
+        'オリジナルF (モノブロ)',
+        'トライA (フロギィ)',
+        'トライB (フロギィ)',
+        'トライC (フロギィ)',
+        'トライD (フロギィ)',
+        'トライE (フロギィ)',
+        'トライF (フロギィ)',
+        'ドスA (タロス)',
+        'ドスB (タロス)',
+        'ドスC (タロス)',
+        'ドスD (タロス)',
+        'ドスE (タロス)',
+        'ドスF (タロス)'
+      ]
+    }],
+    //ジンオウガ亜種(31)、ディアブロス亜種(64)
+    ['T7', {
+      weapon:[
+        'スラアク/操虫棍 (モーターバースト、エイムofトリック)',
+        '大剣/太刀 (封龍剣、軍刀)',
+        '片手剣/双剣 (チュクチュク、テッセン)',
+        'ランス/ガンランス (竜騎槍、ジェネラルパルド)',
+        'ハンマー/狩猟笛 (鬼鉄丸、ヒドゥントーン)',
+        '弓/ヘビィ (覇弓レラカムトルム、ギガン＝ショット)'
+      ],
+      armor:[
+        'オリジナルA (リオソウル)',
+        'オリジナルB (リオソウル、ゴア)',
+        'オリジナルC (リオソウル、クシャナ)',
+        'オリジナルD (ゴア、クシャナ)',
+        'オリジナルE (ゴア)',
+        'オリジナルF (クシャナ)',
+        'トライA (レックスU)',
+        'トライB (レックスU、ゴア)',
+        'トライC (レックスU、クシャナ)',
+        'トライD (ゴア、クシャナ)',
+        'トライE (ゴア)',
+        'トライF (クシャナ)',
+        'ドスA (凛/艶)',
+        'ドスB (凛/艶、ゴア)',
+        'ドスC (凛/艶、クシャナ)',
+        'ドスD (ゴア、クシャナ)',
+        'ドスE (ゴア)',
+        'ドスF (クシャナ)',
+      ]
+    }],
+    //シャガルマガラ(1D)、テオテスカトル(20)、オオナズチ(67)
+    ['T8', {
+      weapon:[
+        'チャアク/操虫棍 (ナバルクライス、金砕棍棒)',
+        '大剣/太刀 (海帝剣、冥刀)',
+        '片手剣/双剣 (ゴールドマロウ、海王双刃)',
+        'ランス/ガンランス (七星槍、シルバールーク)',
+        'ハンマー/狩猟笛 (ドラゴンブレイカー、ゴルトリコーダー)',
+        '弓/ヘビィ (殲滅と破壊の剛弓、カオスウィング)'
+      ],
+      armor:[
+        'オリジナルA (エスカドラ)',
+        'オリジナルB (エスカドラ)',
+        'オリジナルC (エスカドラ)',
+        'オリジナルD (エスカドラ)',
+        'オリジナルE (エスカドラ)',
+        'オリジナルF (エスカドラ)',
+        'トライA (リベリオン/ライオット)',
+        'トライB (リベリオン/ライオット)',
+        'トライC (リベリオン/ライオット)',
+        'トライD (リベリオン/ライオット)',
+        'トライE (リベリオン/ライオット)',
+        'トライF (リベリオン/ライオット)',
+        'ドスA (ドラゴンX)',
+        'ドスB (ドラゴンX)',
+        'ドスC (ドラゴンX)',
+        'ドスD (ドラゴンX)',
+        'ドスE (ドラゴンX)',
+        'ドスF (ドラゴンX)'
+      ]
+    }],
+    //ドスランポス(10)
+    ['T9', {
+      weapon:[
+        'スラアク/操虫棍 (ディーエッジ、エイムofトリック)',
+        '大剣/太刀 (41式対飛竜大剣、凍刀)',
+        '片手剣/双剣 (マスターバング、ランポスクロウズ)',
+        'ランス/ガンランス (合戦槍、フルボルテージ)',
+        'ハンマー/狩猟笛 (ウォーバッシュ、ガンズロック)',
+        '弓/ライト (クイーンブラスター、ボルボバレット)'
+      ],
+      armor:[
+        'オリジナルA (アロイ)',
+        'オリジナルB (アロイ)',
+        'オリジナルC (アロイ)',
+        'オリジナルD (アロイ)',
+        'オリジナルE (アロイ)',
+        'オリジナルF (アロイ)',
+        'トライA (ルドロス)',
+        'トライB (ルドロス)',
+        'トライC (ルドロス)',
+        'トライD (ルドロス)',
+        'トライE (ルドロス)',
+        'トライF (ルドロス)',
+        'ドスA (ハンター)',
+        'ドスB (ハンター)',
+        'ドスC (ハンター)',
+        'ドスD (ハンター)',
+        'ドスE (ハンター)',
+        'ドスF (ハンター)'
+      ]
+    }],
+    //イャンクック亜種(08)、バサルモス(26)
+    ['T10', {
+      weapon:[
+        'スラアク/操虫棍 (竜姫の剣斧、セクトハルバー)',
+        '大剣/太刀 (41式飛竜大剣、凍刃)',
+        '片手剣/双剣 (マスターバング、ランポスクロウズ)',
+        'ランス/ガンランス (合戦槍、フルボルテージ)',
+        'ハンマー/狩猟笛 (ウォーバッシュ、ガンズロック)',
+        '弓/ライト (クイーンブラスター、ボルボバレット)'
+      ],
+      armor:[
+        'オリジナルA (インゴット)',
+        'オリジナルB (インゴット)',
+        'オリジナルC (インゴット)',
+        'オリジナルD (インゴット)',
+        'オリジナルE (インゴット)',
+        'オリジナルF (インゴット)',
+        'トライA (フルフル)',
+        'トライB (フルフル)',
+        'トライC (フルフル)',
+        'トライD (フルフル)',
+        'トライE (フルフル)',
+        'トライF (フルフル)',
+        'ドスA (ゲリョス)',
+        'ドスB (ゲリョス)',
+        'ドスC (ゲリョス)',
+        'ドスD (ゲリョス)',
+        'ドスE (ゲリョス)',
+        'ドスF (ゲリョス)'
+      ]
+    }],
+    //ティガレックス亜種(0C)、ブラキディオス(2C)
+    ['T11', {
+      weapon:[
+        'チャアク/操虫棍 (精鋭討伐隊盾斧、セクトハルバー)',
+        '大剣/太刀 (封龍剣、軍刀)',
+        '片手剣/双剣 (フロストエッジ、テッセン)',
+        'ランス/ガンランス (竜騎槍、ジェネラルバルド)',
+        'ハンマー/狩猟笛 (ナナ＝トリ、ソニックビードロー)',
+        '弓/ヘビィ (覇弓レラカムトルム、ギガン＝ショット)'
+      ],
+      armor:[
+        'オリジナルA (リオハート)',
+        'オリジナルB (リオハート、ギザミ)',
+        'オリジナルC (リオハート、ジンオウU)',
+        'オリジナルD (ギザミ、ジンオウU)',
+        'オリジナルE (ギザミ)',
+        'オリジナルF (ジンオウU)',
+        'トライA (アーティア)',
+        'トライB (アーティア、ギザミ)',
+        'トライC (アーティア、ジンオウU)',
+        'トライD (ギザミ、ジンオウU)',
+        'トライE (ギザミ)',
+        'トライF (ジンオウU)',
+        'ドスA (常磐/八千代)',
+        'ドスB (常磐/八千代、ギザミ)',
+        'ドスC (常磐/八千代、ジンオウU)',
+        'ドスD (ギザミ、ジンオウU)',
+        'ドスE (ギザミ)',
+        'ドスF (ジンオウU)'
+      ]
+    }],
+    //ラージャン(13)、イャンガルルガ(1E)
+    ['T12', {
+      weapon:[
+        'チャアク/操虫棍 (フォースofフォール、金砕棍棒)',
+        '大剣/太刀 (アギト、天上天下天地無双刀)',
+        '片手剣/双剣 (エペ=ギルタナス、ニヴルブリザード)',
+        'ランス/ガンランス (エストック、アームofティラン)',
+        'ハンマー/狩猟笛 (クリスタルノヴァ、ヒドゥントーン)',
+        '弓/ボウガン (龍弓、雷砲、カホウ)'
+      ],
+      armor:[
+        'オリジナルA (シルバーソル)',
+        'オリジナルB (シルバーソル、キリンU)',
+        'オリジナルC (シルバーソル、アカムト)',
+        'オリジナルD (キリンU、アカムト)',
+        'オリジナルE (キリンU)',
+        'オリジナルF (アカムト)',
+        'トライA (フィリア)',
+        'トライB (フィリア、キリンU)',
+        'トライC (フィリア、アカムト)',
+        'トライD (キリンU、アカムト)',
+        'トライE (キリンU)',
+        'トライF (アカムト)',
+        'ドスA (グリード)',
+        'ドスB (グリード、キリンU)',
+        'ドスC (グリード、アカムト)',
+        'ドスD (キリンU、アカムト)',
+        'ドスE (キリンU)',
+        'ドスF (アカムト)'
+      ]
+    }]
+    
+  ]
+);
+//エリア名データ
+const areaNameData = new Map(
+  [
+    ['01', {value:'01', chooseable:['1','2','3','4','5','6','7','8'], text:'迷路'}],
+    ['02', {value:'02', chooseable:['1','2','3','4','5','6','7','8'], text:'傾斜(丘)'}],
+    ['03', {value:'03', chooseable:['1','2','3','4','5','6']        , text:'崖'}],
+    ['04', {value:'04', chooseable:['1','2','3','4','5','6','7','8'], text:'水(川)'}],
+    ['05', {value:'05', chooseable:['1','2','3','4','5','6','7','8'], text:'豚(猫)'}],
+    ['06', {value:'06', chooseable:['1','2','3','4','5','6','7','8'], text:'蔦(ツタ)'}],
+    ['07', {value:'07', chooseable:['1','2','3','4','5','6','7','8'], text:'天井(洞窟)'}],
+    ['08', {value:'08', chooseable:['2','4','6','8']                , text:'柱(遺跡)'}],
+    ['0A', {value:'0A', chooseable:['2','4','6','8']                , text:'宝'}],
+    ['0B', {value:'0B', chooseable:['1','2','3','4','5','6','7','8'], text:'紫(水晶)'}],
+    ['0C', {value:'0C', chooseable:['1','2','3','4','5','6','7','8'], text:'砂漠'}]
+  ]
+);
 
-//クエスト作成者名
-let Author = document.getElementById('$Author');
-let AuthorName = ["0000","0000","0000","0000","0000","0000","0000","0000","0000","0000","0000","0000"];
-//以下2つ16進数変換
-function AuthorChange(){
-    for(i=0;i<12;i++){
-        if(Author.value[i]==null){
-            for(j=i;j<13;j++){
-            AuthorName[j] = "0000";
-            }
-            break;
-        }
-      AuthorName[i] = convertASCIItoHex(Author.value[i]);
-      switch(AuthorName[i].length){
-          case 1: AuthorName[i] = "000" + AuthorName[i]; break;
-          case 2: AuthorName[i] = "00" + AuthorName[i]; break;
-          case 3: AuthorName[i] = "0" + AuthorName[i]; break;
+//タブ切り替えの挙動
+function createTabChange() {
+  document.getElementsByClassName('createContainer')[0].style.display = 'block';
+  document.getElementsByClassName('storageContainer')[0].style.display = 'none';
+  document.getElementsByClassName('switchTab')[0].classList.add('onTab');
+  document.getElementsByClassName('switchTab')[0].classList.remove('offTab');
+  document.getElementsByClassName('switchTab')[1].classList.add('offTab');
+  document.getElementsByClassName('switchTab')[1].classList.remove('onTab');
+}
+function storageTabChange() {
+  document.getElementsByClassName('createContainer')[0].style.display = 'none';
+  document.getElementsByClassName('storageContainer')[0].style.display = 'block';
+  document.getElementsByClassName('switchTab')[0].classList.add('offTab');
+  document.getElementsByClassName('switchTab')[0].classList.remove('onTab');
+  document.getElementsByClassName('switchTab')[1].classList.add('onTab');
+  document.getElementsByClassName('switchTab')[1].classList.remove('offTab');
+}
+//guide表示
+function guideOn() {
+  document.getElementById('guideMessage').style.display = 'block';
+  localStorage.clear('guideFlag');
+  document.getElementsByClassName('guideChange')[0].classList.add('currentGuide');
+  document.getElementsByClassName('guideChange')[1].classList.remove('currentGuide');
+}
+function guideOff() {
+  document.getElementById('guideMessage').style.display = 'none';
+  localStorage.setItem('guideFlag', 'none');
+  document.getElementsByClassName('guideChange')[1].classList.add('currentGuide');
+  document.getElementsByClassName('guideChange')[0].classList.remove('currentGuide');
+}
+//モンスター1体目のセレクトタグをセット、ロード時にのみ呼び出される
+function setMonster1Select() {
+  let target = document.getElementById('monster1');
+  while (target.firstChild) {
+    target.removeChild(target.firstChild);
+  }
+  let blankOption = document.createElement('option');
+  target.appendChild(blankOption);
+  monsterData.forEach(currentMonsterData => {
+    let newOption = document.createElement('option');
+    newOption.value = currentMonsterData.value;
+    newOption.text = currentMonsterData.text;
+    target.appendChild(newOption);
+  });
+}
+//モンスター2体目のセレクトタグをセット、モンスター1体目変更時にも呼び出される、mode1→モンスター1がunit1の場合、mode2→それ以外の場合
+function setMonster2Select(mode) {
+  let target = document.getElementById('monster2');
+  while (target.firstChild) {
+    target.removeChild(target.firstChild);
+  }
+  if (mode === 1) {
+    selectValue.monster2 = '';
+    document.getElementsByClassName('monster2')[0].classList.add('visibility');
+    //mapsのモンスター{2}の名前visibility設定
+    for (i=0; i<document.getElementsByClassName('areaMonster2Name').length; i++) {
+      document.getElementsByClassName('areaMonster2Name')[i].classList.add('visibility');
+    }
+  } else if (mode === 2) {
+    let blankOption = document.createElement('option');
+    target.appendChild(blankOption);  
+    monsterData.forEach(currentMonsterData => {
+      if (currentMonsterData.unit === '2') {
+        let newOption = document.createElement('option');
+        newOption.value = currentMonsterData.value;
+        newOption.text = currentMonsterData.text;
+        target.appendChild(newOption);
+      }
+    });
+    document.getElementsByClassName('monster2')[0].classList.remove('visibility');
+  }
+}
+//モンスターに応じた出土を設定
+function setArtifactSelect(T) {
+  let weapon = document.getElementById('weapon');
+  let armor = document.getElementById('armor');
+  if (T === undefined) {
+    for (i=1; i<weapon.childElementCount; i++) {
+      weapon.children[i].textContent = artifactData.get('T0').weapon[i-1];
+    }
+    for (i=1; i<armor.childElementCount; i++) {
+      armor.children[i].textContent = artifactData.get('T0').armor[i-1];
+    }
+  } else {
+    for (i=1; i<weapon.childElementCount; i++) {
+      weapon.children[i].textContent = artifactData.get(T).weapon[i-1];
+    }
+    for (i=1; i<armor.childElementCount; i++) {
+      armor.children[i].textContent = artifactData.get(T).armor[i-1];
+    }
+  }
+}
+//初期レベルを自動設定
+function setLevel() {
+  let cnt = 0;
+  if (selectValue.monster1 !== '') cnt += 1;
+  if (selectValue.monster2 !== '') cnt += 1;
+  let viewLevel = document.getElementById('level');
+  if (cnt === 0) {
+    viewLevel.value = '';
+    selectValue.level = '';
+  } else {
+    let result = 0;
+    let m1ID = '';
+    let m2ID = '';
+    if (selectValue.monster1 !== '') m1ID = monsterData.get(selectValue.monster1).value;
+    if (selectValue.monster2 !== '') m2ID = monsterData.get(selectValue.monster2).value;
+    if (cnt === 2) {
+      if (m1ID === '63' && m2ID === '64') result = 99;
+      else if (m1ID === '64' && m2ID === '63') result = 99;
+      else if (m1ID === '10' && m2ID === '26') result = 92;
+      else if (m1ID === '26' && m2ID === '10') result = 92;
+      else if (m1ID === '10' && m2ID === '27') result = 92;
+      else if (m1ID === '27' && m2ID === '10') result = 92;
+      else if (m1ID === '26' && m2ID === '2C') result = 97;
+      else if (m1ID === '2C' && m2ID === '26') result = 97;
+      else if (m1ID === '27' && m2ID === '2C') result = 97;
+      else if (m1ID === '2C' && m2ID === '27') result = 97;
+      else if (m1ID === '13' && m2ID === '13') result = 119;
+    }
+    if (result === 0) {
+      let m1 = 0;
+      let m2 = 0;
+      if (selectValue.monster1 !== '') m1 = parseInt(monsterData.get(selectValue.monster1).level);
+      if (selectValue.monster2 !== '') m2 = parseInt(monsterData.get(selectValue.monster2).level);
+      result = Math.floor((m1 + m2) / cnt);
+    }
+    viewLevel.value = result.toString(10);
+    selectValue.level = result.toString(16).toUpperCase();
+  }
+}
+//エリア1~5のエリア名セレクトタグをセット、ロード時のみ呼び出される
+function setAreaTypeSelect() {
+  let areaTypeSelect = new Array();
+  areaTypeSelect.push(...document.getElementsByClassName('areaType'));
+  areaTypeSelect.forEach(currentAreaTypeSelect => {
+    areaNameData.forEach(currentAreaNameData => {
+      let newOption = document.createElement('option');
+      newOption.value = currentAreaNameData.value;
+      newOption.text = currentAreaNameData.text;
+      currentAreaTypeSelect.appendChild(newOption);
+    });
+  });
+}
+//引数に何エリア目かを取り、optionタグを一度削除、エリアの種類と形に合わせて⓪~③をセットする
+function setAreaMonster1Option(areaNum) {
+  //モンスター1体目の位置⓪~③と初期休眠食事のareaNum番目を変数に格納
+  let areaMonster1 = document.getElementsByClassName('areaMonster1')[areaNum];
+  let setMonster1 = document.getElementsByClassName('setMonster1')[areaNum];
+  //対象のエリアが天井、水晶、砂漠の場合は位置セレクトを可視化せずに値だけセットして、初期休眠食事だけを可視化して、return
+  if (selectValue.areaType[areaNum] === '07' || selectValue.areaType[areaNum] === '0B' || selectValue.areaType[areaNum] === '0C') {
+    selectValue.areaMonster1[areaNum] = '01';
+    setMonster1.classList.remove('visibility');
+    return;
+  }
+  //可視化
+  areaMonster1.classList.remove('visibility');
+  setMonster1.classList.remove('visibility');
+  //位置⓪~③のoptionを全て削除する
+  while (areaMonster1.firstChild) {
+    areaMonster1.removeChild(areaMonster1.firstChild);
+  }
+  //位置⓪~③のセレクトタグに空optionを追加する
+  let blankOption = document.createElement('option');
+  areaMonster1.appendChild(blankOption);
+  //エリアの種類と形に合わせて、位置⓪~③のoptionをセットする
+  switch (selectValue.areaType[areaNum]) {
+    //傾斜、蔦の場合
+    case '02':
+    case '06':
+      //出入り口で1か2を使用していると⓪が追加される
+      if (selectValue.areaIn[areaNum] === '01' || selectValue.areaOut[areaNum] === '01' || selectValue.areaIn[areaNum] === '02' || selectValue.areaOut[areaNum] === '02') {
+        let newOption = document.createElement('option');
+        newOption.text = '⓪';
+        newOption.value = '00';
+        areaMonster1.appendChild(newOption);
+      }
+      //①は必ず追加される
+      if (true) {
+        let newOption = document.createElement('option');
+        newOption.text = '①';
+        newOption.value = '01';
+        areaMonster1.appendChild(newOption);
+      }
+      //出入り口で5か6を使用していると②が追加される
+      if (selectValue.areaIn[areaNum] === '05' || selectValue.areaOut[areaNum] === '05' || selectValue.areaIn[areaNum] === '06' || selectValue.areaOut[areaNum] === '06') {
+        let newOption = document.createElement('option');
+        newOption.text = '②';
+        newOption.value = '02';
+        areaMonster1.appendChild(newOption);
+      }
+      //出入り口で7か8を使用していると③が追加される
+      if (selectValue.areaIn[areaNum] === '07' || selectValue.areaOut[areaNum] === '07' || selectValue.areaIn[areaNum] === '08' || selectValue.areaOut[areaNum] === '08') {
+        let newOption = document.createElement('option');
+        newOption.text = '③';
+        newOption.value = '03';
+        areaMonster1.appendChild(newOption);
+      }
+      break;
+    //崖の場合
+    case '03':
+      //崖の出入り口で1か2を使用していると⓪が追加される
+      if (selectValue.areaIn[areaNum] === '01' || selectValue.areaOut[areaNum] === '01' || selectValue.areaIn[areaNum] === '02' || selectValue.areaOut[areaNum] === '02') {
+        let newOption = document.createElement('option');
+        newOption.text = '⓪';
+        newOption.value = '00';
+        areaMonster1.appendChild(newOption);
+      }
+      //①は必ず追加される
+      if (true) {
+        let newOption = document.createElement('option');
+        newOption.text = '①';
+        newOption.value = '01';
+        areaMonster1.appendChild(newOption);
+      }
+      //崖の出入り口で5か6を使用していると②が追加される
+      if (selectValue.areaIn[areaNum] === '05' || selectValue.areaOut[areaNum] === '05' || selectValue.areaIn[areaNum] === '06' || selectValue.areaOut[areaNum] === '06') {
+        let newOption = document.createElement('option');
+        newOption.text = '②';
+        newOption.value = '02';
+        areaMonster1.appendChild(newOption);
+      }
+      break;
+    //水の場合
+    case '04':
+      //⓪①②は必ず追加される
+      if (true) {
+        let newOption0 = document.createElement('option');
+        let newOption1 = document.createElement('option');
+        let newOption2 = document.createElement('option');
+        newOption0.text = '⓪';
+        newOption1.text = '①';
+        newOption2.text = '②';
+        newOption0.value = '00';
+        newOption1.value = '01';
+        newOption2.value = '02';
+        areaMonster1.appendChild(newOption0);
+        areaMonster1.appendChild(newOption1);
+        areaMonster1.appendChild(newOption2);
+      }
+      //水の出入り口で7か8を使用していると③が追加される
+      if (selectValue.areaIn[areaNum] === '07' || selectValue.areaOut[areaNum] === '07' || selectValue.areaIn[areaNum] === '08' || selectValue.areaOut[areaNum] === '08') {
+        let newOption = document.createElement('option');
+        newOption.text = '③';
+        newOption.value = '03';
+        areaMonster1.appendChild(newOption);
+      }
+      break;
+  }
+}
+function setAreaMonster2Option(areaNum) {
+  //モンスター1体目の位置⓪~③と初期休眠食事のareaNum番目を変数に格納
+  let areaMonster2 = document.getElementsByClassName('areaMonster2')[areaNum];
+  let setMonster2 = document.getElementsByClassName('setMonster2')[areaNum];
+  //対象のエリアが天井、水晶、砂漠の場合は位置セレクトを可視化せずに値だけセットして、初期休眠食事だけを可視化して、return
+  if (selectValue.areaType[areaNum] === '07' || selectValue.areaType[areaNum] === '0B' || selectValue.areaType[areaNum] === '0C') {
+    selectValue.areaMonster2[areaNum] = '01';
+    setMonster2.classList.remove('visibility');
+    return;
+  }
+  //可視化
+  areaMonster2.classList.remove('visibility');
+  setMonster2.classList.remove('visibility');
+  //位置⓪~③のoptionを全て削除する
+  while (areaMonster2.firstChild) {
+    areaMonster2.removeChild(areaMonster2.firstChild);
+  }
+  //位置⓪~③のセレクトタグに空optionを追加する
+  let blankOption = document.createElement('option');
+  areaMonster2.appendChild(blankOption);
+  //エリアの種類と形に合わせて、位置⓪~③のoptionをセットする
+  switch (selectValue.areaType[areaNum]) {
+    //傾斜、蔦の場合
+    case '02':
+    case '06':
+      //出入り口で1か2を使用していると⓪が追加される
+      if (selectValue.areaIn[areaNum] === '01' || selectValue.areaOut[areaNum] === '01' || selectValue.areaIn[areaNum] === '02' || selectValue.areaOut[areaNum] === '02') {
+        let newOption = document.createElement('option');
+        newOption.text = '⓪';
+        newOption.value = '00';
+        areaMonster2.appendChild(newOption);
+      }
+      //①は必ず追加される
+      if (true) {
+        let newOption = document.createElement('option');
+        newOption.text = '①';
+        newOption.value = '01';
+        areaMonster2.appendChild(newOption);
+      }
+      //出入り口で5か6を使用していると②が追加される
+      if (selectValue.areaIn[areaNum] === '05' || selectValue.areaOut[areaNum] === '05' || selectValue.areaIn[areaNum] === '06' || selectValue.areaOut[areaNum] === '06') {
+        let newOption = document.createElement('option');
+        newOption.text = '②';
+        newOption.value = '02';
+        areaMonster2.appendChild(newOption);
+      }
+      //出入り口で7か8を使用していると③が追加される
+      if (selectValue.areaIn[areaNum] === '07' || selectValue.areaOut[areaNum] === '07' || selectValue.areaIn[areaNum] === '08' || selectValue.areaOut[areaNum] === '08') {
+        let newOption = document.createElement('option');
+        newOption.text = '③';
+        newOption.value = '03';
+        areaMonster2.appendChild(newOption);
+      }
+      break;
+    //崖の場合
+    case '03':
+      //崖の出入り口で1か2を使用していると⓪が追加される
+      if (selectValue.areaIn[areaNum] === '01' || selectValue.areaOut[areaNum] === '01' || selectValue.areaIn[areaNum] === '02' || selectValue.areaOut[areaNum] === '02') {
+        let newOption = document.createElement('option');
+        newOption.text = '⓪';
+        newOption.value = '00';
+        areaMonster2.appendChild(newOption);
+      }
+      //①は必ず追加される
+      if (true) {
+        let newOption = document.createElement('option');
+        newOption.text = '①';
+        newOption.value = '01';
+        areaMonster2.appendChild(newOption);
+      }
+      //崖の出入り口で5か6を使用していると②が追加される
+      if (selectValue.areaIn[areaNum] === '05' || selectValue.areaOut[areaNum] === '05' || selectValue.areaIn[areaNum] === '06' || selectValue.areaOut[areaNum] === '06') {
+        let newOption = document.createElement('option');
+        newOption.text = '②';
+        newOption.value = '02';
+        areaMonster2.appendChild(newOption);
+      }
+      break;
+    //水の場合
+    case '04':
+      //⓪①②は必ず追加される
+      if (true) {
+        let newOption0 = document.createElement('option');
+        let newOption1 = document.createElement('option');
+        let newOption2 = document.createElement('option');
+        newOption0.text = '⓪';
+        newOption1.text = '①';
+        newOption2.text = '②';
+        newOption0.value = '00';
+        newOption1.value = '01';
+        newOption2.value = '02';
+        areaMonster2.appendChild(newOption0);
+        areaMonster2.appendChild(newOption1);
+        areaMonster2.appendChild(newOption2);
+      }
+      //水の出入り口で7か8を使用していると③が追加される
+      if (selectValue.areaIn[areaNum] === '07' || selectValue.areaOut[areaNum] === '07' || selectValue.areaIn[areaNum] === '08' || selectValue.areaOut[areaNum] === '08') {
+        let newOption = document.createElement('option');
+        newOption.text = '③';
+        newOption.value = '03';
+        areaMonster2.appendChild(newOption);
+      }
+      break;
+  }
+}
+//テンプレ
+function setAreaMonsterTemplate(areaNum) {
+  const m1 = selectValue.monster1;
+  const m2 = selectValue.monster2;
+  const area = selectValue.areaType[areaNum];     //選択中のエリアIDが入る
+  const flg = selectValue.areaFlag[areaNum];      //エリアの形が決まっていたらtrue、決まってなければfalseが入る
+  //visibilityを変化させるクラス
+  const areaM1 = document.getElementsByClassName('areaMonster1')[areaNum];
+  const areaM2 = document.getElementsByClassName('areaMonster2')[areaNum];
+  const setM1 = document.getElementsByClassName('setMonster1')[areaNum];
+  const setM2 = document.getElementsByClassName('setMonster2')[areaNum];
+  //pink
+  const iniM1 = document.getElementsByClassName('iniM1')[areaNum];
+  const sleepM1 = document.getElementsByClassName('sleepM1')[areaNum];
+  const mealM1 = document.getElementsByClassName('mealM1')[areaNum];
+  //blue
+  const iniM2 = document.getElementsByClassName('iniM2')[areaNum];
+  const sleepM2 = document.getElementsByClassName('sleepM2')[areaNum];
+  const mealM2 = document.getElementsByClassName('mealM2')[areaNum];
+  if (m1 !== '' && area !== '') {
+    const data = monsterData.get(m1).choseableArea; //移動可能エリアIDが配列で入る
+    //移動可能かを判別
+    for (PPP=0; PPP<data.length; PPP++) {
+      if (area === data[PPP]) {   //移動可能なら初期休眠食事を表示する
+        setM1.classList.remove('visibility');
+        break;
+      }
+      if (PPP === data.length-1) setM1.classList.add('visibility');
+    }
+    //エリアの形が決まっている
+    if (flg === true) {
+      if (setM1.classList.contains('visibility') === false) {  //移動も可能なら
+        setAreaMonster1Option(areaNum);
+      } else {  //エリアの形は決まっているが移動は不可
+        areaM1.classList.add('visibility');
+        setM1.classList.add('visibility');
+        selectValue.areaMonster1[areaNum] = '00';
+        selectValue.areaIniM1[areaNum] = '00';
+        selectValue.areaSleepM1[areaNum] = '00';
+        selectValue.areaMealM1[areaNum] = '00';
+        iniM1.classList.remove('pink');
+        sleepM1.classList.remove('pink');
+        mealM1.classList.remove('pink');
+        if (areaNum === selectValue.areaIniM1) selectValue.areaIniM1 = '';
+        if (areaNum === selectValue.areaSleepM1) selectValue.areaSleepM1 = '';
+        if (areaNum === selectValue.areaMealM1) selectValue.areaMealM1 = '';
+      }
+    } else {  //エリアの形が決まっていない
+      if (setM1.classList.contains('visibility') === false) {  //移動は可能なら
+        areaM1.classList.add('visibility');
+        selectValue.areaMonster1[areaNum] = '';
+      } else {  //エリアの形が決まっておらず移動も不可の場合
+        areaM1.classList.add('visibility');
+        setM1.classList.add('visibility');
+        selectValue.areaMonster1[areaNum] = '';
+        selectValue.areaIniM1[areaNum] = '';
+        selectValue.areaSleepM1[areaNum] = '';
+        selectValue.areaMealM1[areaNum] = '';
+        iniM1.classList.remove('pink');
+        sleepM1.classList.remove('pink');
+        mealM1.classList.remove('pink');
+        if (areaNum === selectValue.areaIniM1) selectValue.areaIniM1 = '';
+        if (areaNum === selectValue.areaSleepM1) selectValue.areaSleepM1 = '';
+        if (areaNum === selectValue.areaMealM1) selectValue.areaMealM1 = '';         
       }
     }
-}
-Author.onchange=function(){
-    AuthorChange();
-    removeOutput();
-}
-function convertASCIItoHex(asciiVal) {
-    let asciiCode = asciiVal.charCodeAt(0);
-    let hexValue = asciiCode.toString(16).toUpperCase();
-    // console.log("コンソールログ : 0x" + hexValue);
-    return hexValue;
-}
-
-//乱数生成用
-function getRandom( min, max ) {
-    let random = Math.floor( Math.random() * (max + 1 - min) ) + min;
-  
-    return random;
-}
-//クエスト識別 ID
-let questID1;
-let questID2;
-function generationID(){
-    
-    questID1 = getRandom( 0, 4294967295);
-    questID2 = getRandom( 0, 4294967295);
-
-    function transID(ID){
-        let reID = ID.toString(16).toUpperCase();
-        if(reID.length < 8){
-            while(reID.length != 8){
-                reID = "0" + reID;
-            }
-        }
-        return reID;
+  } else {  //m1かエリアが選択されていない場合
+    areaM1.classList.add('visibility');
+    setM1.classList.add('visibility');
+    selectValue.areaMonster1[areaNum] = '';
+    selectValue.areaIniM1[areaNum] = '';
+    selectValue.areaSleepM1[areaNum] = '';
+    selectValue.areaMealM1[areaNum] = '';
+    iniM1.classList.remove('pink');
+    sleepM1.classList.remove('pink');
+    mealM1.classList.remove('pink');
+    if (areaNum === selectValue.areaIniM1) selectValue.areaIniM1 = '';
+    if (areaNum === selectValue.areaSleepM1) selectValue.areaSleepM1 = '';
+    if (areaNum === selectValue.areaMealM1) selectValue.areaMealM1 = '';
+  }
+  if (m2 !== '' && area !== '') {
+    const data = monsterData.get(m2).choseableArea; //移動可能エリアIDが配列で入る
+    //移動可能かを判別
+    for (PPP=0; PPP<data.length; PPP++) {
+      if (area === data[PPP]) {   //移動可能なら初期休眠食事を表示する
+        setM2.classList.remove('visibility');
+        break;
+      }
+      if (PPP === data.length-1) setM2.classList.add('visibility');
     }
+    //エリアの形が決まっている
+    if (flg === true) {
+      if (setM2.classList.contains('visibility') === false) {  //移動も可能なら
+        setAreaMonster2Option(areaNum);
+      } else {  //エリアの形は決まっているが移動は不可
+        areaM2.classList.add('visibility');
+        setM2.classList.add('visibility');
+        selectValue.areaMonster2[areaNum] = '00';
+        selectValue.areaIniM2[areaNum] = '00';
+        selectValue.areaSleepM2[areaNum] = '00';
+        selectValue.areaMealM2[areaNum] = '00';
+        iniM2.classList.remove('pink');
+        sleepM2.classList.remove('pink');
+        mealM2.classList.remove('pink');
+        if (areaNum === selectValue.areaIniM2) selectValue.areaIniM2 = '';
+        if (areaNum === selectValue.areaSleepM2) selectValue.areaSleepM2 = '';
+        if (areaNum === selectValue.areaMealM2) selectValue.areaMealM2 = '';
+      }
+    } else {  //エリアの形が決まっていない
+      if (setM2.classList.contains('visibility') === false) {  //移動は可能なら
+        areaM2.classList.add('visibility');
+        selectValue.areaMonster2[areaNum] = '';
+      } else {  //エリアの形が決まっておらず移動も不可の場合
+        areaM2.classList.add('visibility');
+        setM2.classList.add('visibility');
+        selectValue.areaMonster2[areaNum] = '';
+        selectValue.areaIniM2[areaNum] = '';
+        selectValue.areaSleepM2[areaNum] = '';
+        selectValue.areaMealM2[areaNum] = '';
+        iniM2.classList.remove('pink');
+        sleepM2.classList.remove('pink');
+        mealM2.classList.remove('pink');
+        if (areaNum === selectValue.areaIniM2) selectValue.areaIniM2 = '';
+        if (areaNum === selectValue.areaSleepM2) selectValue.areaSleepM2 = '';
+        if (areaNum === selectValue.areaMealM2) selectValue.areaMealM2 = '';         
+      }
+    }
+  } else {  //m2かエリアが選択されていない場合
+    areaM2.classList.add('visibility');
+    setM2.classList.add('visibility');
+    selectValue.areaMonster2[areaNum] = '';
+    selectValue.areaIniM2[areaNum] = '';
+    selectValue.areaSleepM2[areaNum] = '';
+    selectValue.areaMealM2[areaNum] = '';
+    iniM2.classList.remove('pink');
+    sleepM2.classList.remove('pink');
+    mealM2.classList.remove('pink');
+    if (areaNum === selectValue.areaIniM2) selectValue.areaIniM2 = '';
+    if (areaNum === selectValue.areaSleepM2) selectValue.areaSleepM2 = '';
+    if (areaNum === selectValue.areaMealM2) selectValue.areaMealM2 = '';
+  }
+}
+//モンスター位置⓪~③セレクトタグをセットする関数を呼ぶ為の形づくり、モンスターとエリアの形が変わった時に呼び出す
+function setAreaMonster(areaNum) {
+  if (areaNum === undefined) {  //モンスター変更時
+    for (JJJ=0; JJJ<document.getElementsByClassName('areaType').length; JJJ++) {
+      setAreaMonsterTemplate(JJJ);
+    }
+  } else {  //エリア関連変更時
+    setAreaMonsterTemplate(areaNum);
+  }
+}
+//全ての入力変更時に呼び出し、下のクエスト情報とコードをクリアする
+function clear() {
+  document.getElementsByClassName('resultButton')[0].classList.add('none');
+  document.getElementsByClassName('resultText')[0].classList.add('none');
+  document.getElementsByClassName('result')[0].innerHTML = '';
+  document.getElementsByClassName('result')[1].innerHTML = '';
+}
+//m1変更時
+function changeM1(value) {
+  //モンスター2体目を使用可能かどうか判別し反映する処理
+  let previousUnit = '';
+  if (selectValue.monster1 !== '') {
+    previousUnit = monsterData.get(selectValue.monster1).unit;
+  }
+  let currentUnit = '';
+  if (value !== '') {
+    currentUnit = monsterData.get(value).unit;
+  } else {
+    selectValue.areaIniM1 = '';
+    selectValue.areaSleepM1 = '';
+    selectValue.areaMealM1 = '';
+  }
+  if (previousUnit !== currentUnit) {
+    if (previousUnit === '' && currentUnit === '1') {
+      setMonster2Select(1);
+    } else if (previousUnit === '1' && currentUnit === '') {
+      setMonster2Select(2);
+    } else if (previousUnit === '1' && currentUnit === '2') {
+      setMonster2Select(2);
+    } else if (previousUnit === '2' && currentUnit === '1') {
+      setMonster2Select(1);
+    }
+  }
+  selectValue.monster1 = value;
+  //モンスターに応じた出土を設定
+  if (value === '') {
+    setArtifactSelect();
+    //mapsのモンスター名visibility設定
+    for (i=0; i<document.getElementsByClassName('areaMonster1Name').length; i++) {
+      document.getElementsByClassName('areaMonster1Name')[i].classList.add('visibility');
+    }
+  } else {
+    setArtifactSelect(monsterData.get(value).artifact);
+    //mapsのモンスター名visibility解除
+    for (i=0; i<document.getElementsByClassName('areaMonster1Name').length; i++) {
+      document.getElementsByClassName('areaMonster1Name')[i].classList.remove('visibility');
+    }
+  }
+  //①~③と初期休眠食事の可視不可視（引数なし）
+  setAreaMonster();
+}
+//m2変更時
+function changeM2(value) {
+  selectValue.monster2 = value;
+  if (value === '') {
+    //mapsのモンスター名visibility設定
+    for (i=0; i<document.getElementsByClassName('areaMonster2Name').length; i++) {
+      document.getElementsByClassName('areaMonster2Name')[i].classList.add('visibility');
+    }
+    selectValue.areaIniM2 = '';
+    selectValue.areaSleepM2 = '';
+    selectValue.areaMealM2 = '';
+  } else {
+    //mapsのモンスター名visibility解除
+    for (i=0; i<document.getElementsByClassName('areaMonster2Name').length; i++) {
+      document.getElementsByClassName('areaMonster2Name')[i].classList.remove('visibility');
+    }
+  }
+  //①~③と初期休眠食事の可視不可視（引数なし）
+  setAreaMonster();
+}
+//エリアタイプ変更
+function areaType(areaSelect) {
+  //1回InOutのoptionを全て削除し、空のoptionをセットする
+  while (areaSelect.nextElementSibling.firstChild) {
+    areaSelect.nextElementSibling.removeChild(areaSelect.nextElementSibling.firstChild);
+  }
+  while (areaSelect.nextElementSibling.nextElementSibling.firstChild) {
+    areaSelect.nextElementSibling.nextElementSibling.removeChild(areaSelect.nextElementSibling.nextElementSibling.firstChild);
+  }
+  let blankOption1 = document.createElement('option');
+  areaSelect.nextElementSibling.appendChild(blankOption1);
+  let blankOption2 = document.createElement('option');
+  areaSelect.nextElementSibling.nextElementSibling.appendChild(blankOption2);
+  //変更があったクラス番号を取得し、InOutのselectValueを削除する
+  let doc = document.getElementsByClassName('areaType');
+  doc = [].slice.call(doc);
+  let idx = doc.indexOf(areaSelect);
+  selectValue.areaIn[idx] = '';
+  selectValue.areaOut[idx] = '';
+  //エリアタイプが空以外の時はエリアInOutのオプションをセットする
+  if (areaSelect.value !== '') {
+    areaNameData.get(areaSelect.value).chooseable.forEach(currentChooseAble => {
+      let newOption1 = document.createElement('option');
+      newOption1.value = '0' + currentChooseAble;
+      newOption1.text = currentChooseAble;
+      let newOption2 = document.createElement('option');
+      newOption2.value = '0' + currentChooseAble;
+      newOption2.text = currentChooseAble;
+      areaSelect.nextElementSibling.appendChild(newOption1);
+      areaSelect.nextElementSibling.nextElementSibling.appendChild(newOption2);
+    });
+    //areaInOutを可視化する
+    document.getElementsByClassName('areaIn')[idx].classList.remove('visibility');
+    document.getElementsByClassName('areaOut')[idx].classList.remove('visibility');
+  } else {
+    //areaInOutを不可視化する
+    document.getElementsByClassName('areaIn')[idx].classList.add('visibility');
+    document.getElementsByClassName('areaOut')[idx].classList.add('visibility');
+    //selectValueの初期化
+    selectValue.areaMonster1[idx] = '';
+    selectValue.areaMonster2[idx] = '';
+  }
+  //selectValueにエリアタイプを書き込む
+  selectValue.areaType[idx] = areaSelect.value;
+  //エリアInOutでマップ形状が不正だった場合のセレクトボックス赤背景を削除する
+  document.getElementsByClassName('areaIn')[idx].classList.remove('areaError');
+  document.getElementsByClassName('areaOut')[idx].classList.remove('areaError');
+  //エリアの形が決まっていない状態表示に戻す
+  selectValue.areaFlag[idx] = false;
+  //⓪~③セット
+  setAreaMonster(idx);
+}
+//In変更
+function changeIn(inSelect) {
+  let doc = document.getElementsByClassName('areaIn');
+  doc = [].slice.call(doc);
+  let idx = doc.indexOf(inSelect);
+  selectValue.areaIn[idx] = inSelect.value;
+  //マップの形状が不正だった場合の処理
+  let a = inSelect.value;
+  let b = document.getElementsByClassName('areaOut')[idx].value;
+  if ((a!=='') && a===b || a==='01'&&b==='02' || a==='02'&&b==='01' || a==='03'&&b==='04' || a==='04'&&b==='03' || a==='05'&&b==='06' || a==='06'&&b==='05' || a==='07'&&b==='08' || a==='08'&&b==='07') {
+    document.getElementsByClassName('areaIn')[idx].classList.add('areaError');
+    document.getElementsByClassName('areaOut')[idx].classList.add('areaError');
+    selectValue.areaFlag[idx] = false;
+  } else {
+    document.getElementsByClassName('areaIn')[idx].classList.remove('areaError');
+    document.getElementsByClassName('areaOut')[idx].classList.remove('areaError');
+    if (a !== '' && b !== '') selectValue.areaFlag[idx] = true;
+    else selectValue.areaFlag[idx] = false;
+  }
+  //①~③と初期休眠食事の可視不可視
+  setAreaMonster(idx);
+}
+//Out変更
+function changeOut(outSelect) {
+  let doc = document.getElementsByClassName('areaOut');
+  doc = [].slice.call(doc);
+  let idx = doc.indexOf(outSelect);
+  selectValue.areaOut[idx] = outSelect.value;
+  //マップの形状が不正だった場合の処理
+  let a = outSelect.value;
+  let b = document.getElementsByClassName('areaIn')[idx].value;
+  if ((a!=='') && a===b || a==='01'&&b==='02' || a==='02'&&b==='01' || a==='03'&&b==='04' || a==='04'&&b==='03' || a==='05'&&b==='06' || a==='06'&&b==='05' || a==='07'&&b==='08' || a==='08'&&b==='07') {
+    document.getElementsByClassName('areaIn')[idx].classList.add('areaError');
+    document.getElementsByClassName('areaOut')[idx].classList.add('areaError');
+    selectValue.areaFlag[idx] = false;
+  } else {
+    document.getElementsByClassName('areaIn')[idx].classList.remove('areaError');
+    document.getElementsByClassName('areaOut')[idx].classList.remove('areaError');
+    if (a !== '' && b !== '') selectValue.areaFlag[idx] = true;
+    else selectValue.areaFlag[idx] = false;
+  }
+  //①~③と初期休眠食事の可視不可視
+  setAreaMonster(idx);
+}
 
-    questID1 = transID(questID1);
-    questID2 = transID(questID2);
+//モンスター1体目変更時
+document.getElementById('monster1').onchange = function() {
+  clear();
+  //M2使用可能か、出土設定、可視不可視設定
+  changeM1(this.value);
+  //初期レベル自動設定
+  setLevel();
+}
+//モンスター2体目変更時
+document.getElementById('monster2').onchange = function() {
+  clear();
+  changeM2(this.value);
+  setLevel();
+}
+//出土武器変更時
+document.getElementById('weapon').onchange = function() {
+  clear();
+  selectValue.weapon = this.value;
+}
+//出土防具変更時
+document.getElementById('armor').onchange = function() {
+  clear();
+  selectValue.armor = this.value;
+}
+//出土防具タイプ（部位）変更時
+document.getElementById('armorType').onchange = function() {
+  clear();
+  selectValue.armorType = this.value;
+}
+//初期レベル変更時
+document.getElementById('level').onchange = function() {
+  clear();
+  let hex = this.value;
+  hex = parseInt(hex).toString(16).toUpperCase();
+  selectValue.level = hex;
+}
+//エリア1~5のエリアタイプ変更時
+for (i=0; i<document.getElementsByClassName('areaType').length; i++) {
+  document.getElementsByClassName('areaType')[i].addEventListener('change', (e) => {
+    clear();
+    areaType(e.target);
+  });
+}
+//エリア1~5のIn変更時
+for (i=0; i<document.getElementsByClassName('areaIn').length; i++) {
+  document.getElementsByClassName('areaIn')[i].addEventListener('change', (e) => {
+    clear();
+    changeIn(e.target);
+  });
+}
+//エリア1~5のOut変更時
+for (i=0; i<document.getElementsByClassName('areaOut').length; i++) {
+  document.getElementsByClassName('areaOut')[i].addEventListener('change', (e) => {
+    clear();
+    changeOut(e.target);
+  });
+}
+//エリア1~5の位置⓪~③変更時
+for (i=0; i<document.getElementsByClassName('areaMonster1').length; i++) {
+  document.getElementsByClassName('areaMonster1')[i].addEventListener('change', (e) => {
+    clear();
+    let doc = document.getElementsByClassName('areaMonster1');
+    doc = [].slice.call(doc);
+    let idx = doc.indexOf(e.target);
+    selectValue.areaMonster1[idx] = e.target.value;
+  });
+}
+for (i=0; i<document.getElementsByClassName('areaMonster2').length; i++) {
+  document.getElementsByClassName('areaMonster2')[i].addEventListener('change', (e) => {
+    clear();
+    let doc = document.getElementsByClassName('areaMonster2');
+    doc = [].slice.call(doc);
+    let idx = doc.indexOf(e.target);
+    selectValue.areaMonster2[idx] = e.target.value;
+  });
+}
+//初期休眠食事をクリック時の挙動
+for (i=0; i<document.getElementsByClassName('iniM1').length; i++) {
+  document.getElementsByClassName('iniM1')[i].addEventListener('click', (e) => {
+    clear();
+    let doc = document.getElementsByClassName('iniM1');
+    doc = [].slice.call(doc);
+    let idx = doc.indexOf(e.target);
+    if (selectValue.areaIniM1 === '0' + (idx + 1)) {
+      selectValue.areaIniM1 = '';
+      document.getElementsByClassName('iniM1')[idx].classList.remove('pink');
+    } else {
+      selectValue.areaIniM1 = '0' + (idx + 1);
+      document.getElementsByClassName('iniM1')[idx].classList.add('pink');
+      for (i=0; i<doc.length; i++) if (i !== idx) doc[i].classList.remove('pink');
+    }
+  });
+}
+for (i=0; i<document.getElementsByClassName('sleepM1').length; i++) {
+  document.getElementsByClassName('sleepM1')[i].addEventListener('click', (e) => {
+    clear();
+    let doc = document.getElementsByClassName('sleepM1');
+    doc = [].slice.call(doc);
+    let idx = doc.indexOf(e.target);
+    if (selectValue.areaSleepM1 === '0' + (idx + 1)) {
+      selectValue.areaSleepM1 = '';
+      document.getElementsByClassName('sleepM1')[idx].classList.remove('pink');
+    } else {
+      selectValue.areaSleepM1 = '0' + (idx + 1);
+      document.getElementsByClassName('sleepM1')[idx].classList.add('pink');
+      for (i=0; i<doc.length; i++) if (i !== idx) doc[i].classList.remove('pink');
+      if (document.getElementsByClassName('mealM1')[idx].classList.contains('pink') === true) {
+        document.getElementsByClassName('mealM1')[idx].classList.remove('pink');
+        selectValue.areaMealM1 = '';
+      }
+    }
+  });
+}
+for (i=0; i<document.getElementsByClassName('mealM1').length; i++) {
+  document.getElementsByClassName('mealM1')[i].addEventListener('click', (e) => {
+    clear();
+    let doc = document.getElementsByClassName('mealM1');
+    doc = [].slice.call(doc);
+    let idx = doc.indexOf(e.target);
+    if (selectValue.areaMealM1 === '0' + (idx + 1)) {
+      selectValue.areaMealM1 = '';
+      document.getElementsByClassName('mealM1')[idx].classList.remove('pink');
+    } else {
+      selectValue.areaMealM1 = '0' + (idx + 1);
+      document.getElementsByClassName('mealM1')[idx].classList.add('pink');
+      for (i=0; i<doc.length; i++) if (i !== idx) doc[i].classList.remove('pink');
+      if (document.getElementsByClassName('sleepM1')[idx].classList.contains('pink') === true) {
+        document.getElementsByClassName('sleepM1')[idx].classList.remove('pink');
+        selectValue.areaSleepM1 = '';
+      }
+    }
+  });
+}
+for (i=0; i<document.getElementsByClassName('iniM2').length; i++) {
+  document.getElementsByClassName('iniM2')[i].addEventListener('click', (e) => {
+    clear();
+    let doc = document.getElementsByClassName('iniM2');
+    doc = [].slice.call(doc);
+    let idx = doc.indexOf(e.target);
+    if (selectValue.areaIniM2 === '0' + (idx + 1)) {
+      selectValue.areaIniM2 = '';
+      document.getElementsByClassName('iniM2')[idx].classList.remove('blue');
+    } else {
+      selectValue.areaIniM2 = '0' + (idx + 1);
+      document.getElementsByClassName('iniM2')[idx].classList.add('blue');
+      for (i=0; i<doc.length; i++) if (i !== idx) doc[i].classList.remove('blue');
+    }
+  });
+}
+for (i=0; i<document.getElementsByClassName('sleepM2').length; i++) {
+  document.getElementsByClassName('sleepM2')[i].addEventListener('click', (e) => {
+    clear();
+    let doc = document.getElementsByClassName('sleepM2');
+    doc = [].slice.call(doc);
+    let idx = doc.indexOf(e.target);
+    if (selectValue.areaSleepM2 === '0' + (idx + 1)) {
+      selectValue.areaSleepM2 = '';
+      document.getElementsByClassName('sleepM2')[idx].classList.remove('blue');
+    } else {
+      selectValue.areaSleepM2 = '0' + (idx + 1);
+      document.getElementsByClassName('sleepM2')[idx].classList.add('blue');
+      for (i=0; i<doc.length; i++) if (i !== idx) doc[i].classList.remove('blue');
+      if (document.getElementsByClassName('mealM2')[idx].classList.contains('blue') === true) {
+        document.getElementsByClassName('mealM2')[idx].classList.remove('blue');
+        selectValue.areaMealM2 = '';
+      }
+    }
+  });
+}
+for (i=0; i<document.getElementsByClassName('mealM2').length; i++) {
+  document.getElementsByClassName('mealM2')[i].addEventListener('click', (e) => {
+    clear();
+    let doc = document.getElementsByClassName('mealM2');
+    doc = [].slice.call(doc);
+    let idx = doc.indexOf(e.target);
+    if (selectValue.areaMealM2 === '0' + (idx + 1)) {
+      selectValue.areaMealM2 = '';
+      document.getElementsByClassName('mealM2')[idx].classList.remove('blue');
+    } else {
+      selectValue.areaMealM2 = '0' + (idx + 1);
+      document.getElementsByClassName('mealM2')[idx].classList.add('blue');
+      for (i=0; i<doc.length; i++) if (i !== idx) doc[i].classList.remove('blue');
+      if (document.getElementsByClassName('sleepM2')[idx].classList.contains('blue') === true) {
+        document.getElementsByClassName('sleepM2')[idx].classList.remove('blue');
+        selectValue.areaSleepM2 = '';
+      }
+    }
+  });
+}
+//クエスト作成者名変更時
+document.getElementById('author').oninput = function() {
+  clear();
+  for (i=0; i<12; i++) {
+    if (this.value[i] === undefined) {
+      selectValue.author[i] = '0000';
+    } else {
+      let tmp = this.value[i].charCodeAt(0).toString(16).toUpperCase();
+      while (tmp.length < 4) {
+        tmp = '0' + tmp;
+      }
+      selectValue.author[i] = tmp;
+    }
+  }
+}
+//識別ID
+document.getElementById('questID').oninput = function() {
+  clear();
+  this.value = this.value.toUpperCase();
+  const len = this.value.length;
+  let newVal = '';
+  for (i=0; i<len; i++) {
+    if (this.value[i].match(/[A-F]|\d/g) !== null) {
+      newVal += this.value[i];
+    }
+  }
+  this.value = newVal;
+  selectValue.questID = this.value;
+}
 
-    $questID.value = questID1 + " " + questID2;
-
+//senaga19ボタン
+function senaga19() {
+  clear();
+  document.getElementById('author').value = '＠senaga19';
+  selectValue.author[0] = 'FF20';
+  selectValue.author[1] = '0073';
+  selectValue.author[2] = '0065';
+  selectValue.author[3] = '006E';
+  selectValue.author[4] = '0061';
+  selectValue.author[5] = '0067';
+  selectValue.author[6] = '0061';
+  selectValue.author[7] = '0031';
+  selectValue.author[8] = '0039';
+  selectValue.author[9] = '0000';
+  selectValue.author[10] = '0000';
+  selectValue.author[11] = '0000';
 }
 //乱数生成ボタン
-const btnID = document.getElementById("$btnID");
-btnID.addEventListener("click", function(){
-    generationID();
-    removeOutput();
-});
-//txtフォームからの変更時
-$questID.onchange = function(){
-    if($questID.value.length != 17){
-        $questID.value = "";
-    }else{
-        questID1 = "";
-        questID2 = "";
+function randomNumber() {
+  clear();
+  let min = 0;
+  let max = 4294967295;
+  let random1 = Math.floor( Math.random() * (max + 1 - min) ) + min;
+  let random2 = Math.floor( Math.random() * (max + 1 - min) ) + min;
+  random1 = random1.toString(16).toUpperCase();
+  random2 = random2.toString(16).toUpperCase();
+  while (random1.length !== 8) {
+    random1 = '0' + random1;
+  }
+  while (random2.length !== 8) {
+    random2 = '0' + random2;
+  }
+  document.getElementById('questID').value = random1 + random2;
+  selectValue.questID = random1 + random2;
+}
+//クエスト情報コピー
+function copyInfo() {
+  copyToClipboard(document.getElementsByClassName('questInfo')[1].textContent, 'クエスト情報をコピーしました\n上のクエスト情報読み込みボタンから復元できます');
+}
+//コードコピー
+function copyCode() {
+  copyToClipboard(document.getElementsByClassName('questCode')[1].textContent, 'チートコードをコピーしました\n依頼の際は左のクエスト情報をコピーして送って下さい');
+}
+//クエスト情報読み込みボタン
+function loadInfo() {
+  pasteFromClipboard();
+}
+//ストレージ保存ボタン
+function saveStorage() {
+  alert('準備中');
+}
+//コード生成ボタン
+function generate() {
+  let errorMessage = new Array('\"このメッセージは未入力箇所があった場合に表示されます\"','\"クエストが不完全の為、コードは生成されませんが、クエスト情報は入力した箇所のみで生成されます\"','\"以下未入力箇所です\"');
+  if (selectValue.monster1 === '') {
+    errorMessage.push('モンスター1体目');
+  }
+  if (selectValue.weapon === '') {
+    errorMessage.push('出土武器');
+  }
+  if (selectValue.armor === '') {
+    errorMessage.push('出土防具');
+  }
+  if (selectValue.armorType === '') {
+    errorMessage.push('防具部位');
+  }
+  if (selectValue.level === '') {
+    errorMessage.push('初期レベル');
+  }
+  for (i=0; i<4; i++) {
+    if (selectValue.areaType[i] === '') {
+      errorMessage.push(`エリア${i+1}の種類`);
+    }
+    if (selectValue.areaIn[i] === '' || selectValue.areaOut[i] === '') {
+      errorMessage.push(`エリア${i+1}の入口出口`);
+    }
+    if (selectValue.areaMonster1[i] === '') {
+      errorMessage.push(`エリア${i+1}のモンスター1位置`);
+    }
+  }
+  if (selectValue.areaIniM1 === '') {
+    errorMessage.push('モンスター1の初期エリア');
+  }
+  if (selectValue.areaSleepM1 === '') {
+    errorMessage.push('モンスター1の休眠エリア');
+  }
+  if (selectValue.areaMealM1 === '') {
+    errorMessage.push('モンスター1の食事エリア');
+  }
+  if (selectValue.questID.length !== 16) {
+    errorMessage.push('クエスト識別ID');
+  }
+  if (selectValue.monster2 !== '') {
+    for (i=0; i<4; i++) {
+      if (selectValue.areaMonster2[i] === '') {
+        errorMessage.push(`エリア${i+1}のモンスター2位置`);
+      }
+    }
+    if (selectValue.areaIniM2 === '') {
+      errorMessage.push('モンスター2の初期エリア');
+    }
+    if (selectValue.areaSleepM2 === '') {
+      errorMessage.push('モンスター2の休眠エリア');
+    }
+    if (selectValue.areaMealM2 === '') {
+      errorMessage.push('モンスター2の食事エリア');
+    }
+  }
+  if (selectValue.areaType[4] !== '') {
+    if (selectValue.areaIn[4] === '' || selectValue.areaOut[4] === '') {
+      errorMessage.push('エリア5の入口出口');
+    }
+    if (selectValue.areaMonster1[4] === '') {
+      errorMessage.push('エリア5のモンスター1位置');
+    }
+    if (selectValue.monster2 !== '' && selectValue.areaMonster2[4] === '') {
+      errorMessage.push('エリア5のモンスター2位置');
+    }
+  }
+  let al = '';
+  errorMessage.forEach(ms => {
+    al += ms + '\n';
+  });
+  if (errorMessage.length === 3 || false) {
+    let end4 = '00';
+    let end5 = '00';
+    let frenzyM1 = monsterData.get(selectValue.monster1).frenzy;
+    let frenzyM2 = '';
+    let areaType4 = selectValue.areaType[4];
+    let areaIn4 = selectValue.areaIn[4];
+    let areaOut4 = selectValue.areaOut[4];
+    let area4M1 = selectValue.areaMonster1[4];
+    let m2 = selectValue.monster2;
+    let area0M2 = selectValue.areaMonster2[0];
+    let area1M2 = selectValue.areaMonster2[1];
+    let area2M2 = selectValue.areaMonster2[2];
+    let area3M2 = selectValue.areaMonster2[3];
+    let area4M2 = selectValue.areaMonster2[4];
+    let areaIniM2 = selectValue.areaIniM2;
+    let areaSleepM2 = selectValue.areaSleepM2;
+    let areaMealM2 = selectValue.areaMealM2;
+    if (selectValue.areaType[4] === '') {
+      end4 = '02';
+      areaType4 = '00';
+      areaIn4 = '01';
+      areaOut4 = '01';
+      area4M1 = '00';
+      area4M2 = '00';
+    } else {
+      end5 = '02';
+    }
+    if (selectValue.monster2 === '') {
+      m2 = '00';
+      area0M2 = '00';
+      area1M2 = '00';
+      area2M2 = '00';
+      area3M2 = '00';
+      area4M2 = '00';
+      areaIniM2 = '00';
+      areaSleepM2 = '00';
+      areaMealM2 = '00';
+      frenzyM2 = '00';
+    } else {
+      frenzyM2 = monsterData.get(selectValue.monster2).frenzy;
+    }
+    let resultCode = document.getElementsByClassName('result')[1];
+    resultCode.innerHTML = `E833E9D0 00000098<br>
+${selectValue.author[1]}${selectValue.author[0]} ${selectValue.author[3]}${selectValue.author[2]}<br>
+${selectValue.author[5]}${selectValue.author[4]} ${selectValue.author[7]}${selectValue.author[6]}<br>
+${selectValue.author[9]}${selectValue.author[8]} ${selectValue.author[11]}${selectValue.author[10]}<br>
+${selectValue.questID[6]}${selectValue.questID[7]}${selectValue.questID[4]}${selectValue.questID[5]}${selectValue.questID[2]}${selectValue.questID[3]}${selectValue.questID[0]}${selectValue.questID[1]} ${selectValue.questID[14]}${selectValue.questID[15]}${selectValue.questID[12]}${selectValue.questID[13]}${selectValue.questID[10]}${selectValue.questID[11]}${selectValue.questID[8]}${selectValue.questID[9]}<br>
+00000000 ${selectValue.armorType}${selectValue.armor}${selectValue.weapon}00<br>
+000000${selectValue.monster1} 00000001<br>
+0007${selectValue.areaIniM1}FF 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+000000${m2} 00000001<br>
+0007${areaIniM2}FF 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+00000000 00000001<br>
+000700FF 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+00000000 00000001<br>
+000700FF 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+00000000 00000001<br>
+000700FF 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+00000000 00000000<br>
+${selectValue.areaMonster1[1]}${selectValue.areaMonster1[0]}${selectValue.areaSleepM1}${selectValue.areaMealM1} ${areaMealM2}${area4M1}${selectValue.areaMonster1[3]}${selectValue.areaMonster1[2]}<br>
+${area2M2}${area1M2}${area0M2}${areaSleepM2} 0000${area4M2}${area3M2}<br>
+00000000 00000000<br>
+00000000 00000000<br>
+00000000 00${selectValue.areaOut[0]}${selectValue.areaIn[0]}${selectValue.areaType[0]}<br>
+00${selectValue.areaOut[1]}${selectValue.areaIn[1]}${selectValue.areaType[1]} ${end4}${selectValue.areaOut[2]}${selectValue.areaIn[2]}${selectValue.areaType[2]}<br>
+${end5}${selectValue.areaOut[3]}${selectValue.areaIn[3]}${selectValue.areaType[3]} 00${areaOut4}${areaIn4}${areaType4}<br>
+${frenzyM1}018C${selectValue.level} 000003${frenzyM2}<br>
+D2000000 00000000<br>
+`;
+  } else {
+    alert(al);
+  }
+  let author = '';
+  for (i=0; i<12; i++) {
+    if (selectValue.author[i] === '0000') {
+      break;
+    } else {
+      let tmp = parseInt(selectValue.author[i], 16);
+      author += String.fromCharCode(tmp);
+    }
+  }
+  let level = '';
+  if (selectValue.level !== '') {
+    level = 'Lv.' + parseInt(selectValue.level, 16);
+  }
+  let weapon = '';
+  if (selectValue.weapon !== '') weapon = artifactData.get('T0').weapon[parseInt(selectValue.weapon)];
+  let armor = '';
+  if (selectValue.armor !== '') armor = artifactData.get('T0').armor[parseInt(selectValue.armor, 16)];
+  let armorType = ''
+  switch (selectValue.armorType) {
+    case '00':
+      armorType = '(胴)';
+      break;
+    case '01':
+      armorType = '(腕)';
+      break;
+    case '02':
+      armorType = '(腰)';
+      break;
+    case '03':
+      armorType = '(脚)';
+      break;
+    case '04':
+      armorType = '(頭)';
+      break;
+  }
+  let m1 = '';
+  let m2 = '';
+  if (selectValue.monster1 !== '') m1 = monsterData.get(selectValue.monster1).text;
+  if (selectValue.monster2 !== '') m2 = monsterData.get(selectValue.monster2).text;
+  let areaType = ['','','','',''];
+  for (i=0; i<5; i++) {
+    if (selectValue.areaType[i] !== '') areaType[i] = areaNameData.get(selectValue.areaType[i]).text.slice(0,1);
+  }
+  let iniM1 = '';
+  let iniM2 = '';
+  let sleepM1 = '';
+  let sleepM2 = '';
+  let mealM1 = '';
+  let mealM2 = '';
+  if (selectValue.areaIniM1 !== '') iniM1 = '初期' + selectValue.areaIniM1.slice(1,2);
+  if (selectValue.areaIniM2 !== '') iniM2 = '初期' + selectValue.areaIniM2.slice(1,2);
+  if (selectValue.areaSleepM1 !== '') sleepM1 = ',休眠' + selectValue.areaSleepM1.slice(1,2);
+  if (selectValue.areaSleepM2 !== '') sleepM2 = ',休眠' + selectValue.areaSleepM2.slice(1,2);
+  if (selectValue.areaMealM1 !== '') mealM1 = ',食事' + selectValue.areaMealM1.slice(1,2);
+  if (selectValue.areaMealM2 !== '') mealM2 = ',食事' + selectValue.areaMealM2.slice(1,2);
+  let areaIn = ['','','','',''];
+  let areaOut = ['','','','',''];
+  for (i=0; i<5; i++) {
+    if (selectValue.areaIn[i] !== '') areaIn[i] = selectValue.areaIn[i].slice(1,2);
+    if (selectValue.areaOut[i] !== '') areaOut[i] = ',' + selectValue.areaOut[i].slice(1,2);
+  }
+  let areaM1 = ['','','','',''];
+  let areaM2 = ['','','','',''];
+  for (i=0; i<5; i++) {
+    switch (selectValue.areaMonster1[i]) {
+      case '00':
+        areaM1[i] = ' / ⓪';
+        break;
+      case '01':
+        areaM1[i] = ' / ①';
+        break;
+      case '02':
+        areaM1[i] = ' / ②';
+        break;
+      case '03':
+        areaM1[i] = ' / ③';
+        break;
+    }
+    switch (selectValue.areaMonster2[i]) {
+      case '00':
+        areaM2[i] = ',⓪';
+        break;
+      case '01':
+        areaM2[i] = ',①';
+        break;
+      case '02':
+        areaM2[i] = ',②';
+        break;
+      case '03':
+        areaM2[i] = ',③';
+        break;
+    }
+  }
+  let resultInfo = document.getElementsByClassName('result')[0];
+  resultInfo.innerHTML = `【MH4Gクエスト情報】<br>
+○${author}<br>
+○${selectValue.questID}<br>
+○${weapon}<br>
+○${armor}${armorType}<br>
+○${level}<br>
+○${m1}<br>
+○${iniM1}${sleepM1}${mealM1}<br>
+○${m2}<br>
+○${iniM2}${sleepM2}${mealM2}<br>
+○${areaType[0]}${areaIn[0]}${areaOut[0]}${areaM1[0]}${areaM2[0]}<br>
+○${areaType[1]}${areaIn[1]}${areaOut[1]}${areaM1[1]}${areaM2[1]}<br>
+○${areaType[2]}${areaIn[2]}${areaOut[2]}${areaM1[2]}${areaM2[2]}<br>
+○${areaType[3]}${areaIn[3]}${areaOut[3]}${areaM1[3]}${areaM2[3]}<br>
+○${areaType[4]}${areaIn[4]}${areaOut[4]}${areaM1[4]}${areaM2[4]}<br>
+`;
+  document.getElementsByClassName('resultButton')[0].classList.remove('none');
+  document.getElementsByClassName('resultText')[0].classList.remove('none');
+}
 
-        for(i=0;i<8;i++){
-            questID1 = questID1 + $questID.value[i];
+//クリップボードにコピーする
+const copyToClipboard = (copyText, alertText)=>{
+  navigator.clipboard.writeText(copyText)
+    .then(
+      success => alert(alertText),
+      error => alert('失敗しました\nご報告お願いします')
+    );
+};
+//クリップボードのテキストを代入（貼り付け）する
+const pasteFromClipboard = ()=>{
+  clear();
+  navigator.clipboard.readText()
+    .then(
+      clipText => {
+        const tmp = clipText.split('\n');
+        const res = tmp.filter( (a) => {
+          return a !== '';
+        });
+        if (res === '' || res === null) {
+          alert(`1行目が【MH4Gクエスト情報】から始まるテキストを読み込めます\n現在クリップボードは空です（改行のみの場合も含む）`);
+          return;
         }
-        for(i=9;i<17;i++){
-            questID2 = questID2 + $questID.value[i];
+        if (res[0] !== '【MH4Gクエスト情報】') {
+          alert(`"1行目が【MH4Gクエスト情報】から始まるテキストを読み込めます"\n"以下現在のクリップボード"\n${clipText}`);
+          return;
         }
-    }
-    removeOutput();
-}
-
-//モンスターテキストの変更
-let ele1 = document.getElementsByClassName("$m1Name");
-let ele2 = document.getElementsByClassName("$m2Name");
-function textSetM1(){
-    if($monster1.value == ""){
-        for( i=0; i<ele1.length; i++){
-            document.getElementsByClassName("$m1Name")[i].textContent = "モンスター";
-            }
-    }else{
-        for( i=0; i<ele1.length; i++){
-            document.getElementsByClassName("$m1Name")[i].textContent = monsterName[parseInt($monster1.value,16)];
-            }
-    }
-    //イビルジョー、キリン亜種、クシャルダオラ
-    if($monster1.value == "2A" || $monster1.value == "23" || $monster1.value == "1F"){
-        $weapon[1].textContent = "スラッシュアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / ライトボウガン";
-
-        weaponKinds[0] = "(激流斧、エイムofトリック)";
-        weaponKinds[1] = "(輝剣、ラスティクレイモア)";
-        weaponKinds[2] = "(峰山小太刀、祭囃子・無形ノ調)";
-        weaponKinds[3] = "(シルバープロミネンス、砕牙砲)";
-        weaponKinds[4] = "(星砕きプロメテオル、獄琴)";
-        weaponKinds[5] = "(エクリプスボウ、フリルパラソル)";
-
-        $armor[1].textContent = "オリジナルA (ダマスク)";
-        $armor[2].textContent = "オリジナルB (ダマスク、デスギア)";
-        $armor[3].textContent = "オリジナルC (ダマスク、デスギア)";
-        $armor[4].textContent = "オリジナルD (ダマスク、デスギア)";
-        $armor[5].textContent = "オリジナルE (ダマスク)";
-        $armor[6].textContent = "オリジナルF (ダマスク)";
-        $armor[7].textContent = "トライA (荒天/蒼天)";
-        $armor[8].textContent = "トライB (荒天/蒼天、デスギア)";
-        $armor[9].textContent = "トライC (荒天/蒼天、デスギア)";
-        $armor[10].textContent ="トライD (荒天/蒼天、デスギア)";
-        $armor[11].textContent ="トライE (荒天/蒼天)";
-        $armor[12].textContent ="トライF (荒天/蒼天)";
-        $armor[13].textContent ="ドスA (ミラバルZ)";
-        $armor[14].textContent ="ドスB (ミラバルZ、デスギア)";
-        $armor[15].textContent ="ドスC (ミラバルZ、デスギア)";
-        $armor[16].textContent ="ドスD (ミラバルZ、デスギア)";
-        $armor[17].textContent ="ドスE (ミラバルZ)";
-        $armor[18].textContent ="ドスF (ミラバルZ)";
-    }
-    //イャンクック
-    else if($monster1.value == '07'){
-        $weapon[1].textContent = "スラッシュアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / ライトボウガン";
-
-        weaponKinds[0] = "(ディーエッジ、エイムofトリック)";
-        weaponKinds[1] = "(41式対飛竜大剣、凍刀)";
-        weaponKinds[2] = "(マスターバング、ランポスクロウズ)";
-        weaponKinds[3] = "(合戦槍、フルボルテージ)";
-        weaponKinds[4] = "(ウォーバッシュ、ガンズ＝ロック)";
-        weaponKinds[5] = "(クイーンブラスター、ボルボバレット)";
-
-        $armor[1].textContent = "オリジナルA (アロイ)";
-        $armor[2].textContent = "オリジナルB (アロイ)";
-        $armor[3].textContent = "オリジナルC (アロイ)";
-        $armor[4].textContent = "オリジナルD (アロイ)";
-        $armor[5].textContent = "オリジナルE (アロイ)";
-        $armor[6].textContent = "オリジナルF (アロイ)";
-        $armor[7].textContent = "トライA (ルドロス)";
-        $armor[8].textContent = "トライB (ルドロス)";
-        $armor[9].textContent = "トライC (ルドロス)";
-        $armor[10].textContent = "トライD (ルドロス)";
-        $armor[11].textContent = "トライE (ルドロス)";
-        $armor[12].textContent = "トライF (ルドロス)";
-        $armor[13].textContent = "ドスA (ハンター)";
-        $armor[14].textContent = "ドスB (ハンター)";
-        $armor[15].textContent = "ドスC (ハンター)";
-        $armor[16].textContent = "ドスD (ハンター)";
-        $armor[17].textContent = "ドスE (ハンター)";
-        $armor[18].textContent = "ドスF (ハンター)";
-    }
-    //ゴアマガラ、ディアブロス
-    else if($monster1.value == '1C' || $monster1.value == '63'){
-        $weapon[1].textContent = "チャージアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / ライトボウガン";
-
-        weaponKinds[0] = "(ディア＝ルテミス、エイムofトリック)";
-        weaponKinds[1] = "(雷剣、成敗刀)";
-        weaponKinds[2] = "(ヒドゥンエッジ、王双刃)";
-        weaponKinds[3] = "(バベル、ナナ＝ハウル)";
-        weaponKinds[4] = "(ねこハンマー、ウネリシェルン)";
-        weaponKinds[5] = "(鋼氷馬弓、ベルクーツ)";
-
-        $armor[1].textContent = "オリジナルA (レウス)";
-        $armor[2].textContent = "オリジナルB (レウス、フルフルU)";
-        $armor[3].textContent = "オリジナルC (レウス、キリン)";
-        $armor[4].textContent = "オリジナルD (フルフルU、キリン)";
-        $armor[5].textContent = "オリジナルE (フルフルU)";
-        $armor[6].textContent = "オリジナルF (キリン)";
-        $armor[7].textContent = "トライA (レックス)";
-        $armor[8].textContent = "トライB (レックス、フルフルU)";
-        $armor[9].textContent = "トライC (レックス、キリン)";
-        $armor[10].textContent = "トライD (フルフルU、キリン)";
-        $armor[11].textContent = "トライE (フルフルU)";
-        $armor[12].textContent = "トライF (キリン)";
-        $armor[13].textContent = "ドスA (ゲリョスU)";
-        $armor[14].textContent = "ドスB (ゲリョスU、フルフルU)";
-        $armor[15].textContent = "ドスC (ゲリョスU、キリン)";
-        $armor[16].textContent = "ドスD (フルフルU、キリン)";
-        $armor[17].textContent = "ドスE (フルフルU)";
-        $armor[18].textContent = "ドスF (キリン)";
-    }
-    //ダイミョウザザミ亜種、バサルモス亜種
-    else if($monster1.value == '6C' || $monster1.value == '27'){
-        $weapon[1].textContent = "スラッシュアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / へビィボウガン";
-
-        weaponKinds[0] = "(ディア＝ルテミス、ボーンロッド)";
-        weaponKinds[1] = "(ジークムント、飛竜刀)";
-        weaponKinds[2] = "(ポイズンタバルジン、ギルドナイトセーバー)";
-        weaponKinds[3] = "(トゥースランス、プリンセスバースト)";
-        weaponKinds[4] = "(ヒドゥンブレイカー、ガンズロック)";
-        weaponKinds[5] = "(プロミネンスボウ、デュエルスタップ)";
-
-        $armor[1].textContent = "オリジナルA (レイア)";
-        $armor[2].textContent = "オリジナルB (レイア)";
-        $armor[3].textContent = "オリジナルC (レイア)";
-        $armor[4].textContent = "オリジナルD (レイア)";
-        $armor[5].textContent = "オリジナルE (レイア)";
-        $armor[6].textContent = "オリジナルF (レイア)";
-        $armor[7].textContent = "トライA (ラギア)";
-        $armor[8].textContent = "トライB (ラギア)";
-        $armor[9].textContent = "トライC (ラギア)";
-        $armor[10].textContent = "トライD (ラギア)";
-        $armor[11].textContent = "トライE (ラギア)";
-        $armor[12].textContent = "トライF (ラギア)";
-        $armor[13].textContent = "ドスA (ザザミ)";
-        $armor[14].textContent = "ドスB (ザザミ)";
-        $armor[15].textContent = "ドスC (ザザミ)";
-        $armor[16].textContent = "ドスD (ザザミ)";
-        $armor[17].textContent = "ドスE (ザザミ)";
-        $armor[18].textContent = "ドスF (ザザミ)";
-    }
-    //セルレギオス、キリン
-    else if($monster1.value == '58' || $monster1.value == '22'){
-        $weapon[1].textContent = "スラッシュアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / ライトボウガン";
-
-        weaponKinds[0] = "(王剣斧、セクトハルバー)";
-        weaponKinds[1] = "(雷剣、成敗刀)";
-        weaponKinds[2] = "(ヒドゥンエッジ、王双刃)";
-        weaponKinds[3] = "(バベル、ナナ＝ハウル)";
-        weaponKinds[4] = "(ねこハンマー、ソニックビードロー)";
-        weaponKinds[5] = "(鋼氷馬弓、ベルクーツ)";
-
-        $armor[1].textContent = "オリジナルA (モノデビル)";
-        $armor[2].textContent = "オリジナルB (モノデビル)";
-        $armor[3].textContent = "オリジナルC (モノデビル)";
-        $armor[4].textContent = "オリジナルD (モノデビル)";
-        $armor[5].textContent = "オリジナルE (モノデビル)";
-        $armor[6].textContent = "オリジナルF (モノデビル)";
-        $armor[7].textContent = "トライA (ネブラ)";
-        $armor[8].textContent = "トライB (ネブラ)";
-        $armor[9].textContent = "トライC (ネブラ)";
-        $armor[10].textContent = "トライD (ネブラ)";
-        $armor[11].textContent = "トライE (ネブラ)";
-        $armor[12].textContent = "トライF (ネブラ)";
-        $armor[13].textContent = "ドスA (ディアブロ)";
-        $armor[14].textContent = "ドスB (ディアブロ)";
-        $armor[15].textContent = "ドスC (ディアブロ)";
-        $armor[16].textContent = "ドスD (ディアブロ)";
-        $armor[17].textContent = "ドスE (ディアブロ)";
-        $armor[18].textContent = "ドスF (ディアブロ)";
-    }
-    //ティガレックス、ジンオウガ
-    else if($monster1.value == '0B' || $monster1.value == '30'){
-        $weapon[1].textContent = "スラッシュアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / へビィボウガン";
-
-        weaponKinds[0] = "(ヒドゥンアックス、ボーンロッド)";
-        weaponKinds[1] = "(ジークムント、飛竜刀)";
-        weaponKinds[2] = "(ポイズンタバルジン、ギルドナイトセーバー)";
-        weaponKinds[3] = "(トゥースランス、プリンセスバースト)";
-        weaponKinds[4] = "(ヒドゥンブレイカー、ウネリシェルン)";
-        weaponKinds[5] = "(プロミネンスボウ、デュエルスタップ)";
-
-        $armor[1].textContent = "オリジナルA (モノブロ)";
-        $armor[2].textContent = "オリジナルB (モノブロ)";
-        $armor[3].textContent = "オリジナルC (モノブロ)";
-        $armor[4].textContent = "オリジナルD (モノブロ)";
-        $armor[5].textContent = "オリジナルE (モノブロ)";
-        $armor[6].textContent = "オリジナルF (モノブロ)";
-        $armor[7].textContent = "トライA (フロギィ)";
-        $armor[8].textContent = "トライB (フロギィ)";
-        $armor[9].textContent = "トライC (フロギィ)";
-        $armor[10].textContent = "トライD (フロギィ)";
-        $armor[11].textContent = "トライE (フロギィ)";
-        $armor[12].textContent = "トライF (フロギィ)";
-        $armor[13].textContent = "ドスA (タロス)";
-        $armor[14].textContent = "ドスB (タロス)";
-        $armor[15].textContent = "ドスC (タロス)";
-        $armor[16].textContent = "ドスD (タロス)";
-        $armor[17].textContent = "ドスE (タロス)";
-        $armor[18].textContent = "ドスF (タロス)";
-    }
-    //ディアブロス亜種、ジンオウガ亜種
-    else if($monster1.value == '64' || $monster1.value == '31'){
-        $weapon[1].textContent = "スラッシュアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / へビィボウガン";
-
-        weaponKinds[0] = "(モーターバースト、エイムofトリック)";
-        weaponKinds[1] = "(封龍剣、軍刀)";
-        weaponKinds[2] = "(チュクチュク、テッセン)";
-        weaponKinds[3] = "(竜騎槍、ジェネラルパルド)";
-        weaponKinds[4] = "(鬼鉄丸、ヒドゥントーン)";
-        weaponKinds[5] = "(覇弓レラカムトルム、ギガン＝ショット)";
-
-        $armor[1].textContent = "オリジナルA (リオソウル)";
-        $armor[2].textContent = "オリジナルB (リオソウル、ゴア)";
-        $armor[3].textContent = "オリジナルC (リオソウル、クシャナ)";
-        $armor[4].textContent = "オリジナルD (ゴア、クシャナ)";
-        $armor[5].textContent = "オリジナルE (ゴア)";
-        $armor[6].textContent = "オリジナルF (クシャナ)";
-        $armor[7].textContent = "トライA (レックスU)";
-        $armor[8].textContent = "トライB (レックスU、ゴア)";
-        $armor[9].textContent = "トライC (レックスU、クシャナ)";
-        $armor[10].textContent = "トライD (ゴア、クシャナ)";
-        $armor[11].textContent = "トライE (ゴア)";
-        $armor[12].textContent = "トライF (クシャナ)";
-        $armor[13].textContent = "ドスA (凛/艶)";
-        $armor[14].textContent = "ドスB (凛/艶、ゴア)";
-        $armor[15].textContent = "ドスC (凛/艶、クシャナ)";
-        $armor[16].textContent = "ドスD (ゴア、クシャナ)";
-        $armor[17].textContent = "ドスE (ゴア)";
-        $armor[18].textContent = "ドスF (クシャナ)";
-    }
-    //テオテスカトル、オオナズチ、シャガルマガラ
-    else if($monster1.value == '20' || $monster1.value == '67' || $monster1.value == '1D'){
-        $weapon[1].textContent = "チャージアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / へビィボウガン";
-
-        weaponKinds[0] = "(ナバルクライス、金砕棍棒)";
-        weaponKinds[1] = "(海帝剣、冥刀)";
-        weaponKinds[2] = "(ゴールドマロウ、海王双刃)";
-        weaponKinds[3] = "(七星槍、シルバールーク)";
-        weaponKinds[4] = "(ドラゴンブレイカー、ゴルトリコーダー)";
-        weaponKinds[5] = "(殲滅と破壊の剛弓、カオスウィング)";
-
-        $armor[1].textContent = "オリジナルA (エスカドラ)";
-        $armor[2].textContent = "オリジナルB (エスカドラ)";
-        $armor[3].textContent = "オリジナルC (エスカドラ)";
-        $armor[4].textContent = "オリジナルD (エスカドラ)";
-        $armor[5].textContent = "オリジナルE (エスカドラ)";
-        $armor[6].textContent = "オリジナルF (エスカドラ)";
-        $armor[7].textContent = "トライA (リベリオン/ライオット)";
-        $armor[8].textContent = "トライB (リベリオン/ライオット)";
-        $armor[9].textContent = "トライC (リベリオン/ライオット)";
-        $armor[10].textContent = "トライD (リベリオン/ライオット)";
-        $armor[11].textContent = "トライE (リベリオン/ライオット)";
-        $armor[12].textContent = "トライF (リベリオン/ライオット)";
-        $armor[13].textContent = "ドスA (ドラゴンX)";
-        $armor[14].textContent = "ドスB (ドラゴンX)";
-        $armor[15].textContent = "ドスC (ドラゴンX)";
-        $armor[16].textContent = "ドスD (ドラゴンX)";
-        $armor[17].textContent = "ドスE (ドラゴンX)";
-        $armor[18].textContent = "ドスF (ドラゴンX)";
-    }
-    //ドスランポス
-    else if($monster1.value == '10'){
-        $weapon[1].textContent = "スラッシュアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / ライトボウガン";
-
-        weaponKinds[0] = "(ディーエッジ、エイムofトリック)";
-        weaponKinds[1] = "(41式対飛竜大剣、凍刀)";
-        weaponKinds[2] = "(マスターバング、ランポスクロウズ)";
-        weaponKinds[3] = "(合戦槍、フルボルテージ)";
-        weaponKinds[4] = "(ウォーバッシュ、ガンズロック)";
-        weaponKinds[5] = "(クイーンブラスター、ボルボバレット)";
-
-        $armor[1].textContent = "オリジナルA (アロイ)";
-        $armor[2].textContent = "オリジナルB (アロイ)";
-        $armor[3].textContent = "オリジナルC (アロイ)";
-        $armor[4].textContent = "オリジナルD (アロイ)";
-        $armor[5].textContent = "オリジナルE (アロイ)";
-        $armor[6].textContent = "オリジナルF (アロイ)";
-        $armor[7].textContent = "トライA (ルドロス)";
-        $armor[8].textContent = "トライB (ルドロス)";
-        $armor[9].textContent = "トライC (ルドロス)";
-        $armor[10].textContent = "トライD (ルドロス)";
-        $armor[11].textContent = "トライE (ルドロス)";
-        $armor[12].textContent = "トライF (ルドロス)";
-        $armor[13].textContent = "ドスA (ハンター)";
-        $armor[14].textContent = "ドスB (ハンター)";
-        $armor[15].textContent = "ドスC (ハンター)";
-        $armor[16].textContent = "ドスD (ハンター)";
-        $armor[17].textContent = "ドスE (ハンター)";
-        $armor[18].textContent = "ドスF (ハンター)";
-    }
-    //バサルモス、イャンクック亜種
-    else if($monster1.value == '26' || $monster1.value == '08'){
-        $weapon[1].textContent = "スラッシュアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / ライトボウガン";
-
-        weaponKinds[0] = "(竜姫の剣斧、セクトハルバー)";
-        weaponKinds[1] = "(41式飛竜大剣、凍刃)";
-        weaponKinds[2] = "(マスターバング、ランポスクロウズ)";
-        weaponKinds[3] = "(合戦槍、フルボルテージ)";
-        weaponKinds[4] = "(ウォーバッシュ、ガンズロック)";
-        weaponKinds[5] = "(クイーンブラスター、ボルボバレット)";
-
-        $armor[1].textContent = "オリジナルA (インゴット)";
-        $armor[2].textContent = "オリジナルB (インゴット)";
-        $armor[3].textContent = "オリジナルC (インゴット)";
-        $armor[4].textContent = "オリジナルD (インゴット)";
-        $armor[5].textContent = "オリジナルE (インゴット)";
-        $armor[6].textContent = "オリジナルF (インゴット)";
-        $armor[7].textContent = "トライA (フルフル)";
-        $armor[8].textContent = "トライB (フルフル)";
-        $armor[9].textContent = "トライC (フルフル)";
-        $armor[10].textContent = "トライD (フルフル)";
-        $armor[11].textContent = "トライE (フルフル)";
-        $armor[12].textContent = "トライF (フルフル)";
-        $armor[13].textContent = "ドスA (ゲリョス)";
-        $armor[14].textContent = "ドスB (ゲリョス)";
-        $armor[15].textContent = "ドスC (ゲリョス)";
-        $armor[16].textContent = "ドスD (ゲリョス)";
-        $armor[17].textContent = "ドスE (ゲリョス)";
-        $armor[18].textContent = "ドスF (ゲリョス)";
-    }
-    //ブラキディオス、ティガレックス亜種
-    else if($monster1.value == '2C' || $monster1.value == '0C'){
-        $weapon[1].textContent = "チャージアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / へビィボウガン";
-
-        weaponKinds[0] = "(精鋭討伐隊盾斧、セクトハルバー)";
-        weaponKinds[1] = "(封龍剣、軍刀)";
-        weaponKinds[2] = "(フロストエッジ、テッセン)";
-        weaponKinds[3] = "(竜騎槍、ジェネラルバルド)";
-        weaponKinds[4] = "(ナナ＝トリ、ソニックビードロー)";
-        weaponKinds[5] = "(覇弓レラカムトルム、ギガン＝ショット)";
-
-        $armor[1].textContent = "オリジナルA (リオハート)";
-        $armor[2].textContent = "オリジナルB (リオハート、ギザミ)";
-        $armor[3].textContent = "オリジナルC (リオハート、ジンオウU)";
-        $armor[4].textContent = "オリジナルD (ギザミ、ジンオウU)";
-        $armor[5].textContent = "オリジナルE (ギザミ)";
-        $armor[6].textContent = "オリジナルF (ジンオウU)";
-        $armor[7].textContent = "トライA (アーティア)";
-        $armor[8].textContent = "トライB (アーティア、ギザミ)";
-        $armor[9].textContent = "トライC (アーティア、ジンオウU)";
-        $armor[10].textContent = "トライD (ギザミ、ジンオウU)";
-        $armor[11].textContent = "トライE (ギザミ)";
-        $armor[12].textContent = "トライF (ジンオウU)";
-        $armor[13].textContent = "ドスA (常磐/八千代)";
-        $armor[14].textContent = "ドスB (常磐/八千代、ギザミ)";
-        $armor[15].textContent = "ドスC (常磐/八千代、ジンオウU)";
-        $armor[16].textContent = "ドスD (ギザミ、ジンオウU)";
-        $armor[17].textContent = "ドスE (ギザミ)";
-        $armor[18].textContent = "ドスF (ジンオウU)";
-    }
-    //ラージャン、イャンガルルガ
-    else if($monster1.value == '13' || $monster1.value == '1E'){
-        $weapon[1].textContent = "チャージアックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / ボウガン";
-
-        weaponKinds[0] = "(フォースofフォール、金砕棍棒)";
-        weaponKinds[1] = "(アギト、天上天下天地無双刀)";
-        weaponKinds[2] = "(エペ=ギルタナス、ニヴルブリザード)";
-        weaponKinds[3] = "(エストック、アームofティラン)";
-        weaponKinds[4] = "(クリスタルノヴァ、ヒドゥントーン)";
-        weaponKinds[5] = "(龍弓、雷砲、カホウ)";
-
-        $armor[1].textContent = "オリジナルA (シルバーソル)";
-        $armor[2].textContent = "オリジナルB (シルバーソル、キリンU)";
-        $armor[3].textContent = "オリジナルC (シルバーソル、アカムト)";
-        $armor[4].textContent = "オリジナルD (キリンU、アカムト)";
-        $armor[5].textContent = "オリジナルE (キリンU)";
-        $armor[6].textContent = "オリジナルF (アカムト)";
-        $armor[7].textContent = "トライA (フィリア)";
-        $armor[8].textContent = "トライB (フィリア、キリンU)";
-        $armor[9].textContent = "トライC (フィリア、アカムト)";
-        $armor[10].textContent = "トライD (キリンU、アカムト)";
-        $armor[11].textContent = "トライE (キリンU)";
-        $armor[12].textContent = "トライF (アカムト)";
-        $armor[13].textContent = "ドスA (グリード)";
-        $armor[14].textContent = "ドスB (グリード、キリンU)";
-        $armor[15].textContent = "ドスC (グリード、アカムト)";
-        $armor[16].textContent = "ドスD (キリンU、アカムト)";
-        $armor[17].textContent = "ドスE (キリンU)";
-        $armor[18].textContent = "ドスF (アカムト)";
-    }
-
-    else{
-        $weapon[1].textContent = "アックス / 操虫棍";
-        $weapon[2].textContent = "大剣 / 太刀";
-        $weapon[3].textContent = "片手剣 / 双剣";
-        $weapon[4].textContent = "ランス / ガンランス";
-        $weapon[5].textContent = "ハンマー / 狩猟笛";
-        $weapon[6].textContent = "弓 / ボウガン";
-
-        weaponKinds[0] = "";
-        weaponKinds[1] = "";
-        weaponKinds[2] = "";
-        weaponKinds[3] = "";
-        weaponKinds[4] = "";
-        weaponKinds[5] = "";
-
-        $armor[1].textContent = "オリジナルA";
-        $armor[2].textContent = "オリジナルB";
-        $armor[3].textContent = "オリジナルC";
-        $armor[4].textContent = "オリジナルD";
-        $armor[5].textContent = "オリジナルE";
-        $armor[6].textContent = "オリジナルF";
-        $armor[7].textContent = "トライA";
-        $armor[8].textContent = "トライB";
-        $armor[9].textContent = "トライC";
-        $armor[10].textContent = "トライD";
-        $armor[11].textContent = "トライE";
-        $armor[12].textContent = "トライF";
-        $armor[13].textContent = "ドスA";
-        $armor[14].textContent = "ドスB";
-        $armor[15].textContent = "ドスC";
-        $armor[16].textContent = "ドスD";
-        $armor[17].textContent = "ドスE";
-        $armor[18].textContent = "ドスF";
-    }
-    $weaponKinds.textContent = weaponKinds[parseInt($weapon.value,16)];
-}
-function textSetM2(){
-    if($monster2.value == ""){
-        for( i=0; i<ele2.length; i++){
-            document.getElementsByClassName("$m2Name")[i].textContent = "モンスター";
-            }
-    }else{
-        for( i=0; i<ele2.length; i++){
-            document.getElementsByClassName("$m2Name")[i].textContent = monsterName[parseInt($monster2.value,16)];
-            }
-    }
-}
-
-//出土武具、モンスターテキストの変更
-$monster1.onchange = function(){
-    textSetM1();
-    removeOutput();
-}
-$monster2.onchange = function(){
-    textSetM2();
-    removeOutput();
-}
-
-//エリア横のマップ名セット
-function setIniM1(num){
-    if(num == ""){
-        document.getElementsByClassName("add")[0].textContent = "";
-    }else{
-        document.getElementsByClassName("add")[0].textContent = areaName[parseInt(num,16)];
-    }
-}
-function setIniM2(num){
-    if(num == ""){
-        document.getElementsByClassName("add")[3].textContent = "";
-    }else{
-        document.getElementsByClassName("add")[3].textContent = areaName[parseInt(num,16)];
-    }
-}
-function setSleepM1(num){
-    if(num == ""){
-        document.getElementsByClassName("add")[2].textContent = "";
-    }else{
-        document.getElementsByClassName("add")[2].textContent = areaName[parseInt(num,16)];
-    }
-}
-function setSleepM2(num){
-    if(num == ""){
-        document.getElementsByClassName("add")[5].textContent = "";
-    }else{
-        document.getElementsByClassName("add")[5].textContent = areaName[parseInt(num,16)];
-    }
-}
-function setMealM1(num){
-    if(num == ""){
-        document.getElementsByClassName("add")[1].textContent = "";
-    }else{
-        document.getElementsByClassName("add")[1].textContent = areaName[parseInt(num,16)];
-    }
-}
-function setMealM2(num){
-    if(num == ""){
-        document.getElementsByClassName("add")[4].textContent = "";
-    }else{
-        document.getElementsByClassName("add")[4].textContent = areaName[parseInt(num,16)];
-    }
-}
-//2つから受付パス
-function passIniM1(){
-    switch($ini1.value){
-        case "": setIniM1(""); break;
-        case "01": setIniM1($area1.value); break;
-        case "02": setIniM1($area2.value); break;
-        case "03": setIniM1($area3.value); break;
-        case "04": setIniM1($area4.value); break;
-        case "05": setIniM1($area5.value); break;
-    }
-}
-function passIniM2(){
-    switch($ini2.value){
-        case "": setIniM2(""); break;
-        case "01": setIniM2($area1.value); break;
-        case "02": setIniM2($area2.value); break;
-        case "03": setIniM2($area3.value); break;
-        case "04": setIniM2($area4.value); break;
-        case "05": setIniM2($area5.value); break;
-    }
-}
-function passSleepM1(){
-    switch($sleep1.value){
-        case "": setSleepM1(""); break;
-        case "01": setSleepM1($area1.value); break;
-        case "02": setSleepM1($area2.value); break;
-        case "03": setSleepM1($area3.value); break;
-        case "04": setSleepM1($area4.value); break;
-        case "05": setSleepM1($area5.value); break;
-    }
-}
-function passSleepM2(){
-    switch($sleep2.value){
-        case "": setSleepM2(""); break;
-        case "01": setSleepM2($area1.value); break;
-        case "02": setSleepM2($area2.value); break;
-        case "03": setSleepM2($area3.value); break;
-        case "04": setSleepM2($area4.value); break;
-        case "05": setSleepM2($area5.value); break;
-    }
-}
-function passMealM1(){
-    switch($meal1.value){
-        case "": setMealM1(""); break;
-        case "01": setMealM1($area1.value); break;
-        case "02": setMealM1($area2.value); break;
-        case "03": setMealM1($area3.value); break;
-        case "04": setMealM1($area4.value); break;
-        case "05": setMealM1($area5.value); break;
-    }
-}
-function passMealM2(){
-    switch($meal2.value){
-        case "": setMealM2(""); break;
-        case "01": setMealM2($area1.value); break;
-        case "02": setMealM2($area2.value); break;
-        case "03": setMealM2($area3.value); break;
-        case "04": setMealM2($area4.value); break;
-        case "05": setMealM2($area5.value); break;
-    }
-}
-//マップ種類変更
-function area1Change(){
-    passIniM1();
-    passIniM2();
-    passSleepM1();
-    passSleepM2();
-    passMealM1();
-    passMealM2();
-}
-function area2Change(){
-    passIniM1();
-    passIniM2();
-    passSleepM1();
-    passSleepM2();
-    passMealM1();
-    passMealM2();
-}
-function area3Change(){
-    passIniM1();
-    passIniM2();
-    passSleepM1();
-    passSleepM2();
-    passMealM1();
-    passMealM2();
-}
-function area4Change(){
-    passIniM1();
-    passIniM2();
-    passSleepM1();
-    passSleepM2();
-    passMealM1();
-    passMealM2();
-}
-function area5Change(){
-    passIniM1();
-    passIniM2();
-    passSleepM1();
-    passSleepM2();
-    passMealM1();
-    passMealM2();
-}
-$area1.onchange = function(){
-    area1Change();
-    removeOutput();
-}
-$area2.onchange = function(){
-    area2Change();
-    removeOutput();
-}
-$area3.onchange = function(){
-    area3Change();
-    removeOutput();
-}
-$area4.onchange = function(){
-    area4Change();
-    removeOutput();
-}
-$area5.onchange = function(){
-    area5Change();
-    removeOutput();
-}
-//選択値変更
-$ini1.onchange = function(){
-    passIniM1();
-    removeOutput();
-}
-$ini2.onchange = function(){
-    passIniM2();
-    removeOutput();
-}
-$sleep1.onchange = function(){
-    passSleepM1();
-    removeOutput();
-}
-$sleep2.onchange = function(){
-    passSleepM2();
-    removeOutput();
-}
-$meal1.onchange = function(){
-    passMealM1();
-    removeOutput();
-}
-$meal2.onchange = function(){
-    passMealM2();
-    removeOutput();
-}
-
-//モンスター関連の選択初期化
-function monster1None(){
-    $monster1.value = "";
-    $ini1.value = "";
-    $sleep1.value = "";
-    $meal1.value = "";
-    $area1Posi1.value = "";
-    $area2Posi1.value = "";
-    $area3Posi1.value = "";
-    $area4Posi1.value = "";
-    $area5Posi1.value = "";
-    document.getElementsByClassName("add")[0].textContent = "";
-    document.getElementsByClassName("add")[1].textContent = "";
-    document.getElementsByClassName("add")[2].textContent = "";
-    textSetM1();
-}
-function monster2None(){
-    $monster2.value = "";
-    $ini2.value = "";
-    $sleep2.value = "";
-    $meal2.value = "";
-    $area1Posi2.value = "";
-    $area2Posi2.value = "";
-    $area3Posi2.value = "";
-    $area4Posi2.value = "";
-    $area5Posi2.value = "";
-    document.getElementsByClassName("add")[3].textContent = "";
-    document.getElementsByClassName("add")[4].textContent = "";
-    document.getElementsByClassName("add")[5].textContent = "";
-    textSetM2();
-}
-
-//マップ関連の選択初期化
-function area1None(){
-    $area1.value = "";
-    $area1In.value = "";
-    $area1Out.value = "";
-    $area1Posi1.value = "";
-    $area1Posi2.value = "";
-    area1Change();
-}
-function area2None(){
-    $area2.value = "";
-    $area2In.value = "";
-    $area2Out.value = "";
-    $area2Posi1.value = "";
-    $area2Posi2.value = "";
-    area2Change();
-}
-function area3None(){
-    $area3.value = "";
-    $area3In.value = "";
-    $area3Out.value = "";
-    $area3Posi1.value = "";
-    $area3Posi2.value = "";
-    area3Change();
-}
-function area4None(){
-    $area4.value = "";
-    $area4In.value = "";
-    $area4Out.value = "";
-    $area4Posi1.value = "";
-    $area4Posi2.value = "";
-    area4Change();
-}
-function area5None(){
-    $area5.value = "";
-    $area5In.value = "";
-    $area5Out.value = "";
-    $area5Posi1.value = "";
-    $area5Posi2.value = "";
-    area5Change();
-}
-
-
-//マップ(Area) hidden
-function mapNumChange(){
-    let num = 0;
-    switch($mapNum.value){
-        case "" :
-            num = 0;
-            area1None();
-            area2None();
-            area3None();
-            area4None();
-            area5None();
-            document.getElementById("hiddenMap").hidden = true;
-            break;
-        case "2" :
-            num = 2;
-            area3None();
-            area4None();
-            area5None();
-            document.getElementById("hiddenMap").hidden = true;
-            break;
-        case "3" :
-            num = 3;
-            area4None();
-            area5None();
-            document.getElementById("hiddenMap").hidden = true;
-            break;
-        case "4" :
-            num = 4;
-            area5None();
-            document.getElementById("hiddenMap").hidden = false;
-            break;
-        case "5" :
-            num = 5;
-            document.getElementById("hiddenMap").hidden = false;
-            break;
-    }
-
-    for( i=0; i<num; i++){
-        document.getElementsByClassName("hiddenArea")[i].hidden = false;
-    }
-    for( i=4; i>=num; i--){
-        document.getElementsByClassName("hiddenArea")[i].hidden = true;
-    }
-}
-$mapNum.onchange = function(){
-    mapNumChange();
-    removeOutput();
-}
-
-//モンスター hidden
-let ele3 = document.getElementsByClassName("hiddenM1");
-let ele4 = document.getElementsByClassName("hiddenM2");
-function hiddenSetTrueM1(){
-    for( i=0; i<ele3.length; i++){
-        document.getElementsByClassName("hiddenM1")[i].hidden = true;
-    }
-}
-function hiddenSetTrueM2(){
-    for( i=0; i<ele4.length; i++){
-        document.getElementsByClassName("hiddenM2")[i].hidden = true;
-    }
-}
-function hiddenSetFalseM1(){
-    for( i=0; i<ele3.length; i++){
-        document.getElementsByClassName("hiddenM1")[i].hidden = false;
-    }
-}
-function hiddenSetFalseM2(){
-    for( i=0; i<ele4.length; i++){
-        document.getElementsByClassName("hiddenM2")[i].hidden = false;
-    }
-}
-function monsterNumChange(){
-    switch($monsterNum.value){
-        case "":
-            hiddenSetTrueM1();
-            hiddenSetTrueM2();
-            monster1None();
-            monster2None();
-            break;
-        case "1":
-            hiddenSetFalseM1();
-            hiddenSetTrueM2();
-            monster2None();
-            break;
-        case "2":
-            hiddenSetFalseM1();
-            hiddenSetFalseM2();
-            break;
-    }
-}
-$monsterNum.onchange = function(){
-    monsterNumChange();
-    removeOutput();
-}
-
-//クエスト初期レベル、現在レベル
-function LevSet(){
-    let Lev1 = 0;
-    let Lev2 = 0;
-    let cnt = 0;
-    switch($monster1.value){
-        case "07": Lev1 = 90; cnt+=1; break;
-        case "08": Lev1 = 90; cnt+=1; break;
-        case "0B": Lev1 = 98; cnt+=1; break;
-        case "0C": Lev1 = 94; cnt+=1; break;
-        case "10": Lev1 = 90; cnt+=1; break;
-        case "13": Lev1 = 120; cnt+=1; break;
-        case "1C": Lev1 = 98; cnt+=1; break;
-        case "1D": Lev1 = 120; cnt+=1; break;
-        case "1E": Lev1 = 101; cnt+=1; break;
-        case "1F": Lev1 = 120; cnt+=1; break;
-        case "20": Lev1 = 120; cnt+=1; break;
-        case "22": Lev1 = 120; cnt+=1; break;
-        case "23": Lev1 = 120; cnt+=1; break;
-        case "26": Lev1 = 98; cnt+=1; break;
-        case "27": Lev1 = 98; cnt+=1; break;
-        case "2C": Lev1 = 101; cnt+=1; break;
-        case "30": Lev1 = 98; cnt+=1; break;
-        case "31": Lev1 = 94; cnt+=1; break;
-        case "2A": Lev1 = 120; cnt+=1; break;
-        case "58": Lev1 = 94; cnt+=1; break;
-        case "63": Lev1 = 101; cnt+=1; break;
-        case "64": Lev1 = 101; cnt+=1; break;
-        case "67": Lev1 = 120; cnt+=1; break;
-        case "6C": Lev1 = 94; cnt+=1; break;
-    }
-    switch($monster2.value){
-        case "07": Lev2 = 90; cnt+=1; break;
-        case "08": Lev2 = 90; cnt+=1; break;
-        case "0B": Lev2 = 98; cnt+=1; break;
-        case "0C": Lev2 = 94; cnt+=1; break;
-        case "10": Lev2 = 90; cnt+=1; break;
-        case "13": Lev2 = 120; cnt+=1; break;
-        case "1C": Lev2 = 98; cnt+=1; break;
-        case "1D": Lev2 = 120; cnt+=1; break;
-        case "1E": Lev2 = 101; cnt+=1; break;
-        case "1F": Lev2 = 120; cnt+=1; break;
-        case "20": Lev2 = 120; cnt+=1; break;
-        case "22": Lev2 = 120; cnt+=1; break;
-        case "23": Lev2 = 120; cnt+=1; break;
-        case "26": Lev2 = 98; cnt+=1; break;
-        case "27": Lev2 = 98; cnt+=1; break;
-        case "2C": Lev2 = 101; cnt+=1; break;
-        case "30": Lev2 = 98; cnt+=1; break;
-        case "31": Lev2 = 94; cnt+=1; break;
-        case "2A": Lev2 = 120; cnt+=1; break;
-        case "58": Lev2 = 94; cnt+=1; break;
-        case "63": Lev2 = 101; cnt+=1; break;
-        case "64": Lev2 = 101; cnt+=1; break;
-        case "67": Lev2 = 120; cnt+=1; break;
-        case "6C": Lev2 = 94; cnt+=1; break;
-    }
-    if(cnt==0){
-        return "";
-    }
-    if($monster1.value == "63" && $monster2.value == "64"){
-        return 99;
-    }
-    else if($monster1.value == "10" && $monster2.value == "26"){
-        return 92;
-    }
-    else if($monster1.value == "10" && $monster2.value == "27"){
-        return 92;
-    }
-    else if($monster1.value == "26" && $monster2.value == "2C"){
-        return 97;
-    }
-    else if($monster1.value == "27" && $monster2.value == "2C"){
-        return 97;
-    }
-    else if($monster1.value == "13" && $monster2.value == "13"){
-        return 119;
-    }
-    else{
-        return Math.floor((Lev1 + Lev2) / cnt);
-    }
-}
-function LevCheck(val){
-    if(val >= 1 && val <= 140){
-        return val;
-    }else{
-        let tmp = LevSet();
-        if(tmp == ""){
-            return "";
+        for (i=1; i<15; i++) {
+          if (res[i][0] === undefined) {
+            alert(`"2~15行目の1文字目に○が必要です"\n"以下現在のクリップボード"\n${clipText}`);
+            return;
+          }
+          if (res[i][0] !== '○') {
+            alert(`"2~15行目の1文字目に○が必要です"\n"以下現在のクリップボード"\n${clipText}`);
+            return;
+          }
         }
-        return tmp;
-    }
-}
-$iniLev.onchange = function(){
-    $iniLev.value = LevCheck($iniLev.value);
-    removeOutput();
-}
-$curLev.onchange = function(){
-    $curLev.value = LevCheck($curLev.value);
-    removeOutput();
-}
-
-//お宝フラグ
-let RARE = "00";
-$RARE.onchange = function(){
-    if(RARE == "00"){
-        RARE = "01";
-    }
-    else if(RARE == "01"){
-        RARE = "00";
-    }
-    removeOutput();
-}
-
-//自動設定ボタン
-const btnAuto = document.getElementById("$btnAuto");
-btnAuto.addEventListener("click", function(){
-    $iniLev.value = LevSet();
-    $curLev.value = "140";
-    $frenzyM1.value = "";
-    $frenzyM2.value = "";
-    $frenzyM3.value = "03";
-    $RARE.checked = true;
-    RARE = "01";
-    removeOutput();
-});
-
-//リセットボタン
-const btnReset = document.getElementById("$btnReset");
-btnReset.addEventListener("click", function(){
-    $frames.value = "";
-    $Author.value = "";
-    AuthorChange();
-    $questID.value = "";
-    $weapon.value = "";
-    $armor.value = "";
-    $armorType.value = "";
-    $mapNum.value = "";
-    mapNumChange();
-    $monsterNum.value = "";
-    monsterNumChange();
-    $iniLev.value = "";
-    $curLev.value = "";
-    $RARE.checked = false;
-    RARE = "00";
-    $frenzyM1.value = "";
-    $frenzyM2.value = "";
-    $frenzyM3.value = "";
-
-    removeOutput();
-
-});
-
-//サンプルボタン
-const btnSample = document.getElementById("$btnSample");
-btnSample.addEventListener("click", function(){
-    $frames.value = "10";
-    $Author.value ="＠senaga19"
-    AuthorChange();
-    generationID();
-    $weapon.value = "00";
-    $armor.value = "05";
-    $armorType.value = "04";
-    
-
-    $monsterNum.value = "2";
-    monsterNumChange();
-    $monster1.value = "0C";
-    $monster2.value = "0B";
-    $ini1.value = "01";
-    $ini2.value = "04";
-    $sleep1.value = "02";
-    $sleep2.value = "03";
-    $meal1.value = "03";
-    $meal2.value = "02";
-    $area1Posi1.value = "01";
-    $area1Posi2.value = "02";
-    $area2Posi1.value = "01";
-    $area2Posi2.value = "01";
-    $area3Posi1.value = "02";
-    $area3Posi2.value = "01";
-    $area4Posi1.value = "01";
-    $area4Posi2.value = "01";
-    $area5Posi1.value = "00";
-    $area5Posi2.value = "00";
-    
-    textSetM1();
-    textSetM2();
-    
-    $mapNum.value = "5";
-    mapNumChange();
-    $area1.value = "03";
-    $area1In.value = "03";
-    $area1Out.value = "06";
-    $area2.value = "07";
-    $area2In.value = "06";
-    $area2Out.value = "04";
-    $area3.value = "03";
-    $area3In.value = "05";
-    $area3Out.value = "03";
-    $area4.value = "02";
-    $area4In.value = "03";
-    $area4Out.value = "06";
-    $area5.value = "0A"
-    $area5In.value = "02";
-    $area5Out.value = "06";
-    area1Change();
-    area2Change();
-    area3Change();
-    area4Change();
-    area5Change();
-
-    
-    
-    $iniLev.value = "96";
-    $curLev.value = "140";
-    $RARE.checked = true;
-    RARE = "01";
-    $frenzyM1.value = "03";
-    $frenzyM2.value = "09";
-    $frenzyM3.value = "03";
-
-    removeOutput();
-});
-
-
-//outputの削除
-function removeOutput(){
-    if(count != 0){
-        $coppy1.value = "";
-        $coppy2.value = "";
-        for(i=0; i<76; i++){
-            let dd_element = document.getElementById("$output"+i);
-            dd_element.remove();
+        selectValue.author = ['0000','0000','0000','0000','0000','0000','0000','0000','0000','0000','0000','0000'];
+        let author = '';
+        for (i=1; i<13; i++) {
+          if (res[1][i] === undefined) break;
+          author += res[1][i];
+          let tmp = res[1][i].charCodeAt(0).toString(16).toUpperCase();
+          while (tmp.length < 4) {
+            tmp = '0' + tmp;
+          }
+          selectValue.author[i-1] = tmp;
         }
-        count = 0;
-        document.getElementById("$btnHidden").hidden = true;
-    } 
-}
-
-//コード削除ボタン
-const btnDelete = document.getElementById("$btnDelete");
-btnDelete.addEventListener("click", function(){
-    removeOutput();
-});
-
-//情報コピーボタン
-const btnCoppyInformation = document.getElementById("$btnCoppyInformation");
-btnCoppyInformation.addEventListener("click", function(){
-    document.getElementById("$textareaHidden").hidden = false;
-
-    var textarea = document.getElementById("$coppy2");
-    // 文字をすべて選択
-    textarea.select();
-    // コピー
-    document.execCommand("copy");
-
-    document.getElementById("$textareaHidden").hidden = true;
-
-    alert("『クエスト情報』をクリップボードにコピーしました");
-});
-
-//コードコピーボタン
-const btnCoppyCode = document.getElementById("$btnCoppyCode");
-btnCoppyCode.addEventListener("click", function(){
-
-    document.getElementById("$textareaHidden").hidden = false;
-
-    var textarea = document.getElementById("$coppy1");
-    // 文字をすべて選択
-    textarea.select();
-    // コピー
-    document.execCommand("copy");
-
-    document.getElementById("$textareaHidden").hidden = true;
-
-    alert("『コード』をクリップボードにコピーしました");
-});
-
-//残りのチェンジファンクション
-$area1In.onchange = function(){
-    removeOutput();
-}
-$area1Out.onchange = function(){
-    removeOutput();
-}
-$area1Posi1.onchange = function(){
-    removeOutput();
-}
-$area1Posi2.onchange = function(){
-    removeOutput();
-}
-$area2In.onchange = function(){
-    removeOutput();
-}
-$area2Out.onchange = function(){
-    removeOutput();
-}
-$area2Posi1.onchange = function(){
-    removeOutput();
-}
-$area2Posi2.onchange = function(){
-    removeOutput();
-}
-$area3In.onchange = function(){
-    removeOutput();
-}
-$area3Out.onchange = function(){
-    removeOutput();
-}
-$area3Posi1.onchange = function(){
-    removeOutput();
-}
-$area3Posi2.onchange = function(){
-    removeOutput();
-}
-$area4In.onchange = function(){
-    removeOutput();
-}
-$area4Out.onchange = function(){
-    removeOutput();
-}
-$area4Posi1.onchange = function(){
-    removeOutput();
-}
-$area4Posi2.onchange = function(){
-    removeOutput();
-}
-$area5In.onchange = function(){
-    removeOutput();
-}
-$area5Out.onchange = function(){
-    removeOutput();
-}
-$area5Posi1.onchange = function(){
-    removeOutput();
-}
-$area5Posi2.onchange = function(){
-    removeOutput();
-}
-$frenzyM1.onchange = function(){
-    removeOutput();
-}
-$frenzyM2.onchange = function(){
-    removeOutput();
-}
-$frenzyM3.onchange = function(){
-    removeOutput();
-}
-$weapon.onchange = function(){
-    removeOutput();
-    $weaponKinds.textContent = weaponKinds[parseInt($weapon.value,16)];
-}
-$armor.onchange = function(){
-    removeOutput();
-}
-$armorType.onchange = function(){
-    removeOutput();
-}
-$frames.onchange = function(){
-    removeOutput();
-}
+        document.getElementById('author').value = author;
+        selectValue.questID = '';
+        document.getElementById('questID').value = '';
+        for (i=1; i<17; i++) {
+          if (res[2][i] === undefined) break;
+          selectValue.questID += res[2][i];
+          document.getElementById('questID').value += res[2][i];
+        }
+        selectValue.weapon = '';
+        document.getElementById('weapon').value = '';
+        let weapon = '';
+        for (i=1; i<res[3].length; i++) {
+          weapon += res[3][i];
+        }
+        for (i=0; i<artifactData.get('T0').weapon.length; i++) {
+          if (artifactData.get('T0').weapon[i] === weapon) {
+            selectValue.weapon = '0' + i;
+            document.getElementById('weapon').value = '0' + i;
+            break;
+          }
+        }
+        selectValue.armor = '';
+        selectValue.armorType = '';
+        document.getElementById('armor').value = '';
+        document.getElementById('armorType').value = '';
+        for (i=0; i<artifactData.get('T0').armor.length; i++) {
+          let a = res[4].indexOf(artifactData.get('T0').armor[i]);
+          if (a !== -1) {
+            selectValue.armor = '0' + i;
+            document.getElementById('armor').value = '0' + i;
+          }
+        }
+        for (i=1; i<6; i++) {
+          const typeName = document.getElementById('armorType').children[i].textContent;
+          const a = res[4].indexOf(typeName);
+          if (a !== -1) {
+            selectValue.armorType = '0' + (i-1);
+            document.getElementById('armorType').value = '0' + (i-1);
+          }
+        }
+        selectValue.level = '';
+        document.getElementById('level').value = '';
+        let level = '';
+        for (i=4; i<res[5].length; i++) {
+          level += res[5][i];
+        }
+        if (level !== '') {
+          document.getElementById('level').value = level;
+          selectValue.level = parseInt(level).toString(16).toUpperCase();
+        }
+        selectValue.monster1 = '';
+        selectValue.monster2 = '';
+        document.getElementById('monster1').value = '';
+        document.getElementById('monster2').value = '';
+        const m1 = res[6].slice(1);
+        const m2 = res[8].slice(1);
+        if (m2 !== '') {
+          monsterData.forEach(element => {
+            if (m2 === element.text) {
+              document.getElementById('monster2').value = element.value;
+              changeM2(element.value);
+            }
+          });
+        } else {
+          changeM2('');
+        }
+        if (m1 !== '') {
+          monsterData.forEach(element => {
+            if (m1 === element.text) {
+              document.getElementById('monster1').value = element.value;
+              changeM1(element.value);
+            }
+          });
+        } else {
+          changeM1('');
+        }
+        for (i=0; i<5; i++) {
+          document.getElementsByClassName('areaType')[i].value = '';
+          document.getElementsByClassName('areaIn')[i].value = '';
+          document.getElementsByClassName('areaOut')[i].value = '';
+          document.getElementsByClassName('areaMonster1')[i].value = '';
+          document.getElementsByClassName('areaMonster2')[i].value = '';
+          document.getElementsByClassName('areaIn')[i].classList.add('visibility');
+          document.getElementsByClassName('areaOut')[i].classList.add('visibility');
+          document.getElementsByClassName('areaMonster1')[i].classList.add('visibility');
+          document.getElementsByClassName('areaMonster2')[i].classList.add('visibility');
+          document.getElementsByClassName('setMonster1')[i].classList.add('visibility');
+          document.getElementsByClassName('setMonster2')[i].classList.add('visibility');
+        }
+        selectValue.areaType = ['','','','',''];
+        selectValue.areaIn = ['','','','',''];
+        selectValue.areaOut = ['','','','',''];
+        selectValue.areaMonster1 = ['','','','',''];
+        selectValue.areaMonster2 = ['','','','',''];
+        selectValue.areaFlag = [false,false,false,false,false];
+        areaNameData.forEach(element => {
+          for (i=0; i<5; i++) {
+            let a = res[10+i][1];
+            let b = element.text[0];
+            if (a === b) {
+              let c = document.getElementsByClassName('areaType')[i];
+              c.value = element.value;
+              areaType(c);
+            }
+          }
+        });
+        for (i=0; i<5; i++) {
+          let a = res[10+i].search(/(○|迷|傾|崖|水|豚|蔦|天|柱|宝|紫|砂)[1-8]/);
+          if (a !== -1) {
+            let c = document.getElementsByClassName('areaIn')[i];
+            c.value = '0' + res[10+i][a+1];
+            changeIn(c);
+          }
+          let b = res[10+i].search(/,[1-8]/);
+          if (b !== -1) {
+            let c = document.getElementsByClassName('areaOut')[i];
+            c.value =  '0' + res[10+i][b+1];
+            changeOut(c);
+          }
+        }
+        for (i=0; i<5; i++) {
+          let a = res[10+i].search(/ (⓪|①|②|③)/);
+          if (a !== -1) {
+            let c = res[10+i][a+1];
+            switch (c) {
+              case '⓪':
+                c = '00';
+                break;
+              case '①':
+                c = '01';
+                break;
+              case '②':
+                c = '02';
+                break;
+              case '③':
+                c = '03';
+                break;
+            }
+            selectValue.areaMonster1[i] = c;
+            document.getElementsByClassName('areaMonster1')[i].value = c;
+          }
+          let b = res[10+i].search(/,(⓪|①|②|③)/);
+          if (b !== -1) {
+            let c = res[10+i][b+1];
+            switch (c) {
+              case '⓪':
+                c = '00';
+                break;
+              case '①':
+                c = '01';
+                break;
+              case '②':
+                c = '02';
+                break;
+              case '③':
+                c = '03';
+                break;
+            }
+            selectValue.areaMonster2[i] = c;
+            document.getElementsByClassName('areaMonster2')[i].value = c;
+          }
+        }
+        selectValue.areaIniM1 = '';
+        selectValue.areaIniM2 = '';
+        selectValue.areaSleepM1 = '';
+        selectValue.areaSleepM2 = '';
+        selectValue.areaMealM1 = '';
+        selectValue.areaMealM2 = '';
+        for (i=0; i<5; i++) {
+          document.getElementsByClassName('iniM1')[i].classList.remove('pink');
+          document.getElementsByClassName('sleepM1')[i].classList.remove('pink');
+          document.getElementsByClassName('mealM1')[i].classList.remove('pink');
+          document.getElementsByClassName('iniM2')[i].classList.remove('blue');
+          document.getElementsByClassName('sleepM2')[i].classList.remove('blue');
+          document.getElementsByClassName('mealM2')[i].classList.remove('blue');
+        }
+        const iniM1 = res[7].search(/初期[1-5]/);
+        if (iniM1 !== -1) {
+          selectValue.areaIniM1 = '0' + res[7].slice(iniM1+2, iniM1+3);
+          document.getElementsByClassName('iniM1')[parseInt(selectValue.areaIniM1)-1].classList.add('pink');
+        }
+        const iniM2 = res[9].search(/初期[1-5]/);
+        if (iniM2 !== -1) {
+          selectValue.areaIniM2 = '0' + res[9].slice(iniM2+2, iniM2+3);
+          document.getElementsByClassName('iniM2')[parseInt(selectValue.areaIniM2)-1].classList.add('blue');
+        }
+        const sleepM1 = res[7].search(/休眠[1-5]/);
+        if (sleepM1 !== -1) {
+          selectValue.areaSleepM1 = '0' + res[7].slice(sleepM1+2, sleepM1+3);
+          document.getElementsByClassName('sleepM1')[parseInt(selectValue.areaSleepM1)-1].classList.add('pink');
+        }
+        const sleepM2 = res[9].search(/休眠[1-5]/);
+        if (sleepM2 !== -1) {
+          selectValue.areaSleepM2 = '0' + res[9].slice(sleepM2+2, sleepM2+3);
+          document.getElementsByClassName('sleepM2')[parseInt(selectValue.areaSleepM2)-1].classList.add('blue');
+        }
+        const mealM1 = res[7].search(/食事[1-5]/);
+        if (mealM1 !== -1) {
+          selectValue.areaMealM1 = '0' + res[7].slice(mealM1+2, mealM1+3);
+          document.getElementsByClassName('mealM1')[parseInt(selectValue.areaMealM1)-1].classList.add('pink');
+        }
+        const mealM2 = res[9].search(/食事[1-5]/);
+        if (mealM2 !== -1) {
+          selectValue.areaMealM2 = '0' + res[9].slice(mealM2+2, mealM2+3);
+          document.getElementsByClassName('mealM2')[parseInt(selectValue.areaMealM2)-1].classList.add('blue');
+        }
+        if (res[15] !== undefined) {
+          alert(`"1~15行目のテキストを読み込みました"\n"16行目以降にもテキストが存在する為、一応クリップボードの中身を全て表示します"\n${clipText}`);
+        }
+      }
+    );
+};
 
 //ロード時
-window.addEventListener("load",function(){
-    for( i=0; i<5; i++){
-        document.getElementsByClassName("hiddenArea")[i].hidden = true; 
-    }
-    hiddenSetTrueM1();
-    hiddenSetTrueM2();
-
-    document.getElementById("hiddenMap").hidden = true;
-    document.getElementById("$btnHidden").hidden = true;
-    document.getElementById("$textareaHidden").hidden = true;
-    document.getElementById("$load").hidden = true;
-});
-
-//コード生成ボタン
-const btnGeneration = document.getElementById("$btnGeneration");
-btnGeneration.addEventListener("click", function(){
-
-    //隠れる要素は変数格納が必要か(値を00にしたいので)
-    let monster1,ini1,sleep1,meal1,area1Posi1,area2Posi1,area3Posi1,area4Posi1,area5Posi1;
-    let monster2,ini2,sleep2,meal2,area1Posi2,area2Posi2,area3Posi2,area4Posi2,area5Posi2;
-    let area1,area1In,area1Out;
-    let area2,area2In,area2Out;
-    let area3,area3In,area3Out;
-    let area4,area4In,area4Out;
-    let area5,area5In,area5Out;
-    //未選択箇所チェックの回避用
-    let flgMonsterNum = 0;
-    let flgArea3 = 0;
-    let flgArea4 = 0;
-    let flgArea5 = 0;
-
-    //モンスター数、総マップ数の隠れた箇所を正規値で自動入力
-    switch($monsterNum.value){
-        case "": break;
-        case "1":
-            monster2 = "00";
-            ini2 = "00";
-            sleep2 = "00";
-            meal2 = "00";
-            area1Posi2 = "00";
-            area2Posi2 = "00";
-            area3Posi2 = "00";
-            area4Posi2 = "00";
-            area5Posi2 = "00";
-            flgMonsterNum = 1;
-            break;
-    }
-    switch($mapNum.value){
-        case "": break;
-        case "2":
-            area3 = "00"; area3In = "01"; area3Out = "01"; flgArea3 = 1;
-            area4 = "00"; area4In = "01"; area4Out = "01"; flgArea4 = 1;
-            area5 = "00"; area5In = "01"; area5Out = "01"; flgArea5 = 1;
-            break;
-        case "3":
-            area4 = "00"; area4In = "01"; area4Out = "01"; flgArea4 = 1;
-            area5 = "00"; area5In = "01"; area5Out = "01"; flgArea5 = 1;
-            break;
-        case "4":
-            area5 = "00"; area5In = "01"; area5Out = "01"; flgArea5 = 1;
-            break;
-    }
-
-
-    //未選択箇所をチェック
-    if($frames.value == "" || $questID.value == "" ||$weapon.value == "" || $armor.value == "" || $armorType.value == "" || $monsterNum.value == "" || $monster1.value == "" || ($monster2.value==""&&flgMonsterNum==0) || $ini1.value==""||($ini2.value==""&&flgMonsterNum==0)||$sleep1.value==""||($sleep2.value==""&&flgMonsterNum==0)||$meal1.value==""||($meal2.value==""&&flgMonsterNum==0)||$mapNum.value==""||$area1.value==""||$area2.value==""||($area3.value==""&&flgArea3==0)||($area4.value==""&&flgArea4==0)||($area5.value==""&&flgArea5==0)||$area1In.value==""||$area2In.value==""||($area3In.value==""&&flgArea3==0)||($area4In.value==""&&flgArea4==0)||($area5In.value==""&&flgArea5==0)||$area1Out.value==""||$area2Out.value==""||($area3Out.value==""&&flgArea3==0)||($area4Out.value==""&&flgArea4==0)||($area5Out.value==""&&flgArea5==0)||$area1Posi1.value==""||($area1Posi2.value==""&&flgMonsterNum==0)||$area2Posi1.value==""||($area2Posi2.value==""&&flgMonsterNum==0)||($area3Posi1.value==""&&flgArea3==0)||($area3Posi2.value==""&&flgMonsterNum==0&&flgArea3==0)||($area4Posi1.value==""&&flgArea4==0)||($area4Posi2.value==""&&flgMonsterNum==0&&flgArea4==0)||($area5Posi1.value==""&&flgArea5==0)||($area5Posi2.value==""&&flgMonsterNum==0&&flgArea5==0)||$iniLev.value==""||$curLev.value==""||$frenzyM1.value==""||$frenzyM2.value==""||$frenzyM3.value==""){
-        alert("\"エラー\"未選択箇所があります");
-    }else{
-
-        //値が入っている事が分かったので変数に代入
-        monster1 = $monster1.value;
-        ini1 = $ini1.value;
-        sleep1 = $sleep1.value;
-        meal1 = $meal1.value;
-
-        if(flgMonsterNum == 0){
-            monster2 = $monster2.value;
-            ini2 = $ini2.value;
-            sleep2 = $sleep2.value;
-            meal2 = $meal2.value;
-        }
-
-        if($area1Posi1.value != ""){
-            area1Posi1 = $area1Posi1.value;
-        }else{
-            area1Posi1 = "00";
-        }
-        if($area2Posi1.value != ""){
-            area2Posi1 = $area2Posi1.value;
-        }else{
-            area2Posi1 = "00";
-        }
-        if($area3Posi1.value != ""){
-            area3Posi1 = $area3Posi1.value;
-        }else{
-            area3Posi1 = "00";
-        }
-        if($area4Posi1.value != ""){
-            area4Posi1 = $area4Posi1.value;
-        }else{
-            area4Posi1 = "00";
-        }
-        if($area5Posi1.value != ""){
-            area5Posi1 = $area5Posi1.value;
-        }else{
-            area5Posi1 = "00";
-        }
-
-        if($area1Posi2.value != ""){
-            area1Posi2 = $area1Posi2.value;
-        }else{
-            area1Posi2 = "00";
-        }
-        if($area2Posi2.value != ""){
-            area2Posi2 = $area2Posi2.value;
-        }else{
-            area2Posi2 = "00";
-        }
-        if($area3Posi2.value != ""){
-            area3Posi2 = $area3Posi2.value;
-        }else{
-            area3Posi2 = "00";
-        }
-        if($area4Posi2.value != ""){
-            area4Posi2 = $area4Posi2.value;
-        }else{
-            area4Posi2 = "00";
-        }
-        if($area5Posi2.value != ""){
-            area5Posi2 = $area5Posi2.value;
-        }else{
-            area5Posi2 = "00";
-        }
-
-        area1 = $area1.value;
-        area1In = $area1In.value;
-        area1Out = $area1Out.value;
-
-        area2 = $area2.value;
-        area2In = $area2In.value;
-        area2Out = $area2Out.value;
-        
-        if(flgArea3 == 0){
-            area3 = $area3.value;
-            area3In = $area3In.value;
-            area3Out = $area3Out.value;
-        }
-        if(flgArea4 == 0){
-            area4 = $area4.value;
-            area4In = $area4In.value;
-            area4Out = $area4Out.value;
-        }
-        if(flgArea5 == 0){
-            area5 = $area5.value;
-            area5In = $area5In.value;
-            area5Out = $area5Out.value;
-        }
-
-        //最終エリアフラグ
-        let endFlag = new Array("00","00","00","00");
-        switch($mapNum.value){
-            case "2": endFlag[0] = "02"; break;
-            case "3": endFlag[1] = "02"; break;
-            case "4": endFlag[2] = "02"; break;
-            case "5": endFlag[3] = "02"; break;
-        }
-
-        //初期レベル、現在レベル
-        let iniLev;
-        let curLev;
-
-        iniLev = document.getElementById("$iniLev").value;
-        iniLev = parseInt(iniLev,10);
-        iniLev = iniLev.toString(16).toUpperCase();
-        if(iniLev.length == 1){
-            iniLev = "0" + iniLev;
-        }
-
-        curLev = document.getElementById("$curLev").value;
-        curLev = parseInt(curLev,10);
-        curLev = curLev.toString(16).toUpperCase();
-        if(curLev.length == 1){
-            curLev = "0" + curLev;
-        }
-
-        //配列
-        let output = new Array(76);
-
-        //開始アドレス
-        let startAddress;
-        switch($frames.value){
-            case '1': startAddress = 0x833DF20; break;
-            case '2': startAddress = 0x833E050; break;
-            case '3': startAddress = 0x833E180; break;
-            case '4': startAddress = 0x833E2B0; break;
-            case '5': startAddress = 0x833E3E0; break;
-            case '6': startAddress = 0x833E510; break;
-            case '7': startAddress = 0x833E640; break;
-            case '8': startAddress = 0x833E770; break;
-            case '9': startAddress = 0x833E8A0; break;
-            case '10': startAddress = 0x833E9D0; break;
-        }
-
-        //クエスト作成者名
-        for(i=0,j=0; i<12; i+=2,j+=1){
-            
-            output[j] = ( "0" + startAddress.toString(16).toUpperCase() + " " + AuthorName[i+1] + AuthorName[i]);
-
-            startAddress += 4;
-        }
-
-        //クエスト識別 ID
-        output[6] = ( "0" + startAddress.toString(16).toUpperCase() + " " + questID1);
-        startAddress += 4;
-        output[7] = ( "0" + startAddress.toString(16).toUpperCase() + " " + questID2);
-        startAddress += 4;
-
-        //空白
-        output[8] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
-        startAddress += 4;
-
-        //出土武器、防具、部位
-        output[9] = ( "0" + startAddress.toString(16).toUpperCase() + " " + $armorType.value + $armor.value + $weapon.value + "00");
-        startAddress += 4;
-
-        //モンスター1体目
-        output[10] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "000000" + monster1);
-        startAddress += 4;
-
-        //01
-        output[11] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000001");
-        startAddress += 4;
-        
-        //モンスター1 初期エリア
-        output[12] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "0007" + ini1 + "FF");
-        startAddress += 4;
-
-        //空白 * 7
-        for(i=0; i<7; i++){
-            output[13+i] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
-            startAddress += 4;
-        }
-        
-        //モンスター2体目
-        output[20] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "000000" + monster2);
-        startAddress += 4;
-
-        //01
-        output[21] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000001");
-        startAddress += 4;
-
-        //モンスター2 初期エリア
-        output[22] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "0007" + ini2 + "FF");
-        startAddress += 4;
-
-        //以下3セット
-        for(cnt=0,j=0;j<3;j++){
-            //空白 * 8
-            for(i=0;i<8;i++){
-                output[23+cnt] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
-                startAddress += 4;
-                cnt ++;
-            }
-
-            //01
-            output[23+cnt] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000001");
-            startAddress += 4;
-            cnt++;
-
-            //FF000700
-            output[23+cnt] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "0007" + "00" + "FF");
-            startAddress += 4;
-            cnt++;
-        }
-
-        //空白 * 7
-        for(i=0;i<7;i++){
-            output[53+i] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
-            startAddress += 4;
-        }
-
-        //モンスター1　食事、休眠、位置、位置
-        output[60] = ( "0" + startAddress.toString(16).toUpperCase() + " " + area2Posi1 + area1Posi1 + sleep1 + meal1);
-        startAddress += 4;
-
-        //モンスター1　位置、位置、位置、モンスター2食事
-        output[61] = ( "0" + startAddress.toString(16).toUpperCase() + " " + meal2 + area5Posi1 + area4Posi1 + area3Posi1);
-        startAddress += 4;
-
-        //モンスター2　休眠、位置、位置、位置
-        output[62] = ( "0" + startAddress.toString(16).toUpperCase() + " " + area3Posi2 + area2Posi2 + area1Posi2 + sleep2);
-        startAddress += 4;
-
-        //モンスター2　位置、位置、00、00
-        output[63] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00" + "00" + area5Posi2 + area4Posi2);
-        startAddress += 4;
-
-        //空白 * 5
-        for(i=0;i<5;i++){
-            output[64+i] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00000000");
-            startAddress += 4;
-        }
-
-
-
-        //エリア1マップID、入口、出口、最終エリアフラグ
-        output[69] = ( "0" + startAddress.toString(16).toUpperCase() + " " + endFlag[0] + area1Out + area1In + area1);
-        startAddress += 4;
-
-        //エリア2マップID、入口、出口、最終エリアフラグ
-        output[70] = ( "0" + startAddress.toString(16).toUpperCase() + " " + endFlag[1] + area2Out + area2In + area2);
-        startAddress += 4;
-
-        //エリア3マップID、入口、出口、最終エリアフラグ
-        output[71] = ( "0" + startAddress.toString(16).toUpperCase() + " " + endFlag[2] + area3Out + area3In + area3);
-        startAddress += 4;
-
-        //エリア4マップID、入口、出口、最終エリアフラグ
-        output[72] = ( "0" + startAddress.toString(16).toUpperCase() + " " + endFlag[3] + area4Out + area4In + area4);
-        startAddress += 4;
-
-        //エリア5マップID、入口、出口、最終エリアフラグ
-        output[73] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00" + area5Out + area5In + area5);
-        startAddress += 4;
-
-        //初期レベル、現在レベル、お宝(RARE)フラグ、モンス1狂竜化
-        output[74] = ( "0" + startAddress.toString(16).toUpperCase() + " " + $frenzyM1.value + RARE + curLev + iniLev);
-        startAddress += 4;
-
-        //モンス2狂竜化、乱入モンス狂竜化、00、00
-        output[75] = ( "0" + startAddress.toString(16).toUpperCase() + " " + "00" + "00" + $frenzyM3.value + $frenzyM2.value);
-        startAddress += 4;
-
-
-        
-        removeOutput();
-
-        //出力、生成
-        count += 1;
-
-        document.getElementById("$btnHidden").hidden = false;
-
-        for(i=0; i<76; i++){
-        // id属性で要素を取得
-        let div_element = document.getElementById('$output');
-
-        // 新しいHTML要素を作成
-        let new_element = document.createElement('dd');
-        new_element.textContent = output[i];
-        new_element.id = "$output"+i;
-
-        // 指定した要素の中の末尾に挿入
-        div_element.appendChild(new_element);
-
-        //$coppy1
-        $coppy1.value = $coppy1.value + output[i] + "\n";
-        }
-        
-        
-        //情報info
-        let info = new Array("【MH4Gクエスト情報】","\n","frame: ",$frames.value,"\n",$Author.value,"\n",$questID.value,"\n",$weapon[parseInt($weapon.value,16)+1].textContent,"\n",$weaponKinds.textContent,"\n",$armor[parseInt($armor.value,16)+1].textContent," ",$armorType[parseInt($armorType.value,16)+1].textContent,"\n",monsterName[parseInt(monster1,16)]," / ",ini1,",",meal1,",",sleep1,"\n",monsterName[parseInt(monster2,16)]," / ",ini2,",",meal2,",",sleep2,"\n",areaName[parseInt(area1,16)]," / ",area1In,",",area1Out,",",area1Posi1,",",area1Posi2,"\n",areaName[parseInt(area2,16)]," / ",area2In,",",area2Out,",",area2Posi1,",",area2Posi2,"\n",areaName[parseInt(area3,16)]," / ",area3In,",",area3Out,",",area3Posi1,",",area3Posi2,"\n",areaName[parseInt(area4,16)]," / ",area4In,",",area4Out,",",area4Posi1,",",area4Posi2,"\n",areaName[parseInt(area5,16)]," / ",area5In,",",area5Out,",",area5Posi1,",",area5Posi2,"\n","最終エリア: ",$mapNum.value,"\n","初期レベル: ",$iniLev.value,"\n","現在レベル: ",$curLev.value,"\n","RARE: ",$RARE.checked,"\n","狂竜: ",$frenzyM1.value,",",$frenzyM2.value,",",$frenzyM3.value);
-        for(i=0; i<info.length; i++){
-
-            $coppy2.value = $coppy2.value + info[i];
-        }
-
-
-        
-
-
-    }
-});
-
-
-//読み込みボタン
-const btnLoad = document.getElementById("$btnLoad");
-btnLoad.addEventListener("click", function(){
-
-    if(navigator.clipboard){
-        navigator.clipboard.readText()
-        .then(function(text){
-            $load.textContent = text;
-
-
-            let cnt1 = 0;                                   //改行数
-            let string1 = "";                               //frame
-            let string2 = "";                               //作成者名
-            let string3 = "";                               //クエストID
-            let q1 = ""; let q2 = ""; let tmp17 = 0;
-            let string4 = ""; let val1 = "";                //出土武器種名
-            let string5 = ""; let val2 = "";                //防具シリーズ
-            let string6 = ""; let val3 = "";                //部位
-            let tmp1 = 0;                                   //防具、部位で使用
-            let string7 = "";                               //モンスター1
-            let string8 = "";                               //モンスター2
-            let val4 = ""; let val5 = ""; let val6 = "";    //m1初期、食事、休眠
-            let val7 = ""; let val8 = ""; let val9 = "";    //m2初期、食事、休眠
-            let tmp2 = 0; let tmp3 = 0;                     //m1 tmp
-            let tmp4 = 0; let tmp5 = 0;                     //m2 tmp
-            let val10 = ""; let val11 = "";                 //モンスターID
-            let string9 = ""; let val12 = ""; let val13 = ""; let val14 = ""; let val15 = ""; let tmp6 = 0; let tmp7 = 0;          //エリア1
-            let string10 = ""; let val16 = ""; let val17 = ""; let val18 = ""; let val19 = ""; let tmp8 = 0; let tmp9 = 0;         //エリア2
-            let string11 = ""; let val20 = ""; let val21 = ""; let val22 = ""; let val23 = ""; let tmp10 = 0; let tmp11 = 0;       //エリア3
-            let string12 = ""; let val24 = ""; let val25 = ""; let val26 = ""; let val27 = ""; let tmp12 = 0; let tmp13 = 0;       //エリア4
-            let string13 = ""; let val28 = ""; let val29 = ""; let val30 = ""; let val31 = ""; let tmp14 = 0; let tmp15 = 0;       //エリア5
-            let val32 = ""; let val33 = ""; let val34 = ""; //最終、初期、現在
-            let val35 = ""; let val36 = ""; let val37 = ""; let val38 = ""; let val39 = "";                                        //マップID
-            let string14 = ""; let val44 = "";              //RARE
-            let val40 = ""; let val41 = ""; let val42 = ""; let tmp16 = 0;                                                         //狂竜化
-            let val43 = "2";                                //モンスター数
-
-            for(i=0; i<$load.textContent.length; i++){
-
-                //改行数
-                if($load.textContent[i] == "\n" ){
-                    cnt1 ++;
-                }
-
-                //frame
-                if(cnt1 == 1 && $load.textContent[i] != " " && $load.textContent[i] != "\n"  && $load.textContent[i] != "\r" && isNaN($load.textContent[i]) == false){
-                    string1 += $load.textContent[i];
-                }
-
-                //作成者名
-                if(cnt1 == 2 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    string2 += $load.textContent[i];
-                }
-
-                //クエストID
-                if(cnt1 == 3 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    string3 += $load.textContent[i];
-                    //スペース追加
-                    if(string3.length == 8){
-                        string3 += " ";
-                    }
-                    //q1、q2
-                    if(tmp17 < 8){
-                        q1 += $load.textContent[i];
-                        tmp17 += 1;
-                    }else{
-                        q2 += $load.textContent[i];
-                    }
-                }
-
-                //出土武器種名
-                if(cnt1 == 4 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    string4 += $load.textContent[i];
-                }
-
-                //防具シリーズ、部位
-                if(cnt1 == 6 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    if(tmp1 == 2){
-                        string6 += $load.textContent[i];
-                    }
-                    if($load.textContent[i] == "(" || $load.textContent[i] == ")" ){
-                        tmp1 += 1;
-                    }
-                    if(tmp1 == 0){
-                        string5 += $load.textContent[i];
-                    }
-                }
-
-                //モンスター1
-                if(cnt1 == 7 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    
-                    if(tmp2 == 1){
-                        if($load.textContent[i] == ","){
-                            tmp3 += 1;
-                        }
-                        if(isNaN($load.textContent[i]) == false){
-                            switch (tmp3) {
-                                case 0: val4+=$load.textContent[i]; break;
-                                case 1: val5+=$load.textContent[i]; break;
-                                case 2: val6+=$load.textContent[i]; break;
-                            }
-                        }
-                    }
-                    if($load.textContent[i] == "/"){
-                        tmp2 += 1;
-                    }
-                    if(tmp2 == 0){
-                        string7 += $load.textContent[i];
-                    }
-                }
-
-                //モンスター2
-                if(cnt1 == 8 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    
-                    if(tmp4 == 1){
-                        if($load.textContent[i] == ","){
-                            tmp5 += 1;
-                        }
-                        if(isNaN($load.textContent[i]) == false){
-                            switch (tmp5) {
-                                case 0: val7+=$load.textContent[i]; break;
-                                case 1: val8+=$load.textContent[i]; break;
-                                case 2: val9+=$load.textContent[i]; break;
-                            }
-                        }
-                    }
-                    if($load.textContent[i] == "/"){
-                        tmp4 += 1;
-                    }
-                    if(tmp4 == 0){
-                        string8 += $load.textContent[i];
-                    }
-                }
-
-                //エリア1
-                if(cnt1 == 9 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    
-                    if(tmp6 == 1){
-                        if($load.textContent[i] == ","){
-                            tmp7 += 1;
-                        }
-                        if(isNaN($load.textContent[i]) == false){
-                            switch (tmp7) {
-                                case 0: val12+=$load.textContent[i]; break;
-                                case 1: val13+=$load.textContent[i]; break;
-                                case 2: val14+=$load.textContent[i]; break;
-                                case 3: val15+=$load.textContent[i]; break;
-                            }
-                        }
-                    }
-                    if($load.textContent[i] == "/"){
-                        tmp6 += 1;
-                    }
-                    if(tmp6 == 0){
-                        string9 += $load.textContent[i];
-                    }
-                }
-
-                //エリア2
-                if(cnt1 == 10 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    
-                    if(tmp8 == 1){
-                        if($load.textContent[i] == ","){
-                            tmp9 += 1;
-                        }
-                        if(isNaN($load.textContent[i]) == false){
-                            switch (tmp9) {
-                                case 0: val16+=$load.textContent[i]; break;
-                                case 1: val17+=$load.textContent[i]; break;
-                                case 2: val18+=$load.textContent[i]; break;
-                                case 3: val19+=$load.textContent[i]; break;
-                            }
-                        }
-                    }
-                    if($load.textContent[i] == "/"){
-                        tmp8 += 1;
-                    }
-                    if(tmp8 == 0){
-                        string10 += $load.textContent[i];
-                    }
-                }
-
-                //エリア3
-                if(cnt1 == 11 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    
-                    if(tmp10 == 1){
-                        if($load.textContent[i] == ","){
-                            tmp11 += 1;
-                        }
-                        if(isNaN($load.textContent[i]) == false){
-                            switch (tmp11) {
-                                case 0: val20+=$load.textContent[i]; break;
-                                case 1: val21+=$load.textContent[i]; break;
-                                case 2: val22+=$load.textContent[i]; break;
-                                case 3: val23+=$load.textContent[i]; break;
-                            }
-                        }
-                    }
-                    if($load.textContent[i] == "/"){
-                        tmp10 += 1;
-                    }
-                    if(tmp10 == 0){
-                        string11 += $load.textContent[i];
-                    }
-                }
-
-                //エリア4
-                if(cnt1 == 12 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    
-                    if(tmp12 == 1){
-                        if($load.textContent[i] == ","){
-                            tmp13 += 1;
-                        }
-                        if(isNaN($load.textContent[i]) == false){
-                            switch (tmp13) {
-                                case 0: val24+=$load.textContent[i]; break;
-                                case 1: val25+=$load.textContent[i]; break;
-                                case 2: val26+=$load.textContent[i]; break;
-                                case 3: val27+=$load.textContent[i]; break;
-                            }
-                        }
-                    }
-                    if($load.textContent[i] == "/"){
-                        tmp12 += 1;
-                    }
-                    if(tmp12 == 0){
-                        string12 += $load.textContent[i];
-                    }
-                }
-
-                //エリア5
-                if(cnt1 == 13 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    
-                    if(tmp14 == 1){
-                        if($load.textContent[i] == ","){
-                            tmp15 += 1;
-                        }
-                        if(isNaN($load.textContent[i]) == false){
-                            switch (tmp15) {
-                                case 0: val28+=$load.textContent[i]; break;
-                                case 1: val29+=$load.textContent[i]; break;
-                                case 2: val30+=$load.textContent[i]; break;
-                                case 3: val31+=$load.textContent[i]; break;
-                            }
-                        }
-                    }
-                    if($load.textContent[i] == "/"){
-                        tmp14 += 1;
-                    }
-                    if(tmp14 == 0){
-                        string13 += $load.textContent[i];
-                    }
-                }
-
-                //最終、初期、現在
-                if(cnt1 == 14 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r" && isNaN($load.textContent[i]) == false){
-                    val32 += $load.textContent[i];
-                }
-                if(cnt1 == 15 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r" && isNaN($load.textContent[i]) == false){
-                    val33 += $load.textContent[i];
-                }
-                if(cnt1 == 16 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r" && isNaN($load.textContent[i]) == false){
-                    val34 += $load.textContent[i];
-                }
-
-                //RARE
-                if(cnt1 == 17 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    string14 += $load.textContent[i]
-                }
-
-                //狂竜
-                if(cnt1 == 18 && $load.textContent[i] != " " && $load.textContent[i] != "\n" && $load.textContent[i] != "\r"){
-                    
-                    
-                    if($load.textContent[i] == ","){
-                        tmp16 += 1;
-                    }
-
-                    if(isNaN($load.textContent[i]) == false){
-                        switch (tmp16) {
-                            case 0: val40+=$load.textContent[i]; break;
-                            case 1: val41+=$load.textContent[i]; break;
-                            case 2: val42+=$load.textContent[i]; break;
-                        }
-                    }
-                }
-                    
-                
-
-            }
-
-
-            switch (string4) {  //武器種変換
-                case "アックス/操虫棍":
-                case "スラッシュアックス/操虫棍":
-                case "チャージアックス/操虫棍":
-                case "スラッシュアックス":
-                case "チャージアックス":
-                case "操虫棍":
-                val1 = "00"; break;
-
-                case "大剣/太刀": val1 = "01"; break;
-                case "片手剣/双剣": val1 = "02"; break;
-                case "ランス/ガンランス": val1 = "03"; break;
-                case "ハンマー/狩猟笛": val1 = "04"; break;
-                
-                case "弓/ボウガン":
-                case "弓/ライトボウガン":
-                case "弓/へビィボウガン":
-                val1 = "05"; break;
-            
-                default:
-                    break;
-            }
-            switch (string5) {  //防具シリーズ変換
-                case "オリジナルA": val2="00"; break;
-                case "オリジナルB": val2="01"; break;
-                case "オリジナルC": val2="02"; break;
-                case "オリジナルD": val2="03"; break;
-                case "オリジナルE": val2="04"; break;
-                case "オリジナルF": val2="05"; break;
-                case "トライA": val2="06"; break;
-                case "トライB": val2="07"; break;
-                case "トライC": val2="08"; break;
-                case "トライD": val2="09"; break;
-                case "トライE": val2="0A"; break;
-                case "トライF": val2="0B"; break;
-                case "ドスA": val2="0C"; break;
-                case "ドスB": val2="0D"; break;
-                case "ドスC": val2="0E"; break;
-                case "ドスD": val2="0F"; break;
-                case "ドスE": val2="10"; break;
-                case "ドスF": val2="11"; break;
-                default: break;
-            }
-            switch (string6) {  //防具部位変換
-                case "胴": val3="00"; break;
-                case "腕": val3="01"; break;
-                case "腰": val3="02"; break;
-                case "脚": val3="03"; break;
-                case "頭": val3="04"; break;
-                default: break;
-            }
-            switch (string7) {  //モンスター1変換
-                case "イャンクック": val10="07"; break;
-                case "イャンクック亜種": val10="08"; break;
-                case "ティガレックス": val10="0B"; break;
-                case "ティガレックス亜種": val10="0C"; break;
-                case "ドスランポス": val10="10"; break;
-                case "ラージャン": val10="13"; break;
-                case "ゴア・マガラ": val10="1C"; break;
-                case "シャガル・マガラ": val10="1D"; break;
-                case "イャンガルルガ": val10="1E"; break;
-                case "クシャルダオラ": val10="1F"; break;
-                case "テオ・テスカトル": val10="20"; break;
-                case "キリン": val10="22"; break;
-                case "キリン亜種": val10="23"; break;
-                case "バサルモス": val10="26"; break;
-                case "バサルモス亜種": val10="27"; break;
-                case "ブラキディオス": val10="2C"; break;
-                case "ジンオウガ": val10="30"; break;
-                case "ジンオウガ亜種": val10="31"; break;
-                case "イビルジョー": val10="2A"; break;
-                case "セルレギオス": val10="58"; break;
-                case "ディアブロス": val10="63"; break;
-                case "ディアブロス": val10="64"; break;
-                case "オオナズチ": val10="67"; break;
-                case "ダイミョウザザミ亜種": val10="6C"; break;
-            }
-            switch (string8) {  //モンスター2変換
-                case "なし": val11="00"; val43="1"; break;
-                case "イャンクック": val11="07"; break;
-                case "イャンクック亜種": val11="08"; break;
-                case "ティガレックス": val11="0B"; break;
-                case "ティガレックス亜種": val11="0C"; break;
-                case "ドスランポス": val11="10"; break;
-                case "ラージャン": val11="13"; break;
-                case "ゴア・マガラ": val11="1C"; break;
-                case "シャガル・マガラ": val11="1D"; break;
-                case "イャンガルルガ": val11="1E"; break;
-                case "クシャルダオラ": val11="1F"; break;
-                case "テオ・テスカトル": val11="20"; break;
-                case "キリン": val11="22"; break;
-                case "キリン亜種": val11="23"; break;
-                case "バサルモス": val11="26"; break;
-                case "バサルモス亜種": val11="27"; break;
-                case "ブラキディオス": val11="2C"; break;
-                case "ジンオウガ": val11="30"; break;
-                case "ジンオウガ亜種": val11="31"; break;
-                case "イビルジョー": val11="2A"; break;
-                case "セルレギオス": val11="58"; break;
-                case "ディアブロス": val11="63"; break;
-                case "ディアブロス": val11="64"; break;
-                case "オオナズチ": val11="67"; break;
-                case "ダイミョウザザミ亜種": val11="6C"; break;
-            }
-            switch (string9) {  //エリア1変換
-                case "BC": val35="00"; break;
-                case "迷路": val35="01"; break;
-                case "傾斜": val35="02"; break;
-                case "崖": val35="03"; break;
-                case "水": val35="04"; break;
-                case "豚": val35="05"; break;
-                case "蔦": val35="06"; break;
-                case "天井": val35="07"; break;
-                case "柱": val35="08"; break;
-                case "宝": val35="0A"; break;
-                case "水晶": val35="0B"; break;
-                case "砂漠": val35="0C"; break;
-            }
-            switch (string10) {  //エリア2変換
-                case "BC": val36="00"; break;
-                case "迷路": val36="01"; break;
-                case "傾斜": val36="02"; break;
-                case "崖": val36="03"; break;
-                case "水": val36="04"; break;
-                case "豚": val36="05"; break;
-                case "蔦": val36="06"; break;
-                case "天井": val36="07"; break;
-                case "柱": val36="08"; break;
-                case "宝": val36="0A"; break;
-                case "水晶": val36="0B"; break;
-                case "砂漠": val36="0C"; break;
-            }
-            switch (string11) {  //エリア3変換
-                case "BC": val37="00"; break;
-                case "迷路": val37="01"; break;
-                case "傾斜": val37="02"; break;
-                case "崖": val37="03"; break;
-                case "水": val37="04"; break;
-                case "豚": val37="05"; break;
-                case "蔦": val37="06"; break;
-                case "天井": val37="07"; break;
-                case "柱": val37="08"; break;
-                case "宝": val37="0A"; break;
-                case "水晶": val37="0B"; break;
-                case "砂漠": val37="0C"; break;
-            }
-            switch (string12) {  //エリア4変換
-                case "BC": val38="00"; break;
-                case "迷路": val38="01"; break;
-                case "傾斜": val38="02"; break;
-                case "崖": val38="03"; break;
-                case "水": val38="04"; break;
-                case "豚": val38="05"; break;
-                case "蔦": val38="06"; break;
-                case "天井": val38="07"; break;
-                case "柱": val38="08"; break;
-                case "宝": val38="0A"; break;
-                case "水晶": val38="0B"; break;
-                case "砂漠": val38="0C"; break;
-            }
-            switch (string13) {  //エリア5変換
-                case "BC": val39="00"; break;
-                case "迷路": val39="01"; break;
-                case "傾斜": val39="02"; break;
-                case "崖": val39="03"; break;
-                case "水": val39="04"; break;
-                case "豚": val39="05"; break;
-                case "蔦": val39="06"; break;
-                case "天井": val39="07"; break;
-                case "柱": val39="08"; break;
-                case "宝": val39="0A"; break;
-                case "水晶": val39="0B"; break;
-                case "砂漠": val39="0C"; break;
-            }
-            //16進数変換 (いらなかった)
-            // val33 = parseInt(val33,10).toString(16).toUpperCase();
-            // val34 = parseInt(val34,10).toString(16).toUpperCase();
-            switch (string14) { //RARE変換
-                case "RARE:true": string14="true"; val44="01"; break;
-                case "RARE:false": string14="false"; val44="00"; break;
-            }
-
-            
-            // console.log(string1);
-            // console.log(string2);
-            // console.log(string3);
-            // console.log(string4,val1);
-            // console.log(string5,val2);
-            // console.log(string6,val3);
-            // console.log(string7,val10,val4,val5,val6);
-            // console.log(string8,val11,val7,val8,val9);
-            // console.log(string9,val35,val12,val13,val14,val15);
-            // console.log(string10,val36,val16,val17,val18,val19);
-            // console.log(string11,val37,val20,val21,val22,val23);
-            // console.log(string12,val38,val24,val25,val26,val27);
-            // console.log(string13,val39,val28,val29,val30,val31);
-            // console.log(val32,val33,val34);
-            // console.log(string14);
-            // console.log(val40,val41,val42);
-            // console.log(q1,q2);
-
-            //値をはめる
-            $frames.value = string1;
-            $Author.value = string2;
-            AuthorChange();
-            $questID.value = string3;
-            questID1 = q1;
-            questID2 = q2;
-            $weapon.value = val1;
-            $armor.value = val2;
-            $armorType.value = val3;
-            $monsterNum.value = val43;
-            monsterNumChange();
-
-            $monster1.value = val10;
-            $monster2.value = val11;
-            $ini1.value = val4;
-            $ini2.value = val7;
-            $meal1.value = val5;
-            $meal2.value = val8;
-            $sleep1.value = val6;
-            $sleep2.value = val9;
-            
-            $area1Posi1.value = val14;
-            $area1Posi2.value = val15;
-            $area2Posi1.value = val18;
-            $area2Posi2.value = val19;
-            $area3Posi1.value = val22;
-            $area3Posi2.value = val23;
-            $area4Posi1.value = val26;
-            $area4Posi2.value = val27;
-            $area5Posi1.value = val30;
-            $area5Posi2.value = val31;
-            
-            textSetM1();
-            textSetM2();
-            
-            $mapNum.value = val32;
-            mapNumChange();
-            $area1.value = val35;
-            $area1In.value = val12;
-            $area1Out.value = val13;
-            $area2.value = val36;
-            $area2In.value = val16;
-            $area2Out.value = val17;
-            $area3.value = val37;
-            $area3In.value = val20;
-            $area3Out.value = val21;
-            $area4.value = val38;
-            $area4In.value = val24;
-            $area4Out.value = val25;
-            $area5.value = val39;
-            $area5In.value = val28;
-            $area5Out.value = val29;
-            area1Change();
-            area2Change();
-            area3Change();
-            area4Change();
-            area5Change();
-
-            
-            
-            $iniLev.value = val33;
-            $curLev.value = val34;
-            if(string14 == "true"){
-                $RARE.checked = true;
-            }else{
-                $RARE.checked = false;
-            }
-            RARE = val44;
-            $frenzyM1.value = val40;
-            $frenzyM2.value = val41;
-            $frenzyM3.value = val42;
-
-            removeOutput();
-
-        });
-    }
-
-});
+window.onload = function() {
+  setMonster1Select();
+  setMonster2Select(2);
+  setArtifactSelect();
+  setAreaTypeSelect();
+  let a = localStorage.getItem('guideFlag');
+  if (a === 'none') {
+    document.getElementById('guideMessage').style.display = 'none';
+    document.getElementsByClassName('guideChange')[1].classList.add('currentGuide');
+  } else {
+    document.getElementsByClassName('guideChange')[0].classList.add('currentGuide');
+  }
+}
 
 
