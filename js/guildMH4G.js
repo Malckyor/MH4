@@ -1536,7 +1536,7 @@ function generate() {
       frenzyM2 = monsterData.get(selectValue.monster2).frenzy;
     }
     let resultCode = document.getElementsByClassName('result')[1];
-    resultCode.innerHTML = `E833E9D0 00000098<br>
+    resultCode.innerHTML = `E833E9D0 00000130<br>
 ${selectValue.author[1]}${selectValue.author[0]} ${selectValue.author[3]}${selectValue.author[2]}<br>
 ${selectValue.author[5]}${selectValue.author[4]} ${selectValue.author[7]}${selectValue.author[6]}<br>
 ${selectValue.author[9]}${selectValue.author[8]} ${selectValue.author[11]}${selectValue.author[10]}<br>
