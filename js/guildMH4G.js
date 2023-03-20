@@ -1766,11 +1766,14 @@ const pasteFromClipboard = ()=>{
         selectValue.armorType = '';
         document.getElementById('armor').value = '';
         document.getElementById('armorType').value = '';
+        console.log(res[4]);
         for (i=0; i<artifactData.get('T0').armor.length; i++) {
+          console.log(artifactData.get('T0').armor[i]);
           let a = res[4].indexOf(artifactData.get('T0').armor[i]);
+          console.log(a);
           if (a !== -1) {
-            selectValue.armor = '0' + i;
-            document.getElementById('armor').value = '0' + i;
+            selectValue.armor = '0' + i.toString(16).toUpperCase();
+            document.getElementById('armor').value = '0' + i.toString(16).toUpperCase();
           }
         }
         for (i=1; i<6; i++) {
