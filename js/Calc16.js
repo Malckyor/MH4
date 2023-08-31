@@ -5,6 +5,7 @@ let condition_Del = true;
 let condition_mark = true;
 let condition_zero = true;
 let condition_equal = true;
+let currentLanguage = localStorage.getItem("currentLanguage");
 
 
 window.onload = function(){
@@ -561,7 +562,13 @@ function history(){
         equalCheck();
         DelCheck();
 
-        alert(`HEX → ${document.getElementsByClassName("route")[0].innerText} = ${document.getElementById("HEX").innerText}\nDEC → ${document.getElementsByClassName("route")[1].innerText} = ${document.getElementById("DEC").innerText}\nの途中式&結果を復元しました`);
+        if (currentLanguage === "en") {
+            restoredMessage = "Restored old formulas and results.";
+        } else {
+            restoredMessage = "の途中式&結果を復元しました";
+        }
+        
+        alert(`HEX → ${document.getElementsByClassName("route")[0].innerText} = ${document.getElementById("HEX").innerText}\nDEC → ${document.getElementsByClassName("route")[1].innerText} = ${document.getElementById("DEC").innerText}\n${restoredMessage}`);
     };
     new_element2.onclick = function(){
         document.getElementsByClassName("route")[0].innerText = history_HEX_route[this.className];
@@ -574,7 +581,13 @@ function history(){
         equalCheck();
         DelCheck();
 
-        alert(`HEX → ${document.getElementsByClassName("route")[0].innerText} = ${document.getElementById("HEX").innerText}\nDEC → ${document.getElementsByClassName("route")[1].innerText} = ${document.getElementById("DEC").innerText}\nの途中式&結果を復元しました`);
+        if (currentLanguage === "en") {
+            restoredMessage = "Restored old formulas and results.";
+        } else {
+            restoredMessage = "の途中式&結果を復元しました";
+        }
+
+        alert(`HEX → ${document.getElementsByClassName("route")[0].innerText} = ${document.getElementById("HEX").innerText}\nDEC → ${document.getElementsByClassName("route")[1].innerText} = ${document.getElementById("DEC").innerText}\n${restoredMessage}`);
     };
 
     

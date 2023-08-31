@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head prefix=”og: http://ogp.me/ns#”>
+  <meta property="og:url" content="https://r77tchan.github.io/MH4/html/guildMH4G.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="MH4Gギルクエ作成ツール" />
+  <meta property="og:description" content="description" />
+  <meta property="og:site_name" content="site_name" />
+  <meta property="og:image" content="https://r77tchan.github.io/MH4/image/favicon4.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@senaga19" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="モンスターハンター4Gのギルクエ作成ツール">
+  <meta name="thumbnail" content="https://r77tchan.github.io/MH4/image/favicon4.png">
+
+  <link rel="shortcut icon" href="../image/favicon4.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../image/favicon4.png" sizes="180x180">
+  <link rel="icon" type="image/png" href="../image/favicon4.png" sizes="192x192">
+
+  <title>MH4Gギルクエ作成ツール</title>
+  <link rel="stylesheet" href="../css/guildMH4G.css">
+</head>
+
+<body>
+  <header>
+    <h1><a href="../index.html">MH4 MH4G改造チート</a></h1>
+  </header>
+
+  <main>
+    <h2>MH4Gギルクエ作成ツール</h2>
+    <div id="guideMessage">
+      <p><a target="_blank" href="https://twitter.com/senaga19">Twitter</a>または<a target="_blank" href="https://liff.line.me/1645278921-kWRPP32q/?accountId=227qeqca">公式LINE</a>にて作成代行を承ります</p>
+      <p>任意のクエスト作成者名→1500円</p>
+      <p>クエスト作成者名＠senaga19→無料</p>
+      <p>にてゲーム内で受け渡します</p>
+      <p>代行や使い方について詳しくは<a target="_blank" href="https://blog.mh4.jp/archives/172">blog.mh4.jp</a>に書いてますのでご確認下さい</p>
+      <p>このメッセージは右下のストレージタブから非表示にできます</p>
+    </div>
+
+    <div class="switchTabFlex">
+      <span class="switchTab onTab" onclick="createTabChange()">作成タブ</span>
+      <span class="switchTab offTab" onclick="storageTabChange()">ストレージ</span>
+    </div>
+    
+    <div class="createContainer">
+      <div class="buttonWarapper">        
+        <button onclick="loadInfo()">クエスト情報読み込み</button>
+        <button onclick="saveStorage()">ストレージ保存</button>
+      </div>
+
+
+      <p style="background-color: aquamarine;">monster</p>
+
+
+      <div class="monster1">
+        <label for="monster1">モンスター1体目</label>
+        <select id="monster1">
+          <option value=""></option>
+        </select>
+      </div>
+
+      <div class="monster2">
+        <label for="monster2">モンスター2体目</label>
+        <select id="monster2">
+          <option value=""></option>
+        </select>
+      </div>
+
+      <div class="weapon">
+        <label for="weapon">出土武器</label>
+        <br>
+        <select id="weapon">
+          <option value=""></option>
+          <option value="00">スクリプトを読み込んで下さい</option>
+          <option value="01">スクリプトを読み込んで下さい</option>
+          <option value="02">スクリプトを読み込んで下さい</option>
+          <option value="03">スクリプトを読み込んで下さい</option>
+          <option value="04">スクリプトを読み込んで下さい</option>
+          <option value="05">スクリプトを読み込んで下さい</option>
+        </select>
+      </div>
+
+      <div class="armor">
+        <label for="armor">出土防具</label>
+        <br>
+        <select id="armor">
+          <option value=""></option>
+          <option value="00">スクリプトを読み込んで下さい</option>
+          <option value="01">スクリプトを読み込んで下さい</option>
+          <option value="02">スクリプトを読み込んで下さい</option>
+          <option value="03">スクリプトを読み込んで下さい</option>
+          <option value="04">スクリプトを読み込んで下さい</option>
+          <option value="05">スクリプトを読み込んで下さい</option>
+          <option value="06">スクリプトを読み込んで下さい</option>
+          <option value="07">スクリプトを読み込んで下さい</option>
+          <option value="08">スクリプトを読み込んで下さい</option>
+          <option value="09">スクリプトを読み込んで下さい</option>
+          <option value="0A">スクリプトを読み込んで下さい</option>
+          <option value="0B">スクリプトを読み込んで下さい</option>
+          <option value="0C">スクリプトを読み込んで下さい</option>
+          <option value="0D">スクリプトを読み込んで下さい</option>
+          <option value="0E">スクリプトを読み込んで下さい</option>
+          <option value="0F">スクリプトを読み込んで下さい</option>
+          <option value="10">スクリプトを読み込んで下さい</option>
+          <option value="11">スクリプトを読み込んで下さい</option>
+        </select>
+      </div>
+
+      <div class="armorType">
+        <label for="armorType">防具部位</label>
+        <select id="armorType">
+          <option value=""></option>
+          <option value="00">胴</option>
+          <option value="01">腕</option>
+          <option value="02">腰</option>
+          <option value="03">脚</option>
+          <option value="04">頭</option>          
+        </select>
+      </div>
+
+      <div class="level">
+        <label for="level">初期レベル</label>
+        <input type="number" id="level" min="1" max="140" step="1">
+      </div>
+
+      
+      <p style="background-color: aquamarine;">maps</p>
+
+
+      
+      <img src="../image/map2.png">
+
+      <div class="area">
+        エリア1
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <hr>
+      
+      <div class="area">
+        エリア2
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="area">
+        エリア3
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="area">
+        エリア4
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="area">
+        エリア5
+        <select class="areaType">
+          <option value=""></option>
+        </select>
+        <select class="areaIn visibility">
+          <option value=""></option>
+        </select>
+        <select class="areaOut visibility">
+          <option value=""></option>
+        </select>
+        <div class="areaMonster">
+          <span class="areaMonster1Name visibility">モンスター1</span>
+          <select class="areaMonster1 visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster1 visibility">
+            <span class="set3 iniM1">初期</span>
+            <span class="set3 sleepM1">休眠</span>
+            <span class="set3 mealM1">食事</span>
+          </span>
+        </div>
+        <div class="areaMonster">
+          <span class="areaMonster2Name visibility">モンスター2</span>
+          <select class="areaMonster2 visibility visibility">
+            <option value=""></option>
+          </select>
+          <span class="setMonster2 visibility">
+            <span class="set3 iniM2">初期</span>
+            <span class="set3 sleepM2">休眠</span>
+            <span class="set3 mealM2">食事</span>
+          </span>
+        </div>
+      </div>
+
+      <img src="../image/map2.png">
+
+
+      <p style="background-color: aquamarine;">author</p>
+
+
+      <div class="author">
+        <label for="author">クエスト作成者名</label>
+        <br>
+        <textarea id="author" rows="1" maxlength="12"></textarea>
+      </div>
+
+      <div class="questID">
+        <label for="questID">クエスト識別ID</label>
+        <br>
+        <textarea id="questID" rows="1" maxlength="16"></textarea>
+      </div>
+
+      <div class="buttonWarapper">
+        <button onclick="senaga19()">＠senaga19</button>
+        <button onclick="randomNumber()">乱数生成</button>
+      </div>
+
+
+      <p style="background-color: aquamarine;">build</p>
+
+
+      <div class="buttonWarapper">
+        <button onclick="generate()">++生成++</button>
+      </div>
+
+
+      <div class="resultButton none">
+        <button class="questInfo" onclick="copyInfo()">クエスト情報コピー</button>
+        <button class="questCode" onclick="copyCode()">チートコードコピー</button>
+      </div>
+      <div class="resultText none">
+        <span class="questInfo result"></span>
+        <span class="questCode result"></span>
+      </div>
+      <br>
+      <br>
+
+
+      
+
+    </div>
+    <div class="storageContainer" style="display: none;">
+      <p>
+        guideメッセージ
+        <span class="guideChange" onclick="guideOn()">表示</span>
+        <span class="guideChange" onclick="guideOff()">非表示</span>
+      </p>
+      <p>ここはストレージコンテナ</p>
+      <p>クエスト情報を端末上（ブラウザ上）に一時保存可能にする予定（未定）</p>
+    </div>
+  </main>
+
+  <footer>
+    <small><a href="https://twitter.com/senaga19" target="_blank">＠senaga19</a></small>
+  </footer>
+
+  <script src="../js/guildMH4G.js"></script>
+</body>
+
+</html>

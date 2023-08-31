@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="16進数計算、変換、電卓">
+
+    <title>Hex Calculator</title>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">MH4 & MH4G Cheats</a></h1>
+    </header>
+    
+    <main>
+        <br>
+        <h2>Hex Calculator</h2>
+        <br>
+        <div class="print">
+            <div class="val"><span class="invisible">✓</span> HEX</div>
+            <div class="val" id="HEX"></div>
+            <div class="val"><span class="invisible">✓</span> DEC</div>
+            <div class="val" id="DEC"></div>
+        </div>
+        <div class="route"></div>
+        <div class="route"></div>
+        <div class="container">
+            <div class="item HEX" id="D">D</div>
+            <div class="item HEX" id="E">E</div>
+            <div class="item HEX" id="F">F</div>
+            <div class="item" id="Del">Del</div>
+            <div class="item HEX" id="A">A</div>
+            <div class="item HEX" id="B">B</div>
+            <div class="item HEX" id="C">C</div>
+            <div class="item mark" id="mark1">*</div>
+            <div class="item" id="num7">7</div>
+            <div class="item" id="num8">8</div>
+            <div class="item" id="num9">9</div>
+            <div class="item mark" id="mark2">/</div>
+            <div class="item" id="num4">4</div>
+            <div class="item" id="num5">5</div>
+            <div class="item" id="num6">6</div>
+            <div class="item mark" id="mark3">-</div>
+            <div class="item" id="num1">1</div>
+            <div class="item" id="num2">2</div>
+            <div class="item" id="num3">3</div>
+            <div class="item mark" id="mark4">+</div>
+            <div class="item" id="change">Change</div>
+            <div class="item" id="num0">0</div>
+            <div class="item none"></div>
+            <div class="item" id="equal">=</div>
+        </div>
+        <br>
+        <br>
+        <h3>History<br>(Click to view old formulas and results)</h3>
+        <div id="history">
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </main>
+
+    <footer>
+        <small><a href="https://twitter.com/senaga19" target="_blank">@senaga19</a></small>
+        <br>
+        <small><a id= "footer-content" href="https://github.com/Malckyor/" target="_blank">English translation by Malckyor</a></small>
+    </footer>
+    <script src="../js/Calc16.js"></script>
+</body>
+</html>
