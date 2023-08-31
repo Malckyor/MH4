@@ -16,7 +16,7 @@ btnToggleLanguage.addEventListener("click", () => {
 });
 
 function loadPageContent() {
-  fetch(`../${currentLanguage === 'en' ? 'html_en' : 'html'}/index.html`)
+  fetch(`/${currentLanguage === 'en' ? 'html_en' : 'html'}/index.html`)
     .then(response => response.text())
     .then(pageContent => {
       document.getElementById("main-content").innerHTML = pageContent;
