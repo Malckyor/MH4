@@ -16,7 +16,7 @@ btnToggleLanguage.addEventListener("click", () => {
 });
 
 function loadPageContent() {
-  fetch(`/${currentLanguage === 'en' ? 'html_en' : 'html'}/index.html`)
+  fetch(`../${currentLanguage === 'en' ? 'html_en' : 'html'}/index.html`)
     .then(response => response.text())
     .then(pageContent => {
       document.getElementById("main-content").innerHTML = pageContent;
@@ -39,12 +39,11 @@ function updateFooterVisibility() {
     const footerContent = document.getElementById("footer-content");
     
     if (currentLanguage === "en") {
-      footerContent.style.display = "block"; // Exibir o elemento
+      footerContent.style.display = "block";
     } else {
-      footerContent.style.display = "none"; // Ocultar o elemento
+      footerContent.style.display = "none";
     }
 }
 
-// Carregar o conteúdo inicial
 loadPageContent();
 updateFooterVisibility();
