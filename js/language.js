@@ -18,7 +18,7 @@ btnToggleLanguage.addEventListener("click", () => {
 function loadPageContent() {
   const languageFolder = currentLanguage === "en" ? "html_en" : "html";
 
-  fetch(`MH4/${languageFolder}/index.html`)
+  fetch(`/${languageFolder}/index.html`)
     .then(response => response.text())
     .then(pageContent => {
       document.getElementById("main-content").innerHTML = pageContent;
